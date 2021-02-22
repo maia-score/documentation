@@ -1,13 +1,13 @@
 module.exports = {
   title: 'Maia Score',
   tagline: 'Next-gen Credit Scoring',
-  url: 'https://maia.synx.ai',
-  baseUrl: '/',
+  url: 'https://maia-score.github.io',
+  baseUrl: '/documentation/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/logo.svg',
   organizationName: 'maia-score', // Usually your GitHub org/user name.
-  projectName: 'docuemntation', // Usually your repo name.
+  projectName: 'documentation', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'Maia API',
