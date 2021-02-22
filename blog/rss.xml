@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Maia Score Blog</title>
+        <link>https://maia-score.github.io/blog</link>
+        <description>Maia Score Blog</description>
+        <lastBuildDate>Thu, 18 Feb 2021 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Hello world!]]></title>
+            <link>https://maia-score.github.io/documentation/blog/hello-world</link>
+            <guid>hello-world</guid>
+            <pubDate>Thu, 18 Feb 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[We are excited to announce the launch of our official engineering blog, aimed to keep our community posted about releases and updates of Maia.]]></description>
+        </item>
+    </channel>
+</rss>
