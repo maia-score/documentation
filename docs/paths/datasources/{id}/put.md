@@ -7,21 +7,48 @@ description: Update a single datasources record
 ---
 
 <!-- prettier-ignore-start -->
-
 import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
 
+
+export const Method = ({children, color}) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: '6px',
+      color: '#fff',
+      padding: '0.6rem 1.2rem',
+      textTransform: 'uppercase',
+      fontWeight: 'bold'
+    }}>
+    {children}
+  </span>
+);
+
+export const Path = ({children}) => (
+  <span
+    style={{
+      borderRadius: '6px',
+      color: '#fff',
+      paddingLeft: '0.8rem',
+      textTransform: 'lowercase',
+      fontWeight: 'bold',
+      fontFamily: 'SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace',
+      fontsSize: '1.2rem'
+    }}>
+    {children}
+  </span>
+);
+
 <!-- prettier-ignore-end -->
 
-```console
-PUT /datasources/{id}
-```
+<Method color="#6b55b2">PUT</Method><Path>/datasources/{id}</Path>
 
 ## Parameters
 
-| name | in   | type   | required | description |
-| ---- | ---- | ------ | -------- | ----------- |
-| id   | path | string | true     |             |
+| name |  in  |  type  | required | description |
+| ---- | :--: | :----: | :------: | ----------- |
+| `id` | path | string |   true   |             |
 
 ## Request Body
 
@@ -61,6 +88,38 @@ PUT /datasources/{id}
 ```
 
 </TabItem>
+
+</Tabs>
+
+### Code Snippets
+
+<!-- prettier-ignore-start -->
+
+<Tabs defaultValue="" values={[
+  { label: "Shell + Curl", value: "shell" },
+]}>
+
+<!-- prettier-ignore-end -->
+
+<TabItem value="shell">
+
+```shell
+curl --request PUT \
+  --url https://mywebsite.io/datasources/%7Bid%7D \
+  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
+  --header 'content-type: application/json' \
+  --data '{"driver":"mysql","host":"string","username":"string","password":"string","database":"string","port":"string","ssl":true,"keyfile":"string","certificate":"string","sslCA":"string","ssh":true,"sshHost":"string","sshUsername":"string","sshPassword":"string","sshPort":"string","sshIdentity":"string","sshTunneling":true,"published_at":"2019-08-24T14:15:22Z","created_by":"string","updated_by":"string"}'
+```
+
+</TabItem>
+
+```shell title="Shell + Curl"
+curl --request PUT \
+  --url https://mywebsite.io/datasources/%7Bid%7D \
+  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
+  --header 'content-type: application/json' \
+  --data '{"driver":"mysql","host":"string","username":"string","password":"string","database":"string","port":"string","ssl":true,"keyfile":"string","certificate":"string","sslCA":"string","ssh":true,"sshHost":"string","sshUsername":"string","sshPassword":"string","sshPort":"string","sshIdentity":"string","sshTunneling":true,"published_at":"2019-08-24T14:15:22Z","created_by":"string","updated_by":"string"}'
+```
 
 </Tabs>
 

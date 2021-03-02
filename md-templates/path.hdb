@@ -7,26 +7,57 @@ description: {{method.description}}
 ---
 
 <!-- prettier-ignore-start -->
-
 import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
 
+{{{{rawBlock}}}}
+
+export const Method = ({children, color}) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: '6px',
+      color: '#fff',
+      padding: '0.6rem 1.2rem',
+      textTransform: 'uppercase',
+      fontWeight: 'bold'
+    }}>
+    {children}
+  </span>
+);
+
+export const Path = ({children}) => (
+  <span
+    style={{
+      borderRadius: '6px',
+      color: '#fff',
+      paddingLeft: '0.8rem',
+      textTransform: 'lowercase',
+      fontWeight: 'bold',
+      fontFamily: 'SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace',
+      fontsSize: '1.2rem'
+    }}>
+    {children}
+  </span>
+);
+
+{{{{/rawBlock}}}}
 <!-- prettier-ignore-end -->
 
-```console
-{{httpMethod}} {{path}}
-```
+<Method color="#6b55b2">{{httpMethod}}</Method><Path>{{path}}</Path>
+
 
 {{#with method}}
 
-
+{{#if parameters}}
 ## Parameters
 
-| name | in | type | required | description |
-| ---- | -- | ---- | -------- | ----------- |
+| name |   in   |  type  |  required  | description |
+| ---- | :----: | :----: | :--------: | ----------- |
 {{#each parameters}}
-| {{name}} | {{in}} | {{schema.type}} | {{#if required}}true{{else}}false{{/if}} | {{description}} |
+| `{{name}}` | {{in}} | {{schema.type}} | {{#if required}}true{{else}}false{{/if}} | {{description}} |
 {{/each}}
+{{/if}}
 
 {{#if requestBody}}
 {{#with requestBody}}
@@ -60,6 +91,35 @@ import TabItem from "@theme/TabItem"
 </Tabs>
 
 {{/if}}   {{! requestBody }}
+
+### Code Snippets
+
+<!-- prettier-ignore-start -->
+
+<Tabs defaultValue="{{../snippets.1.id}}" values={[
+{{#each ../snippets}}
+  { label: "{{title}}", value: "{{id}}" },
+{{/each}}
+]}>
+
+<!-- prettier-ignore-end -->
+
+{{#each ../snippets}}
+
+<TabItem value="{{id}}">
+
+{{{codeSnippet content lang ""}}}
+
+</TabItem>
+
+
+{{/each}}
+
+{{#each ../snippets}}
+{{{codeSnippet content lang title}}}
+{{/each}}
+
+</Tabs>
 
 ## Responses
 

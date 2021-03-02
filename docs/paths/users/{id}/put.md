@@ -7,21 +7,48 @@ description: Update an existing user
 ---
 
 <!-- prettier-ignore-start -->
-
 import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
 
+
+export const Method = ({children, color}) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: '6px',
+      color: '#fff',
+      padding: '0.6rem 1.2rem',
+      textTransform: 'uppercase',
+      fontWeight: 'bold'
+    }}>
+    {children}
+  </span>
+);
+
+export const Path = ({children}) => (
+  <span
+    style={{
+      borderRadius: '6px',
+      color: '#fff',
+      paddingLeft: '0.8rem',
+      textTransform: 'lowercase',
+      fontWeight: 'bold',
+      fontFamily: 'SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace',
+      fontsSize: '1.2rem'
+    }}>
+    {children}
+  </span>
+);
+
 <!-- prettier-ignore-end -->
 
-```console
-PUT /users/{id}
-```
+<Method color="#6b55b2">PUT</Method><Path>/users/{id}</Path>
 
 ## Parameters
 
-| name | in   | type   | required | description |
-| ---- | ---- | ------ | -------- | ----------- |
-| id   | path | string | true     |             |
+| name |  in  |  type  | required | description |
+| ---- | :--: | :----: | :------: | ----------- |
+| `id` | path | string |   true   |             |
 
 ## Request Body
 
@@ -53,6 +80,38 @@ PUT /users/{id}
 ```
 
 </TabItem>
+
+</Tabs>
+
+### Code Snippets
+
+<!-- prettier-ignore-start -->
+
+<Tabs defaultValue="" values={[
+  { label: "Shell + Curl", value: "shell" },
+]}>
+
+<!-- prettier-ignore-end -->
+
+<TabItem value="shell">
+
+```shell
+curl --request PUT \
+  --url https://mywebsite.io/users/%7Bid%7D \
+  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
+  --header 'content-type: application/json' \
+  --data '{"username":"string","email":"string","provider":"string","password":"pa$$word","resetPasswordToken":"string","confirmationToken":"string","confirmed":false,"blocked":false,"role":"string","reports":["string"],"created_by":"string","updated_by":"string"}'
+```
+
+</TabItem>
+
+```shell title="Shell + Curl"
+curl --request PUT \
+  --url https://mywebsite.io/users/%7Bid%7D \
+  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
+  --header 'content-type: application/json' \
+  --data '{"username":"string","email":"string","provider":"string","password":"pa$$word","resetPasswordToken":"string","confirmationToken":"string","confirmed":false,"blocked":false,"role":"string","reports":["string"],"created_by":"string","updated_by":"string"}'
+```
 
 </Tabs>
 
