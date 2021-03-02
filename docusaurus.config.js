@@ -9,6 +9,11 @@ module.exports = {
   organizationName: 'maia-score', // Usually your GitHub org/user name.
   projectName: 'documentation', // Usually your repo name.
   themeConfig: {
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
+    },
     navbar: {
       title: 'Maia API',
       logo: {
@@ -17,7 +22,7 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/',
+          to: '/',
           activeBasePath: 'docs',
           label: 'Docs',
           position: 'left',
@@ -25,7 +30,8 @@ module.exports = {
         {to: 'blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/maia-score/documentation',
-          label: 'GitHub',
+          className: 'header-github-link',
+          'aria-label': 'GitHub',
           position: 'right',
         },
       ],
@@ -38,7 +44,7 @@ module.exports = {
           items: [
             {
               label: 'Getting Started',
-              to: 'docs/',
+              to: '/',
             },
           ],
         },
@@ -59,7 +65,7 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
+              label: 'Engineering Blog',
               to: 'blog',
             },
             {
@@ -77,16 +83,17 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/maia-score/documentation/edit/master/website/',
+            'https://github.com/maia-score/documentation/edit/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/maia-score/documentation/edit/master/website/blog/',
+            'https://github.com/maia-score/documentation/edit/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

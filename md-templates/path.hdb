@@ -1,0 +1,98 @@
+---
+id: {{method.operationId}}
+slug: {{slug}}
+title: {{method.summary}}
+sidebar_label: {{method.operationId}}
+description: {{method.description}}
+---
+
+<!-- prettier-ignore-start -->
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<!-- prettier-ignore-end -->
+
+```console
+{{httpMethod}} {{path}}
+```
+
+{{#with method}}
+
+
+## Parameters
+
+| name | in | type | required | description |
+| ---- | -- | ---- | -------- | ----------- |
+{{#each parameters}}
+| {{name}} | {{in}} | {{schema.type}} | {{#if required}}true{{else}}false{{/if}} | {{description}} |
+{{/each}}
+
+{{#if requestBody}}
+{{#with requestBody}}
+
+## Request Body
+
+<!-- prettier-ignore-start -->
+
+<Tabs defaultValue="{{firstKey content}}" values={[
+{{#each content}}
+  { label: "{{@key}}", value: "{{@key}}" },
+{{/each}}
+]}>
+
+<!-- prettier-ignore-end -->
+
+
+{{#each content}}
+
+<TabItem value="{{@key}}">
+
+{{description}}
+
+{{{schemaSampleWithTitle @key schema "Example request"}}}
+
+</TabItem>
+
+{{/each}} {{! content }}
+{{/with}} {{! requestBody }}
+
+</Tabs>
+
+{{/if}}   {{! requestBody }}
+
+## Responses
+
+{{#each responses}}
+
+---
+
+### {{@key}}
+
+{{description}}
+
+<!-- prettier-ignore-start -->
+
+<Tabs defaultValue="{{firstKey content}}" values={[
+{{#each content}}
+  { label: "{{@key}}", value: "{{@key}}" },
+{{/each}}
+]}>
+
+<!-- prettier-ignore-end -->
+{{#each content}}
+
+<TabItem value="{{@key}}">
+
+{{description}}
+
+{{{schemaSampleWithTitle @key schema "Example response"}}}
+
+</TabItem>
+
+{{/each}} {{! content }}
+
+</Tabs>
+
+{{/each}} {{! responses }}
+{{/with}} {{! method }}
