@@ -9,7 +9,6 @@
   --palette-gray: #32343e;
   --palette-green: #66bb6a;
   --palette-midnight: #141725;
-  --palette-pale-blue: #b1b5d3;
   --palette-pink: #d14671;
   --palette-pink-darker: #be2f5b;
   --palette-questdb-black: #0f0f0f;
@@ -69,7 +68,7 @@
 
 
 .admonition {
-  --ifm-color-info: var(--palette-pale-blue);
+  --ifm-color-info: var(--ifm-color-primary-dark);
   --ifm-color-success: var(--ifm-color-primary-lightest);
   --ifm-heading-color: #000;
 }
@@ -110,36 +109,7 @@ body {
   flex-direction: column;
 }
 
-/**
- *
- * Scrollbars
- *
- **/
 
-/* Firefox */
-* {
-  scrollbar-color: var(--palette-pale-blue) var(--palette-gray);
-  scrollbar-width: thin;
-}
-
-/* WebKit / Blink */
-::-webkit-scrollbar {
-  width: 7px !important;
-  height: 7px !important;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--palette-gray) !important;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 0 !important;
-  background: var(--palette-pale-blue) !important;
-}
-
-::-webkit-scrollbar-corner {
-  background: var(--palette-gray) !important;
-}
 
 /**
  *
@@ -215,7 +185,7 @@ body {
 
 /* Firefox */
 * {
-  scrollbar-color: var(--palette-pale-blue) var(--palette-gray);
+  scrollbar-color: var(--ifm-color-primary) var(--palette-gray);
   scrollbar-width: thin;
 }
 
@@ -231,7 +201,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 0 !important;
-  background: var(--palette-pale-blue) !important;
+  background: var(--ifm-color-primary) !important;
 }
 
 ::-webkit-scrollbar-corner {
@@ -281,6 +251,8 @@ body {
   --ifm-color-primary-lighter: #80b1f2;
   --ifm-color-primary-lightest: #a0c7f7;
 
+  --ifm-link-color: var(--ifm-color-primary-light);
+  --ifm-pagination-nav-color-hover: var(--ifm-color-primary);
   --palette-pink: #25c2a0;
   --palette-pink-darker: #25c2a0;
   --ifm-table-cell-padding: 0.15rem 1rem;
@@ -289,6 +261,30 @@ body {
 
 nav {
   --ifm-font-size-base: var(--font-size-normal);
+}
+
+.table-of-contents {
+  border-left-width: 3px;
+  font-size: var(--font-size-small);
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+.table-of-contents li {
+  position: relative;
+}
+
+.table-of-contents__link--active::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -18px;
+  width: 3px;
+  content: " ";
+  background: var(--ifm-color-primary);
+}
+
+ul ul .table-of-contents__link--active::before {
+  left: -33px;
 }
 
 .markdown {
@@ -335,7 +331,7 @@ html[data-theme='dark'] .header-github-link:before {
 }
 
 .footer--dark {
-  --ifm-footer-background-color: #2b3137;
+  --ifm-footer-background-color: var(--ifm-background-surface-color);
 }
 
 
