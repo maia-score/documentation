@@ -1,361 +1,241 @@
-/**
+:root
+{
+	--font-family-base:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,Cantarell,Helvetica,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Android Emoji",EmojiSymbols,"EmojiOne Mozilla","Twemoji Mozilla","Segoe UI Symbol","Noto Color Emoji";
+	--font-size-big-1:22px;
+	--font-size-big-2:24px;
+	--font-size-big-3:32px;
+	--font-size-big-4:46px;
+	--font-size-big-5:64px;
+	--font-size-large:17px;
+	--font-size-normal:16px;
+	--font-size-small:15px;
+	--ifm-code-font-size:95%;
+	--ifm-color-primary:#25c2a0;
+	--ifm-color-primary:#6b55b2;
+	--ifm-color-primary-dark:#21af90;
+	--ifm-color-primary-dark:#454195;
+	--ifm-color-primary-darker:#1fa588;
+	--ifm-color-primary-darker:#503aa5;
+	--ifm-color-primary-darkest:#1a8870;
+	--ifm-color-primary-darkest:#47359f;
+	--ifm-color-primary-light:#46cbae;
+	--ifm-color-primary-light:#6da0ef;
+	--ifm-color-primary-lighter:#66d4bd;
+	--ifm-color-primary-lighter:#80b1f2;
+	--ifm-color-primary-lightest:#92e0d0;
+	--ifm-color-primary-lightest:#a0c7f7;
+	--ifm-font-family-base:var(--font-family-base);
+	--ifm-font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+	--ifm-font-size-base:var(--font-size-small);
+	--ifm-global-border-radius:8px;
+	--ifm-h1-font-size:var(--font-size-big-4);
+	--ifm-h2-font-size:var(--font-size-big-2);
+	--ifm-h3-font-size:var(--font-size-big-1);
+	--ifm-h4-font-size:var(--font-size-large);
+	--ifm-heading-margin-bottom:1.5rem;
+	--ifm-hr-border-color:var(--palette-white-20);
+	--ifm-link-color:var(--palette-turquoise);
+	--ifm-link-color:var(--ifm-color-primary-light);
+	--ifm-list-paragraph-margin:.5rem;
+	--ifm-pagination-nav-color-hover:var(--ifm-color-primary);
+	--ifm-table-cell-padding:.15rem 1rem;
+	--ifm-table-cell-padding:.15rem 1rem;
+	--ifm-toc-border-color:var(--palette-white-10);
+	--ifm-toc-border-color:var(--palette-white-10);
+	--palette-pink:#25c2a0;
+	--palette-pink-darker:#25c2a0;
+	--transition-bezier:cubic-bezier(0.17,0.67,0.83,0.67);
+	--transition-fastest:100ms
+}
+
+.admonition
+{
+	--ifm-color-info:var(--ifm-color-primary-dark);
+	--ifm-color-success:var(--ifm-color-primary-lightest);
+	--ifm-heading-color:#000
+}
+
+.alert--secondary
+{
+	--ifm-alert-background-color:var(--palette-white-darker);
+	--ifm-alert-border-color:var(--palette-white-darker)
+}
+
+.pagination-nav
+{
+	--ifm-color-content-secondary:var(--palette-white);
+	--ifm-color-emphasis-300:transparent;
+	--ifm-link-color:var(--palette-white);
+	--ifm-link-hover-color:var(--palette-white);
+	--ifm-pagination-nav-border-radius:var(--ifm-global-border-radius);
+	--ifm-pagination-nav-color-hover:var(--palette-white)
+}
+
+html,body
+{
+	height:100%;
+	height:100%
+}
+
+body
+{
+	margin:0;
+	margin:0;
+	transition:var(--ifm-transition-fast) ease color;
+	transition:var(--ifm-transition-fast) ease color
+}
+
+#__docusaurus
+{
+	display:flex;
+	flex-direction:column;
+	min-height:100%
+}
+
+.font-size--large
+{
+	font-size:var(--font-size-large);
+	font-size:var(--font-size-large)
+}
+
+.responsive-image
+{
+	height:auto
+}
+
+.item-enter
+{
+	opacity:0;
+	opacity:0
+}
+
+.item-enter-active
+{
+	opacity:1;
+	opacity:1;
+	transition:opacity 200ms ease-in;
+	transition:opacity 200ms ease-in
+}
+
+.item-exit
+{
+	opacity:1;
+	opacity:1
+}
+
+.item-exit-active
+{
+	opacity:0;
+	opacity:0;
+	transition:opacity 200ms ease-in;
+	transition:opacity 200ms ease-in
+}
+
 *
-* Override Infima's variables + set color palette
-*
-**/
-
-:root {
-  --palette-charade: #21222c;
-  --palette-gray: #32343e;
-  --palette-green: #66bb6a;
-  --palette-midnight: #141725;
-  --palette-pink: #d14671;
-  --palette-pink-darker: #be2f5b;
-  --palette-questdb-black: #0f0f0f;
-  --palette-rock: rgb(var(--palette-rock-raw));
-  --palette-rock-raw: 38, 40, 51;
-  --palette-sky: #81d3f9;
-  --palette-turquoise: #0cc0df;
-  --palette-black-10: rgba(0, 0, 0, 0.1);
-  --palette-white: #fff;
-  --palette-white-03: rgba(255, 255, 255, 0.03);
-  --palette-white-05: rgba(255, 255, 255, 0.05);
-  --palette-white-10: rgba(255, 255, 255, 0.1);
-  --palette-white-20: rgba(255, 255, 255, 0.2);
-  --palette-white-30: rgba(255, 255, 255, 0.3);
-  --palette-white-40: rgba(255, 255, 255, 0.4);
-  --palette-white-darker: #d9d9d9;
-  --palette-yellow: #ffd54f;
-
-  --image-shadow: 0 15px 61px 5px rgba(20, 23, 37, 0.94);
-
-  --transition-bezier: cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  --transition-fastest: 100ms;
-
-  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Ubuntu, Cantarell, Helvetica, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Android Emoji", EmojiSymbols, "EmojiOne Mozilla",
-    "Twemoji Mozilla", "Segoe UI Symbol", "Noto Color Emoji";
-
-  --font-size-small: 15px;
-  --font-size-normal: 16px;
-  --font-size-large: 17px;
-  --font-size-big-1: 22px;
-  --font-size-big-2: 24px;
-  --font-size-big-3: 32px;
-  --font-size-big-4: 46px;
-  --font-size-big-5: 64px;
-
-  --ifm-font-family-base: var(--font-family-base);
-  --ifm-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-  --ifm-font-size-base: var(--font-size-small);
-  --ifm-global-border-radius: 8px;
-  --ifm-h1-font-size: var(--font-size-big-4);
-  --ifm-h2-font-size: var(--font-size-big-2);
-  --ifm-h3-font-size: var(--font-size-big-1);
-  --ifm-h4-font-size: var(--font-size-large);
-  --ifm-heading-margin-bottom: 1.5rem;
-  --ifm-hr-border-color: var(--palette-white-20);
-  --ifm-link-color: var(--palette-turquoise);
-  --ifm-list-paragraph-margin: 0.5rem;
-
-  --ifm-table-cell-padding: 0.15rem 1rem;
-  --ifm-toc-border-color: var(--palette-white-10);
+{
+	scrollbar-color:var(--ifm-color-primary) var(--palette-gray);
+	scrollbar-width:thin
 }
 
-
-
-
-.admonition {
-  --ifm-color-info: var(--ifm-color-primary-dark);
-  --ifm-color-success: var(--ifm-color-primary-lightest);
-  --ifm-heading-color: #000;
+::-webkit-scrollbar
+{
+	height:7px!important;
+	width:7px!important
 }
 
-.alert--secondary {
-  --ifm-alert-background-color: var(--palette-white-darker);
-  --ifm-alert-border-color: var(--palette-white-darker);
+::-webkit-scrollbar-thumb
+{
+	background:var(--ifm-color-primary)!important;
+	border-radius:0!important
 }
 
-.pagination-nav {
-  --ifm-color-content-secondary: var(--palette-white);
-  --ifm-link-color: var(--palette-white);
-  --ifm-link-hover-color: var(--palette-white);
-  --ifm-pagination-nav-color-hover: var(--palette-white);
-  --ifm-pagination-nav-border-radius: var(--ifm-global-border-radius);
-  --ifm-color-emphasis-300: transparent;
+nav
+{
+	--ifm-font-size-base:var(--font-size-normal)
 }
 
-/**
- *
- * Globals
- *
- **/
-
-html,
-body {
-  height: 100%;
+.table-of-contents
+{
+	border-left-width:3px;
+	font-size:var(--font-size-small);
+	font-weight:var(--ifm-font-weight-semibold)
 }
 
-body {
-  margin: 0;
-  transition: var(--ifm-transition-fast) ease color;
+.table-of-contents li
+{
+	position:relative
 }
 
-#__docusaurus {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+.table-of-contents__left-border
+{
+	border-left:3px solid var(--ifm-toc-border-color)
 }
 
-
-
-/**
- *
- * Utils
- *
- **/
-
-.font-size--large {
-  font-size: var(--font-size-large);
+.table-of-contents__link--active::before
+{
+	background:var(--ifm-color-primary);
+	bottom:0;
+	content:" ";
+	left:-18px;
+	position:absolute;
+	top:0;
+	width:3px
 }
 
-.responsive-image {
-  height: auto;
+ul ul .table-of-contents__link--active::before
+{
+	left:-33px
 }
 
-
-
-/**
- *
- * Transitions
- *
- **/
-
-.item-enter {
-  opacity: 0;
+.markdown
+{
+	--ifm-h2-vertical-rhythm-top:3;
+	--ifm-h3-vertical-rhythm-top:2;
+	--ifm-heading-vertical-rhythm-bottom:.4;
+	--ifm-heading-vertical-rhythm-top:2;
+	--ifm-hr-border-color:var(--ifm-background-surface-color);
+	--ifm-paragraph-margin-bottom:.5rem;
+	--ifm-table-background:var(--ifm-background-surface-color);
+	--ifm-table-border-color:var(--ifm-background-color);
+	--ifm-table-border-width:4px;
+	--ifm-table-head-background:#292e3e;
+	--ifm-table-head-color:var(--palette-white);
+	--ifm-table-stripe-background:var(--palette-white-03)
 }
 
-.item-enter-active {
-  opacity: 1;
-  transition: opacity 200ms ease-in;
+.docusaurus-highlight-code-line
+{
+	background-color:#484d5b;
+	display:block;
+	margin:0 calc(-1 * var(--ifm-pre-padding));
+	padding:0 var(--ifm-pre-padding)
 }
 
-.item-exit {
-  opacity: 1;
+.header-github-link:hover
+{
+	opacity:.6
 }
 
-.item-exit-active {
-  opacity: 0;
-  transition: opacity 200ms ease-in;
+.header-github-link:before
+{
+	background:url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E") no-repeat;
+	content:'';
+	display:flex;
+	height:24px;
+	width:24px
 }
 
-
-
-
-
-
-
-
-
-/**
- *
- * Globals
- *
- **/
-
-html,
-body {
-  height: 100%;
+html[data-theme='dark'] .header-github-link:before
+{
+	background:url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E") no-repeat
 }
 
-body {
-  margin: 0;
-  transition: var(--ifm-transition-fast) ease color;
+.footer--dark
+{
+	--ifm-footer-background-color:var(--ifm-background-surface-color)
 }
 
-
-
-/**
- *
- * Scrollbars
- *
- **/
-
-/* Firefox */
-* {
-  scrollbar-color: var(--ifm-color-primary) var(--palette-gray);
-  scrollbar-width: thin;
-}
-
-/* WebKit / Blink */
-::-webkit-scrollbar {
-  width: 7px !important;
-  height: 7px !important;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--palette-gray) !important;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 0 !important;
-  background: var(--ifm-color-primary) !important;
-}
-
-::-webkit-scrollbar-corner {
-  background: var(--palette-gray) !important;
-}
-
-/**
- *
- * Utils
- *
- **/
-
-.font-size--large {
-  font-size: var(--font-size-large);
-}
-
-
-
-
-
-
-
-
-
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
-/* You can override the default Infima variables here. */
-:root {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
-  --ifm-code-font-size: 95%;
-
-  --ifm-color-primary: #6b55b2;
-  --ifm-color-primary-dark: #454195;
-  --ifm-color-primary-darker: #503aa5;
-  --ifm-color-primary-darkest: #47359f;
-  --ifm-color-primary-light: #6da0ef;
-  --ifm-color-primary-lighter: #80b1f2;
-  --ifm-color-primary-lightest: #a0c7f7;
-
-  --ifm-link-color: var(--ifm-color-primary-light);
-  --ifm-pagination-nav-color-hover: var(--ifm-color-primary);
-  --palette-pink: #25c2a0;
-  --palette-pink-darker: #25c2a0;
-  --ifm-table-cell-padding: 0.15rem 1rem;
-  --ifm-toc-border-color: var(--palette-white-10);
-}
-
-nav {
-  --ifm-font-size-base: var(--font-size-normal);
-}
-
-.table-of-contents {
-  border-left-width: 3px;
-  font-size: var(--font-size-small);
-  font-weight: var(--ifm-font-weight-semibold);
-}
-
-.table-of-contents li {
-  position: relative;
-}
-
-.table-of-contents__link--active::before {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -18px;
-  width: 3px;
-  content: " ";
-  background: var(--ifm-color-primary);
-}
-
-ul ul .table-of-contents__link--active::before {
-  left: -33px;
-}
-
-.markdown {
-  --ifm-h2-vertical-rhythm-top: 3;
-  --ifm-h3-vertical-rhythm-top: 2;
-  --ifm-heading-vertical-rhythm-top: 2; /* h4 */
-  --ifm-heading-vertical-rhythm-bottom: 0.4;
-  --ifm-paragraph-margin-bottom: 0.5rem;
-  --ifm-table-background: var(--ifm-background-surface-color);
-  --ifm-table-border-color: var(--ifm-background-color);
-  --ifm-table-border-width: 4px;
-  --ifm-table-head-background: #292e3e;
-  --ifm-table-head-color: var(--palette-white);
-  --ifm-table-stripe-background: var(--palette-white-03);
-  --ifm-hr-border-color: var(--ifm-background-surface-color);
-}
-
-
-
-
-.docusaurus-highlight-code-line {
-  background-color: rgb(72, 77, 91);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
-}
-
-.header-github-link:hover {
-  opacity: 0.6;
-}
-
-.header-github-link:before {
-  content: '';
-  width: 24px;
-  height: 24px;
-  display: flex;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
-    no-repeat;
-}
-
-html[data-theme='dark'] .header-github-link:before {
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
-    no-repeat;
-}
-
-.footer--dark {
-  --ifm-footer-background-color: var(--ifm-background-surface-color);
-}
-
-
-
-/**
- *
- * Transitions
- *
- **/
-
-.item-enter {
-  opacity: 0;
-}
-
-.item-enter-active {
-  opacity: 1;
-  transition: opacity 200ms ease-in;
-}
-
-.item-exit {
-  opacity: 1;
-}
-
-.item-exit-active {
-  opacity: 0;
-  transition: opacity 200ms ease-in;
+::-webkit-scrollbar-track,::-webkit-scrollbar-corner
+{
+	background:var(--palette-gray)!important
 }

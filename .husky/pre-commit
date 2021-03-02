@@ -2,5 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn openapi2md --spec spec/openapi.json --target docs/paths --templates md-templates
-yarn build
 git add -A .
