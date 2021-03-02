@@ -10,7 +10,6 @@
 	--font-size-normal:16px;
 	--font-size-small:15px;
 	--ifm-code-font-size:95%;
-	--ifm-color-secondary:#25c2a0;
 	--ifm-color-primary:#6b55b2;
 	--ifm-color-primary-dark:#21af90;
 	--ifm-color-primary-dark:#454195;
@@ -34,14 +33,12 @@
 	--ifm-h4-font-size:var(--font-size-large);
 	--ifm-heading-margin-bottom:1.5rem;
 	--ifm-hr-border-color:var(--palette-white-20);
-	--ifm-link-color:var(--palette-turquoise);
-	--ifm-link-color:var(--ifm-color-primary-light);
+	--ifm-link-color:var(--ifm-color-primary);
 	--ifm-list-paragraph-margin:.5rem;
 	--ifm-pagination-nav-color-hover:var(--ifm-color-primary);
 	--ifm-table-cell-padding:.15rem 1rem;
 	--ifm-table-cell-padding:.15rem 1rem;
-	--ifm-toc-border-color:var(--palette-white-10);
-	--ifm-toc-border-color:var(--palette-white-10);
+	--ifm-toc-border-color:var(--ifm-background-surface-color);
 	--palette-pink:#25c2a0;
 	--palette-pink-darker:#25c2a0;
 	--transition-bezier:cubic-bezier(0.17,0.67,0.83,0.67);
@@ -133,7 +130,7 @@ body
 
 *
 {
-	scrollbar-color:var(--ifm-color-primary) var(--palette-gray);
+	scrollbar-color:var(--ifm-color-primary) var(--ifm-background-surface-color);
 	scrollbar-width:thin
 }
 
@@ -146,7 +143,7 @@ body
 ::-webkit-scrollbar-thumb
 {
 	background:var(--ifm-color-primary)!important;
-	border-radius:0!important
+	border-radius:4rem!important
 }
 
 nav
