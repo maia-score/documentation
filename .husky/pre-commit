@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn speccy lint spec/openapi.json
-yarn oas3-mdx --spec spec/openapi.json --target docs/paths --templates md-templates
+yarn oas3-mdx --spec spec/openapi.json --target docs/paths --templates md-templates --snippets "shell,node,python,php"
 git add -A .

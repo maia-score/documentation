@@ -144,8 +144,11 @@ export const Url = ({children}) => {
 
 <!-- prettier-ignore-start -->
 
-<Tabs defaultValue="" values={[
+<Tabs defaultValue="node" values={[
   { label: "Shell + Curl", value: "shell" },
+  { label: "Node + Native", value: "node" },
+  { label: "Python + Python3", value: "python" },
+  { label: "Php + Curl", value: "php" },
 ]}>
 
 <!-- prettier-ignore-end -->
@@ -162,12 +165,216 @@ curl --request PUT \
 
 </TabItem>
 
+<TabItem value="node">
+
+```javascript
+const http = require("https");
+
+const options = {
+  method: "PUT",
+  hostname: "maiascore.com",
+  port: null,
+  path: "/users/%7Bid%7D",
+  headers: {
+    "content-type": "application/x-www-form-urlencoded",
+    Authorization: "Bearer REPLACE_BEARER_TOKEN",
+  },
+};
+
+const req = http.request(options, function (res) {
+  const chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    const body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(
+  JSON.stringify({
+    username: "jlopez",
+    email: "test@mydomain.com",
+    provider: "local",
+    password: "********",
+    resetPasswordToken: "26f425d6-9269-442b-89ed-e35ba63bf9c0",
+    confirmationToken: "eddc394a-8664-406e-852f-7a35d84a7fb7",
+    confirmed: false,
+    blocked: false,
+    role: "string",
+    reports: ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"],
+  })
+);
+req.end();
+```
+
+</TabItem>
+
+<TabItem value="python">
+
+```python
+import http.client
+
+conn = http.client.HTTPSConnection("maiascore.com")
+
+payload = "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"reports\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}"
+
+headers = {
+    'content-type': "application/x-www-form-urlencoded",
+    'Authorization': "Bearer REPLACE_BEARER_TOKEN"
+    }
+
+conn.request("PUT", "/users/%7Bid%7D", payload, headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+```
+
+</TabItem>
+
+<TabItem value="php">
+
+```php
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+  CURLOPT_URL => "https://maiascore.com/users/%7Bid%7D",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PUT",
+  CURLOPT_POSTFIELDS => "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"reports\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}",
+  CURLOPT_HTTPHEADER => [
+    "Authorization: Bearer REPLACE_BEARER_TOKEN",
+    "content-type: application/x-www-form-urlencoded"
+  ],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
+```
+
+</TabItem>
+
 ```shell title="Shell + Curl"
 curl --request PUT \
   --url https://maiascore.com/users/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
   --header 'content-type: application/x-www-form-urlencoded' \
   --data '{"username":"jlopez","email":"test@mydomain.com","provider":"local","password":"********","resetPasswordToken":"26f425d6-9269-442b-89ed-e35ba63bf9c0","confirmationToken":"eddc394a-8664-406e-852f-7a35d84a7fb7","confirmed":false,"blocked":false,"role":"string","reports":["maia-c6cbaa76ba8f","maia-3b5a054c593d","maia-f95a8582aea5"]}'
+```
+
+```javascript title="Node + Native"
+const http = require("https");
+
+const options = {
+  method: "PUT",
+  hostname: "maiascore.com",
+  port: null,
+  path: "/users/%7Bid%7D",
+  headers: {
+    "content-type": "application/x-www-form-urlencoded",
+    Authorization: "Bearer REPLACE_BEARER_TOKEN",
+  },
+};
+
+const req = http.request(options, function (res) {
+  const chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    const body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(
+  JSON.stringify({
+    username: "jlopez",
+    email: "test@mydomain.com",
+    provider: "local",
+    password: "********",
+    resetPasswordToken: "26f425d6-9269-442b-89ed-e35ba63bf9c0",
+    confirmationToken: "eddc394a-8664-406e-852f-7a35d84a7fb7",
+    confirmed: false,
+    blocked: false,
+    role: "string",
+    reports: ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"],
+  })
+);
+req.end();
+```
+
+```python title="Python + Python3"
+import http.client
+
+conn = http.client.HTTPSConnection("maiascore.com")
+
+payload = "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"reports\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}"
+
+headers = {
+    'content-type': "application/x-www-form-urlencoded",
+    'Authorization': "Bearer REPLACE_BEARER_TOKEN"
+    }
+
+conn.request("PUT", "/users/%7Bid%7D", payload, headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+```
+
+```php title="Php + Curl"
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+  CURLOPT_URL => "https://maiascore.com/users/%7Bid%7D",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PUT",
+  CURLOPT_POSTFIELDS => "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"reports\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}",
+  CURLOPT_HTTPHEADER => [
+    "Authorization: Bearer REPLACE_BEARER_TOKEN",
+    "content-type: application/x-www-form-urlencoded"
+  ],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
 ```
 
 </Tabs>

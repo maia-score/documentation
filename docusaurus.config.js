@@ -14,6 +14,10 @@ module.exports = {
       disableSwitch: true,
       respectPrefersColorScheme: false,
     },
+    prism: {
+      theme: require('prism-react-renderer/themes/palenight'),
+      additionalLanguages: ['php']
+    },
     navbar: {
       title: 'Maia API',
       logo: {

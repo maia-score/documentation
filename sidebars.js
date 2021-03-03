@@ -222,7 +222,7 @@ module.exports = {
               collapsed: true,
               items: [
                 'paths/users/me/getMe'
-              ],
+              ], 
             },
             'paths/users/getUsers'
           ],

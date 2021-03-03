@@ -70,8 +70,11 @@ export const Url = ({children}) => {
 
 <!-- prettier-ignore-start -->
 
-<Tabs defaultValue="" values={[
+<Tabs defaultValue="node" values={[
   { label: "Shell + Curl", value: "shell" },
+  { label: "Node + Native", value: "node" },
+  { label: "Python + Python3", value: "python" },
+  { label: "Php + Curl", value: "php" },
 ]}>
 
 <!-- prettier-ignore-end -->
@@ -86,10 +89,170 @@ curl --request POST \
 
 </TabItem>
 
+<TabItem value="node">
+
+```javascript
+const http = require("https");
+
+const options = {
+  method: "POST",
+  hostname: "maiascore.com",
+  port: null,
+  path: "/trainings/cancel/%7Bid%7D",
+  headers: {
+    Authorization: "Bearer REPLACE_BEARER_TOKEN",
+  },
+};
+
+const req = http.request(options, function (res) {
+  const chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    const body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.end();
+```
+
+</TabItem>
+
+<TabItem value="python">
+
+```python
+import http.client
+
+conn = http.client.HTTPSConnection("maiascore.com")
+
+headers = { 'Authorization': "Bearer REPLACE_BEARER_TOKEN" }
+
+conn.request("POST", "/trainings/cancel/%7Bid%7D", headers=headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+```
+
+</TabItem>
+
+<TabItem value="php">
+
+```php
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+  CURLOPT_URL => "https://maiascore.com/trainings/cancel/%7Bid%7D",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_HTTPHEADER => [
+    "Authorization: Bearer REPLACE_BEARER_TOKEN"
+  ],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
+```
+
+</TabItem>
+
 ```shell title="Shell + Curl"
 curl --request POST \
   --url https://maiascore.com/trainings/cancel/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
+```
+
+```javascript title="Node + Native"
+const http = require("https");
+
+const options = {
+  method: "POST",
+  hostname: "maiascore.com",
+  port: null,
+  path: "/trainings/cancel/%7Bid%7D",
+  headers: {
+    Authorization: "Bearer REPLACE_BEARER_TOKEN",
+  },
+};
+
+const req = http.request(options, function (res) {
+  const chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    const body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.end();
+```
+
+```python title="Python + Python3"
+import http.client
+
+conn = http.client.HTTPSConnection("maiascore.com")
+
+headers = { 'Authorization': "Bearer REPLACE_BEARER_TOKEN" }
+
+conn.request("POST", "/trainings/cancel/%7Bid%7D", headers=headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+```
+
+```php title="Php + Curl"
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+  CURLOPT_URL => "https://maiascore.com/trainings/cancel/%7Bid%7D",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_HTTPHEADER => [
+    "Authorization: Bearer REPLACE_BEARER_TOKEN"
+  ],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
 ```
 
 </Tabs>

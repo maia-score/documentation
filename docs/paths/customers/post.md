@@ -136,8 +136,11 @@ export const Url = ({children}) => {
 
 <!-- prettier-ignore-start -->
 
-<Tabs defaultValue="" values={[
+<Tabs defaultValue="node" values={[
   { label: "Shell + Curl", value: "shell" },
+  { label: "Node + Native", value: "node" },
+  { label: "Python + Python3", value: "python" },
+  { label: "Php + Curl", value: "php" },
 ]}>
 
 <!-- prettier-ignore-end -->
@@ -154,12 +157,216 @@ curl --request POST \
 
 </TabItem>
 
+<TabItem value="node">
+
+```javascript
+const http = require("https");
+
+const options = {
+  method: "POST",
+  hostname: "maiascore.com",
+  port: null,
+  path: "/customers",
+  headers: {
+    "content-type": "application/x-www-form-urlencoded",
+    Authorization: "Bearer REPLACE_BEARER_TOKEN",
+  },
+};
+
+const req = http.request(options, function (res) {
+  const chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    const body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(
+  JSON.stringify({
+    uuid: "string",
+    referenceId: "string",
+    dateOfBirth: "2019-08-24",
+    addressStreet: "string",
+    addressNeighborhood: "string",
+    addressCity: "string",
+    addressState: "string",
+    addressCountry: "string",
+    gender: "male",
+    maritalStatus: "single",
+  })
+);
+req.end();
+```
+
+</TabItem>
+
+<TabItem value="python">
+
+```python
+import http.client
+
+conn = http.client.HTTPSConnection("maiascore.com")
+
+payload = "{\"uuid\":\"string\",\"referenceId\":\"string\",\"dateOfBirth\":\"2019-08-24\",\"addressStreet\":\"string\",\"addressNeighborhood\":\"string\",\"addressCity\":\"string\",\"addressState\":\"string\",\"addressCountry\":\"string\",\"gender\":\"male\",\"maritalStatus\":\"single\"}"
+
+headers = {
+    'content-type': "application/x-www-form-urlencoded",
+    'Authorization': "Bearer REPLACE_BEARER_TOKEN"
+    }
+
+conn.request("POST", "/customers", payload, headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+```
+
+</TabItem>
+
+<TabItem value="php">
+
+```php
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+  CURLOPT_URL => "https://maiascore.com/customers",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{\"uuid\":\"string\",\"referenceId\":\"string\",\"dateOfBirth\":\"2019-08-24\",\"addressStreet\":\"string\",\"addressNeighborhood\":\"string\",\"addressCity\":\"string\",\"addressState\":\"string\",\"addressCountry\":\"string\",\"gender\":\"male\",\"maritalStatus\":\"single\"}",
+  CURLOPT_HTTPHEADER => [
+    "Authorization: Bearer REPLACE_BEARER_TOKEN",
+    "content-type: application/x-www-form-urlencoded"
+  ],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
+```
+
+</TabItem>
+
 ```shell title="Shell + Curl"
 curl --request POST \
   --url https://maiascore.com/customers \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
   --header 'content-type: application/x-www-form-urlencoded' \
   --data '{"uuid":"string","referenceId":"string","dateOfBirth":"2019-08-24","addressStreet":"string","addressNeighborhood":"string","addressCity":"string","addressState":"string","addressCountry":"string","gender":"male","maritalStatus":"single"}'
+```
+
+```javascript title="Node + Native"
+const http = require("https");
+
+const options = {
+  method: "POST",
+  hostname: "maiascore.com",
+  port: null,
+  path: "/customers",
+  headers: {
+    "content-type": "application/x-www-form-urlencoded",
+    Authorization: "Bearer REPLACE_BEARER_TOKEN",
+  },
+};
+
+const req = http.request(options, function (res) {
+  const chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    const body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(
+  JSON.stringify({
+    uuid: "string",
+    referenceId: "string",
+    dateOfBirth: "2019-08-24",
+    addressStreet: "string",
+    addressNeighborhood: "string",
+    addressCity: "string",
+    addressState: "string",
+    addressCountry: "string",
+    gender: "male",
+    maritalStatus: "single",
+  })
+);
+req.end();
+```
+
+```python title="Python + Python3"
+import http.client
+
+conn = http.client.HTTPSConnection("maiascore.com")
+
+payload = "{\"uuid\":\"string\",\"referenceId\":\"string\",\"dateOfBirth\":\"2019-08-24\",\"addressStreet\":\"string\",\"addressNeighborhood\":\"string\",\"addressCity\":\"string\",\"addressState\":\"string\",\"addressCountry\":\"string\",\"gender\":\"male\",\"maritalStatus\":\"single\"}"
+
+headers = {
+    'content-type': "application/x-www-form-urlencoded",
+    'Authorization': "Bearer REPLACE_BEARER_TOKEN"
+    }
+
+conn.request("POST", "/customers", payload, headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+```
+
+```php title="Php + Curl"
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+  CURLOPT_URL => "https://maiascore.com/customers",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{\"uuid\":\"string\",\"referenceId\":\"string\",\"dateOfBirth\":\"2019-08-24\",\"addressStreet\":\"string\",\"addressNeighborhood\":\"string\",\"addressCity\":\"string\",\"addressState\":\"string\",\"addressCountry\":\"string\",\"gender\":\"male\",\"maritalStatus\":\"single\"}",
+  CURLOPT_HTTPHEADER => [
+    "Authorization: Bearer REPLACE_BEARER_TOKEN",
+    "content-type: application/x-www-form-urlencoded"
+  ],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
 ```
 
 </Tabs>
