@@ -1,9 +1,9 @@
 ---
-id:
+id: uploadFile
 slug: upload-post
-title:
-sidebar_label:
-description: Upload a file
+title: Upload a file
+sidebar_label: POST
+description: This is a multipurpose endpoin to upload a file to the logged user.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,9 +40,25 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">POST</Method><Path>/upload/</Path>
+<Url>
+  <Method color="#6b55b2">POST</Method><Path>{unescape(escape('/upload'))}</Path>
+</Url>
+
+> This is a multipurpose endpoin to upload a file to the logged user.
 
 ## Request Body
 
@@ -56,9 +72,10 @@ export const Path = ({children}) => (
 
 <TabItem value="application/json">
 
-```json title="Example request"
+```json
 {
-  "foo": "string"
+  "filename": "string",
+  "binaryUrl": "string"
 }
 ```
 
@@ -80,20 +97,20 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request POST \
-  --url https://mywebsite.io/upload/ \
+  --url https://maiascore.com/upload \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
   --header 'content-type: application/json' \
-  --data '{"foo":"string"}'
+  --data '{"filename":"string","binaryUrl":"string"}'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
 curl --request POST \
-  --url https://mywebsite.io/upload/ \
+  --url https://maiascore.com/upload \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
   --header 'content-type: application/json' \
-  --data '{"foo":"string"}'
+  --data '{"filename":"string","binaryUrl":"string"}'
 ```
 
 </Tabs>
@@ -104,7 +121,7 @@ curl --request POST \
 
 ### 200
 
-response
+Upload successful
 
 <!-- prettier-ignore-start -->
 
@@ -118,7 +135,8 @@ response
 
 ```json title="Example response"
 {
-  "foo": "string"
+  "code": 200,
+  "message": "OK"
 }
 ```
 
@@ -130,7 +148,7 @@ response
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -144,8 +162,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -157,7 +175,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -171,8 +189,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -184,7 +202,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -198,8 +216,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

@@ -1,9 +1,9 @@
 ---
-id:
+id: createCustomer
 slug: customers-post
-title:
-sidebar_label:
-description: Create a new customers record
+title: Create a new customers record.
+sidebar_label: POST
+description: This method is used to register a new customer into database. These information will be used for AI agent trainig.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,9 +40,25 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">POST</Method><Path>/customers</Path>
+<Url>
+  <Method color="#6b55b2">POST</Method><Path>{unescape(escape('/customers'))}</Path>
+</Url>
+
+> This method is used to register a new customer into database. These information will be used for AI agent trainig.
 
 ## Request Body
 
@@ -50,13 +66,15 @@ export const Path = ({children}) => (
 
 <Tabs defaultValue="application/json" values={[
   { label: "application/json", value: "application/json" },
+  { label: "application/xml", value: "application/xml" },
+  { label: "application/x-www-form-urlencoded", value: "application/x-www-form-urlencoded" },
 ]}>
 
 <!-- prettier-ignore-end -->
 
 <TabItem value="application/json">
 
-```json title="Example request"
+```json
 {
   "uuid": "string",
   "referenceId": "string",
@@ -67,10 +85,46 @@ export const Path = ({children}) => (
   "addressState": "string",
   "addressCountry": "string",
   "gender": "male",
-  "maritalStatus": "single",
-  "published_at": "2019-08-24T14:15:22Z",
-  "created_by": "string",
-  "updated_by": "string"
+  "maritalStatus": "single"
+}
+```
+
+</TabItem>
+
+<TabItem value="application/xml">
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <uuid>string</uuid>
+  <referenceId>string</referenceId>
+  <dateOfBirth>2019-08-24</dateOfBirth>
+  <addressStreet>string</addressStreet>
+  <addressNeighborhood>string</addressNeighborhood>
+  <addressCity>string</addressCity>
+  <addressState>string</addressState>
+  <addressCountry>string</addressCountry>
+  <gender>male</gender>
+  <maritalStatus>single</maritalStatus>
+</item>
+```
+
+</TabItem>
+
+<TabItem value="application/x-www-form-urlencoded">
+
+```json
+{
+  "uuid": "string",
+  "referenceId": "string",
+  "dateOfBirth": "2019-08-24",
+  "addressStreet": "string",
+  "addressNeighborhood": "string",
+  "addressCity": "string",
+  "addressState": "string",
+  "addressCountry": "string",
+  "gender": "male",
+  "maritalStatus": "single"
 }
 ```
 
@@ -92,20 +146,20 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request POST \
-  --url https://mywebsite.io/customers \
+  --url https://maiascore.com/customers \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"uuid":"string","referenceId":"string","dateOfBirth":"2019-08-24","addressStreet":"string","addressNeighborhood":"string","addressCity":"string","addressState":"string","addressCountry":"string","gender":"male","maritalStatus":"single","published_at":"2019-08-24T14:15:22Z","created_by":"string","updated_by":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"uuid":"string","referenceId":"string","dateOfBirth":"2019-08-24","addressStreet":"string","addressNeighborhood":"string","addressCity":"string","addressState":"string","addressCountry":"string","gender":"male","maritalStatus":"single"}'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
 curl --request POST \
-  --url https://mywebsite.io/customers \
+  --url https://maiascore.com/customers \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"uuid":"string","referenceId":"string","dateOfBirth":"2019-08-24","addressStreet":"string","addressNeighborhood":"string","addressCity":"string","addressState":"string","addressCountry":"string","gender":"male","maritalStatus":"single","published_at":"2019-08-24T14:15:22Z","created_by":"string","updated_by":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"uuid":"string","referenceId":"string","dateOfBirth":"2019-08-24","addressStreet":"string","addressNeighborhood":"string","addressCity":"string","addressState":"string","addressCountry":"string","gender":"male","maritalStatus":"single"}'
 ```
 
 </Tabs>
@@ -141,7 +195,9 @@ Retrieve customers document(s)
   "addressCountry": "string",
   "gender": "male",
   "maritalStatus": "single",
-  "published_at": "2019-08-24T14:15:22Z"
+  "published_at": "2019-08-24T14:15:22Z",
+  "created_by": "string",
+  "updated_by": "string"
 }
 ```
 
@@ -153,7 +209,7 @@ Retrieve customers document(s)
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -167,8 +223,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -180,7 +236,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -194,8 +250,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -207,7 +263,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -221,8 +277,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

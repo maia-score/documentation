@@ -1,9 +1,9 @@
 ---
-id:
+id: getCustomer
 slug: customers-id-get
-title:
-sidebar_label:
-description: Find one customers record
+title: Find one customers record
+sidebar_label: GET
+description: Find one customers record using Id or Reference.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,15 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">GET</Method><Path>/customers/{id}</Path>
+<Url>
+  <Method color="#6b55b2">GET</Method><Path>{unescape(escape('/customers/{id}'))}</Path>
+</Url>
+
+> Find one customers record using Id or Reference.
 
 ## Parameters
 
 | name |  in  |  type  | required | description |
 | ---- | :--: | :----: | :------: | ----------- |
-| `id` | path | string |   true   |             |
+| `id` | path | string |   true   | Customer Id |
 
 ### Code Snippets
 
@@ -64,7 +80,7 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request GET \
-  --url https://mywebsite.io/customers/%7Bid%7D \
+  --url https://maiascore.com/customers/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -72,7 +88,7 @@ curl --request GET \
 
 ```shell title="Shell + Curl"
 curl --request GET \
-  --url https://mywebsite.io/customers/%7Bid%7D \
+  --url https://maiascore.com/customers/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -109,7 +125,9 @@ Retrieve customers document(s)
   "addressCountry": "string",
   "gender": "male",
   "maritalStatus": "single",
-  "published_at": "2019-08-24T14:15:22Z"
+  "published_at": "2019-08-24T14:15:22Z",
+  "created_by": "string",
+  "updated_by": "string"
 }
 ```
 
@@ -121,7 +139,7 @@ Retrieve customers document(s)
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -135,8 +153,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -148,7 +166,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -162,8 +180,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -175,7 +193,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -189,8 +207,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

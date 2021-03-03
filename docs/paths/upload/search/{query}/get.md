@@ -1,9 +1,9 @@
 ---
-id:
-slug: auth-reset-password-post
-title:
-sidebar_label:
-description: Reset user password with a code (resetToken)
+id: findFile
+slug: upload-search-query-get
+title: Search for an uploaded file
+sidebar_label: GET
+description: Performs a search for an uploaded file by its file name.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,31 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">POST</Method><Path>/auth/reset-password</Path>
+<Url>
+  <Method color="#6b55b2">GET</Method><Path>{unescape(escape('/upload/search/{query}'))}</Path>
+</Url>
 
-## Request Body
+> Performs a search for an uploaded file by its file name.
 
-<!-- prettier-ignore-start -->
+## Parameters
 
-<Tabs defaultValue="application/json" values={[
-  { label: "application/json", value: "application/json" },
-]}>
-
-<!-- prettier-ignore-end -->
-
-<TabItem value="application/json">
-
-```json title="Example request"
-{
-  "foo": "string"
-}
-```
-
-</TabItem>
-
-</Tabs>
+| name    |  in  |  type  | required | description  |
+| ------- | :--: | :----: | :------: | ------------ |
+| `query` | path | string |   true   | Search query |
 
 ### Code Snippets
 
@@ -79,21 +79,17 @@ export const Path = ({children}) => (
 <TabItem value="shell">
 
 ```shell
-curl --request POST \
-  --url https://mywebsite.io/auth/reset-password \
-  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"foo":"string"}'
+curl --request GET \
+  --url https://maiascore.com/upload/search/%7Bquery%7D \
+  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
-curl --request POST \
-  --url https://mywebsite.io/auth/reset-password \
-  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"foo":"string"}'
+curl --request GET \
+  --url https://maiascore.com/upload/search/%7Bquery%7D \
+  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
 </Tabs>
@@ -104,7 +100,7 @@ curl --request POST \
 
 ### 200
 
-response
+OK
 
 <!-- prettier-ignore-start -->
 
@@ -118,7 +114,8 @@ response
 
 ```json title="Example response"
 {
-  "foo": "string"
+  "filename": "string",
+  "binaryUrl": "string"
 }
 ```
 
@@ -130,7 +127,7 @@ response
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -144,8 +141,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -157,7 +154,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -171,8 +168,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -184,7 +181,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -198,8 +195,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

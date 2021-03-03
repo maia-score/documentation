@@ -1,9 +1,9 @@
 ---
-id:
+id: sendEmailConfirmation
 slug: auth-send-email-confirmation-post
-title:
-sidebar_label:
-description: Send a confirmation email to user
+title: Send confirmation email
+sidebar_label: POST
+description: If not confirmed, sends a confirmation email to an user as part of verification process.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,9 +40,25 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">POST</Method><Path>/auth/send-email-confirmation</Path>
+<Url>
+  <Method color="#6b55b2">POST</Method><Path>{unescape(escape('/auth/send-email-confirmation'))}</Path>
+</Url>
+
+> If not confirmed, sends a confirmation email to an user as part of verification process.
 
 ## Request Body
 
@@ -50,15 +66,38 @@ export const Path = ({children}) => (
 
 <Tabs defaultValue="application/json" values={[
   { label: "application/json", value: "application/json" },
+  { label: "application/xml", value: "application/xml" },
+  { label: "application/x-www-form-urlencoded", value: "application/x-www-form-urlencoded" },
 ]}>
 
 <!-- prettier-ignore-end -->
 
 <TabItem value="application/json">
 
-```json title="Example request"
+```json
 {
-  "foo": "string"
+  "id": "string"
+}
+```
+
+</TabItem>
+
+<TabItem value="application/xml">
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <id>string</id>
+</item>
+```
+
+</TabItem>
+
+<TabItem value="application/x-www-form-urlencoded">
+
+```json
+{
+  "id": "string"
 }
 ```
 
@@ -80,20 +119,20 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request POST \
-  --url https://mywebsite.io/auth/send-email-confirmation \
+  --url https://maiascore.com/auth/send-email-confirmation \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"foo":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"id":"string"}'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
 curl --request POST \
-  --url https://mywebsite.io/auth/send-email-confirmation \
+  --url https://maiascore.com/auth/send-email-confirmation \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"foo":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"id":"string"}'
 ```
 
 </Tabs>
@@ -104,7 +143,7 @@ curl --request POST \
 
 ### 200
 
-response
+Email sent successfuly
 
 <!-- prettier-ignore-start -->
 
@@ -118,7 +157,8 @@ response
 
 ```json title="Example response"
 {
-  "foo": "string"
+  "code": 200,
+  "message": "OK"
 }
 ```
 
@@ -130,7 +170,7 @@ response
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -144,8 +184,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -157,7 +197,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -171,8 +211,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -184,7 +224,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -198,8 +238,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

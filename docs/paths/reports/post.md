@@ -1,9 +1,9 @@
 ---
-id:
+id: createReport
 slug: reports-post
-title:
-sidebar_label:
-description: Create a new reports record
+title: Create a new score report
+sidebar_label: POST
+description: Create and process a new score repors.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,9 +40,25 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">POST</Method><Path>/reports</Path>
+<Url>
+  <Method color="#6b55b2">POST</Method><Path>{unescape(escape('/reports'))}</Path>
+</Url>
+
+> Create and process a new score repors.
 
 ## Request Body
 
@@ -50,13 +66,15 @@ export const Path = ({children}) => (
 
 <Tabs defaultValue="application/json" values={[
   { label: "application/json", value: "application/json" },
+  { label: "application/xml", value: "application/xml" },
+  { label: "application/x-www-form-urlencoded", value: "application/x-www-form-urlencoded" },
 ]}>
 
 <!-- prettier-ignore-end -->
 
 <TabItem value="application/json">
 
-```json title="Example request"
+```json
 {
   "uuid": "string",
   "referenceId": "string",
@@ -66,10 +84,44 @@ export const Path = ({children}) => (
   "score": 0,
   "scoreProbability": 0,
   "scoreConfidence": 0,
-  "scoreVersion": "string",
-  "published_at": "2019-08-24T14:15:22Z",
-  "created_by": "string",
-  "updated_by": "string"
+  "scoreVersion": "string"
+}
+```
+
+</TabItem>
+
+<TabItem value="application/xml">
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <uuid>string</uuid>
+  <referenceId>string</referenceId>
+  <type>reference</type>
+  <processed>true</processed>
+  <users_permissions_user>string</users_permissions_user>
+  <score>0</score>
+  <scoreProbability>0</scoreProbability>
+  <scoreConfidence>0</scoreConfidence>
+  <scoreVersion>string</scoreVersion>
+</item>
+```
+
+</TabItem>
+
+<TabItem value="application/x-www-form-urlencoded">
+
+```json
+{
+  "uuid": "string",
+  "referenceId": "string",
+  "type": "reference",
+  "processed": true,
+  "users_permissions_user": "string",
+  "score": 0,
+  "scoreProbability": 0,
+  "scoreConfidence": 0,
+  "scoreVersion": "string"
 }
 ```
 
@@ -91,20 +143,20 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request POST \
-  --url https://mywebsite.io/reports \
+  --url https://maiascore.com/reports \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"uuid":"string","referenceId":"string","type":"reference","processed":true,"users_permissions_user":"string","score":0,"scoreProbability":0,"scoreConfidence":0,"scoreVersion":"string","published_at":"2019-08-24T14:15:22Z","created_by":"string","updated_by":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"uuid":"string","referenceId":"string","type":"reference","processed":true,"users_permissions_user":"string","score":0,"scoreProbability":0,"scoreConfidence":0,"scoreVersion":"string"}'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
 curl --request POST \
-  --url https://mywebsite.io/reports \
+  --url https://maiascore.com/reports \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"uuid":"string","referenceId":"string","type":"reference","processed":true,"users_permissions_user":"string","score":0,"scoreProbability":0,"scoreConfidence":0,"scoreVersion":"string","published_at":"2019-08-24T14:15:22Z","created_by":"string","updated_by":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"uuid":"string","referenceId":"string","type":"reference","processed":true,"users_permissions_user":"string","score":0,"scoreProbability":0,"scoreConfidence":0,"scoreVersion":"string"}'
 ```
 
 </Tabs>
@@ -153,7 +205,9 @@ Retrieve reports document(s)
   "scoreProbability": 0,
   "scoreConfidence": 0,
   "scoreVersion": "string",
-  "published_at": "2019-08-24T14:15:22Z"
+  "published_at": "2019-08-24T14:15:22Z",
+  "created_by": "string",
+  "updated_by": "string"
 }
 ```
 
@@ -165,7 +219,7 @@ Retrieve reports document(s)
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -179,8 +233,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -192,7 +246,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -206,8 +260,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -219,7 +273,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -233,8 +287,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

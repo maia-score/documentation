@@ -1,9 +1,9 @@
 ---
-id:
+id: deleteDatasource
 slug: datasources-id-delete
-title:
-sidebar_label:
-description: Delete a single datasources record
+title: Delete a single datasources record
+sidebar_label: DELETE
+description: Removes the connection with a data source and erases login information. Please note that a reference of the data source will remain to ensure consistence about data origin on customer and payment records, but data source cannot be longer used or accessed.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,15 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">DELETE</Method><Path>/datasources/{id}</Path>
+<Url>
+  <Method color="#6b55b2">DELETE</Method><Path>{unescape(escape('/datasources/{id}'))}</Path>
+</Url>
+
+> Removes the connection with a data source and erases login information. Please note that a reference of the data source will remain to ensure consistence about data origin on customer and payment records, but data source cannot be longer used or accessed.
 
 ## Parameters
 
-| name |  in  |  type  | required | description |
-| ---- | :--: | :----: | :------: | ----------- |
-| `id` | path | string |   true   |             |
+| name |  in  |  type  | required | description   |
+| ---- | :--: | :----: | :------: | ------------- |
+| `id` | path | string |   true   | Datasource Id |
 
 ### Code Snippets
 
@@ -64,7 +80,7 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request DELETE \
-  --url https://mywebsite.io/datasources/%7Bid%7D \
+  --url https://maiascore.com/datasources/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -72,7 +88,7 @@ curl --request DELETE \
 
 ```shell title="Shell + Curl"
 curl --request DELETE \
-  --url https://mywebsite.io/datasources/%7Bid%7D \
+  --url https://maiascore.com/datasources/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -108,7 +124,7 @@ deletes a single datasources based on the ID supplied
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -122,8 +138,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -135,7 +151,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -149,8 +165,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -162,7 +178,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -176,8 +192,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

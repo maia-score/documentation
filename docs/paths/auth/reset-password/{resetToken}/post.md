@@ -1,9 +1,9 @@
 ---
-id:
-slug: trainings-id-put
-title:
-sidebar_label:
-description: Update a single trainings record
+id: resetPassword
+slug: auth-reset-password-reset-token-post
+title: Reset password
+sidebar_label: POST
+description: Reset user password with a code (resetToken)
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,47 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">PUT</Method><Path>/trainings/{id}</Path>
+<Url>
+  <Method color="#6b55b2">POST</Method><Path>{unescape(escape('/auth/reset-password/{resetToken}'))}</Path>
+</Url>
+
+> Reset user password with a code (resetToken)
 
 ## Parameters
 
-| name |  in  |  type  | required | description |
-| ---- | :--: | :----: | :------: | ----------- |
-| `id` | path | string |   true   |             |
-
-## Request Body
-
-<!-- prettier-ignore-start -->
-
-<Tabs defaultValue="application/json" values={[
-  { label: "application/json", value: "application/json" },
-]}>
-
-<!-- prettier-ignore-end -->
-
-<TabItem value="application/json">
-
-```json title="Example request"
-{
-  "uuid": "string",
-  "accuracy": 0,
-  "precission": 0,
-  "mae": 0,
-  "rmse": 0,
-  "binaryPath": "string",
-  "version": "string",
-  "meta": "string",
-  "published_at": "2019-08-24T14:15:22Z",
-  "created_by": "string",
-  "updated_by": "string"
-}
-```
-
-</TabItem>
-
-</Tabs>
+| name         |  in  |  type  | required | description              |
+| ------------ | :--: | :----: | :------: | ------------------------ |
+| `resetToken` | path | string |   true   | Token for password reset |
 
 ### Code Snippets
 
@@ -95,21 +79,17 @@ export const Path = ({children}) => (
 <TabItem value="shell">
 
 ```shell
-curl --request PUT \
-  --url https://mywebsite.io/trainings/%7Bid%7D \
-  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"uuid":"string","accuracy":0,"precission":0,"mae":0,"rmse":0,"binaryPath":"string","version":"string","meta":"string","published_at":"2019-08-24T14:15:22Z","created_by":"string","updated_by":"string"}'
+curl --request POST \
+  --url https://maiascore.com/auth/reset-password/%7BresetToken%7D \
+  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
-curl --request PUT \
-  --url https://mywebsite.io/trainings/%7Bid%7D \
-  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"uuid":"string","accuracy":0,"precission":0,"mae":0,"rmse":0,"binaryPath":"string","version":"string","meta":"string","published_at":"2019-08-24T14:15:22Z","created_by":"string","updated_by":"string"}'
+curl --request POST \
+  --url https://maiascore.com/auth/reset-password/%7BresetToken%7D \
+  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
 </Tabs>
@@ -120,7 +100,7 @@ curl --request PUT \
 
 ### 200
 
-Retrieve trainings document(s)
+response
 
 <!-- prettier-ignore-start -->
 
@@ -134,16 +114,8 @@ Retrieve trainings document(s)
 
 ```json title="Example response"
 {
-  "id": "string",
-  "uuid": "string",
-  "accuracy": 0,
-  "precission": 0,
-  "mae": 0,
-  "rmse": 0,
-  "binaryPath": "string",
-  "version": "string",
-  "meta": "string",
-  "published_at": "2019-08-24T14:15:22Z"
+  "code": 200,
+  "message": "OK"
 }
 ```
 
@@ -155,7 +127,7 @@ Retrieve trainings document(s)
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -169,8 +141,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -182,7 +154,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -196,8 +168,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -209,7 +181,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -223,8 +195,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

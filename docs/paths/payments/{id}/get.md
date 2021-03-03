@@ -1,9 +1,9 @@
 ---
-id:
+id: getPayment
 slug: payments-id-get
-title:
-sidebar_label:
-description: Find one payments record
+title: Find one payments record
+sidebar_label: GET
+description: Gets a payment event from its &#x60;Id&#x60;
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,15 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">GET</Method><Path>/payments/{id}</Path>
+<Url>
+  <Method color="#6b55b2">GET</Method><Path>{unescape(escape('/payments/{id}'))}</Path>
+</Url>
+
+> Gets a payment event from its &#x60;Id&#x60;
 
 ## Parameters
 
 | name |  in  |  type  | required | description |
 | ---- | :--: | :----: | :------: | ----------- |
-| `id` | path | string |   true   |             |
+| `id` | path | string |   true   | Payment Id  |
 
 ### Code Snippets
 
@@ -64,7 +80,7 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request GET \
-  --url https://mywebsite.io/payments/%7Bid%7D \
+  --url https://maiascore.com/payments/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -72,7 +88,7 @@ curl --request GET \
 
 ```shell title="Shell + Curl"
 curl --request GET \
-  --url https://mywebsite.io/payments/%7Bid%7D \
+  --url https://maiascore.com/payments/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -103,7 +119,9 @@ Retrieve payments document(s)
   "amountPaid": 0,
   "dueDate": "2019-08-24",
   "date": "2019-08-24",
-  "published_at": "2019-08-24T14:15:22Z"
+  "published_at": "2019-08-24T14:15:22Z",
+  "created_by": "string",
+  "updated_by": "string"
 }
 ```
 
@@ -115,7 +133,7 @@ Retrieve payments document(s)
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -129,8 +147,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -142,7 +160,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -156,8 +174,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -169,7 +187,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -183,8 +201,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

@@ -1,8 +1,8 @@
 ---
-id:
+id: createUserPermissionRole
 slug: users-permissions-roles-role-put
 title:
-sidebar_label:
+sidebar_label: PUT
 description: Update a role
 ---
 
@@ -40,15 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">PUT</Method><Path>/users-permissions/roles/{role}</Path>
+<Url>
+  <Method color="#6b55b2">PUT</Method><Path>{unescape(escape('/users-permissions/roles/{role}'))}</Path>
+</Url>
+
+> Update a role
 
 ## Parameters
 
 | name   |  in  |  type  | required | description |
 | ------ | :--: | :----: | :------: | ----------- |
-| `role` | path | string |   true   |             |
+| `role` | path | string |   true   | Role Id     |
 
 ## Request Body
 
@@ -62,15 +78,13 @@ export const Path = ({children}) => (
 
 <TabItem value="application/json">
 
-```json title="Example request"
+```json
 {
   "name": "string",
   "description": "string",
   "type": "string",
   "permissions": ["string"],
-  "users": ["string"],
-  "created_by": "string",
-  "updated_by": "string"
+  "users": ["string"]
 }
 ```
 
@@ -92,20 +106,20 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request PUT \
-  --url https://mywebsite.io/users-permissions/roles/%7Brole%7D \
+  --url https://maiascore.com/users-permissions/roles/%7Brole%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
   --header 'content-type: application/json' \
-  --data '{"name":"string","description":"string","type":"string","permissions":["string"],"users":["string"],"created_by":"string","updated_by":"string"}'
+  --data '{"name":"string","description":"string","type":"string","permissions":["string"],"users":["string"]}'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
 curl --request PUT \
-  --url https://mywebsite.io/users-permissions/roles/%7Brole%7D \
+  --url https://maiascore.com/users-permissions/roles/%7Brole%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
   --header 'content-type: application/json' \
-  --data '{"name":"string","description":"string","type":"string","permissions":["string"],"users":["string"],"created_by":"string","updated_by":"string"}'
+  --data '{"name":"string","description":"string","type":"string","permissions":["string"],"users":["string"]}'
 ```
 
 </Tabs>
@@ -116,7 +130,7 @@ curl --request PUT \
 
 ### 200
 
-response
+OK
 
 <!-- prettier-ignore-start -->
 
@@ -143,7 +157,6 @@ response
       "enabled": true,
       "policy": "string",
       "role": "string",
-      "created_by": "string",
       "updated_by": "string"
     }
   ],
@@ -163,7 +176,9 @@ response
       "created_by": "string",
       "updated_by": "string"
     }
-  ]
+  ],
+  "created_by": "string",
+  "updated_by": "string"
 }
 ```
 
@@ -175,7 +190,7 @@ response
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -189,8 +204,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -202,7 +217,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -216,8 +231,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -229,7 +244,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -243,8 +258,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

@@ -1,9 +1,9 @@
 ---
-id:
+id: filesCount
 slug: upload-files-count-get
-title:
-sidebar_label:
-description: Retrieve the total number of uploaded files
+title: Retrieve number of uploaded files
+sidebar_label: GET
+description: Retrieve the total number of uploaded files across all users.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,9 +40,25 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">GET</Method><Path>/upload/files/count</Path>
+<Url>
+  <Method color="#6b55b2">GET</Method><Path>{unescape(escape('/upload/files/count'))}</Path>
+</Url>
+
+> Retrieve the total number of uploaded files across all users.
 
 ### Code Snippets
 
@@ -58,7 +74,7 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request GET \
-  --url https://mywebsite.io/upload/files/count \
+  --url https://maiascore.com/upload/files/count \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -66,7 +82,7 @@ curl --request GET \
 
 ```shell title="Shell + Curl"
 curl --request GET \
-  --url https://mywebsite.io/upload/files/count \
+  --url https://maiascore.com/upload/files/count \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -78,7 +94,7 @@ curl --request GET \
 
 ### 200
 
-response
+OK
 
 <!-- prettier-ignore-start -->
 
@@ -92,7 +108,8 @@ response
 
 ```json title="Example response"
 {
-  "foo": "string"
+  "code": 200,
+  "message": "OK"
 }
 ```
 
@@ -104,7 +121,7 @@ response
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -118,8 +135,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -131,7 +148,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -145,8 +162,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -158,7 +175,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -172,8 +189,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

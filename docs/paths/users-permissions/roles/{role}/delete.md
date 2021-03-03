@@ -1,8 +1,8 @@
 ---
-id:
+id: deleteUserPermissionRole
 slug: users-permissions-roles-role-delete
 title:
-sidebar_label:
+sidebar_label: DELETE
 description: Delete a role
 ---
 
@@ -40,15 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">DELETE</Method><Path>/users-permissions/roles/{role}</Path>
+<Url>
+  <Method color="#6b55b2">DELETE</Method><Path>{unescape(escape('/users-permissions/roles/{role}'))}</Path>
+</Url>
+
+> Delete a role
 
 ## Parameters
 
 | name   |  in  |  type  | required | description |
 | ------ | :--: | :----: | :------: | ----------- |
-| `role` | path | string |   true   |             |
+| `role` | path | string |   true   | Role Id     |
 
 ### Code Snippets
 
@@ -64,7 +80,7 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request DELETE \
-  --url https://mywebsite.io/users-permissions/roles/%7Brole%7D \
+  --url https://maiascore.com/users-permissions/roles/%7Brole%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -72,7 +88,7 @@ curl --request DELETE \
 
 ```shell title="Shell + Curl"
 curl --request DELETE \
-  --url https://mywebsite.io/users-permissions/roles/%7Brole%7D \
+  --url https://maiascore.com/users-permissions/roles/%7Brole%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -84,7 +100,7 @@ curl --request DELETE \
 
 ### 200
 
-response
+OK
 
 <!-- prettier-ignore-start -->
 
@@ -98,7 +114,8 @@ response
 
 ```json title="Example response"
 {
-  "foo": "string"
+  "code": 200,
+  "message": "OK"
 }
 ```
 
@@ -110,7 +127,7 @@ response
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -124,8 +141,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -137,7 +154,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -151,8 +168,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -164,7 +181,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -178,8 +195,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

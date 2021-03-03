@@ -1,8 +1,8 @@
 ---
-id:
+id: updateUser
 slug: users-id-put
-title:
-sidebar_label:
+title: Update an user
+sidebar_label: PUT
 description: Update an existing user
 ---
 
@@ -40,15 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">PUT</Method><Path>/users/{id}</Path>
+<Url>
+  <Method color="#6b55b2">PUT</Method><Path>{unescape(escape('/users/{id}'))}</Path>
+</Url>
+
+> Update an existing user
 
 ## Parameters
 
 | name |  in  |  type  | required | description |
 | ---- | :--: | :----: | :------: | ----------- |
-| `id` | path | string |   true   |             |
+| `id` | path | string |   true   | User Id     |
 
 ## Request Body
 
@@ -56,26 +72,67 @@ export const Path = ({children}) => (
 
 <Tabs defaultValue="application/json" values={[
   { label: "application/json", value: "application/json" },
+  { label: "application/xml", value: "application/xml" },
+  { label: "application/x-www-form-urlencoded", value: "application/x-www-form-urlencoded" },
 ]}>
 
 <!-- prettier-ignore-end -->
 
 <TabItem value="application/json">
 
-```json title="Example request"
+```json
 {
-  "username": "string",
-  "email": "string",
-  "provider": "string",
-  "password": "pa$$word",
-  "resetPasswordToken": "string",
-  "confirmationToken": "string",
+  "username": "jlopez",
+  "email": "test@mydomain.com",
+  "provider": "local",
+  "password": "********",
+  "resetPasswordToken": "26f425d6-9269-442b-89ed-e35ba63bf9c0",
+  "confirmationToken": "eddc394a-8664-406e-852f-7a35d84a7fb7",
   "confirmed": false,
   "blocked": false,
   "role": "string",
-  "reports": ["string"],
-  "created_by": "string",
-  "updated_by": "string"
+  "reports": ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"]
+}
+```
+
+</TabItem>
+
+<TabItem value="application/xml">
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <username>jlopez</username>
+  <email>test@mydomain.com</email>
+  <provider>local</provider>
+  <password>********</password>
+  <resetPasswordToken>26f425d6-9269-442b-89ed-e35ba63bf9c0</resetPasswordToken>
+  <confirmationToken>eddc394a-8664-406e-852f-7a35d84a7fb7</confirmationToken>
+  <confirmed>false</confirmed>
+  <blocked>false</blocked>
+  <role>string</role>
+  <reports>maia-c6cbaa76ba8f</reports>
+  <reports>maia-3b5a054c593d</reports>
+  <reports>maia-f95a8582aea5</reports>
+</item>
+```
+
+</TabItem>
+
+<TabItem value="application/x-www-form-urlencoded">
+
+```json
+{
+  "username": "jlopez",
+  "email": "test@mydomain.com",
+  "provider": "local",
+  "password": "********",
+  "resetPasswordToken": "26f425d6-9269-442b-89ed-e35ba63bf9c0",
+  "confirmationToken": "eddc394a-8664-406e-852f-7a35d84a7fb7",
+  "confirmed": false,
+  "blocked": false,
+  "role": "string",
+  "reports": ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"]
 }
 ```
 
@@ -97,20 +154,20 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request PUT \
-  --url https://mywebsite.io/users/%7Bid%7D \
+  --url https://maiascore.com/users/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"username":"string","email":"string","provider":"string","password":"pa$$word","resetPasswordToken":"string","confirmationToken":"string","confirmed":false,"blocked":false,"role":"string","reports":["string"],"created_by":"string","updated_by":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"username":"jlopez","email":"test@mydomain.com","provider":"local","password":"********","resetPasswordToken":"26f425d6-9269-442b-89ed-e35ba63bf9c0","confirmationToken":"eddc394a-8664-406e-852f-7a35d84a7fb7","confirmed":false,"blocked":false,"role":"string","reports":["maia-c6cbaa76ba8f","maia-3b5a054c593d","maia-f95a8582aea5"]}'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
 curl --request PUT \
-  --url https://mywebsite.io/users/%7Bid%7D \
+  --url https://maiascore.com/users/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"username":"string","email":"string","provider":"string","password":"pa$$word","resetPasswordToken":"string","confirmationToken":"string","confirmed":false,"blocked":false,"role":"string","reports":["string"],"created_by":"string","updated_by":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"username":"jlopez","email":"test@mydomain.com","provider":"local","password":"********","resetPasswordToken":"26f425d6-9269-442b-89ed-e35ba63bf9c0","confirmationToken":"eddc394a-8664-406e-852f-7a35d84a7fb7","confirmed":false,"blocked":false,"role":"string","reports":["maia-c6cbaa76ba8f","maia-3b5a054c593d","maia-f95a8582aea5"]}'
 ```
 
 </Tabs>
@@ -121,7 +178,7 @@ curl --request PUT \
 
 ### 200
 
-response
+Update successful
 
 <!-- prettier-ignore-start -->
 
@@ -147,27 +204,24 @@ response
     "description": "string",
     "type": "string",
     "permissions": ["string"],
-    "users": ["string"],
-    "created_by": "string",
-    "updated_by": "string"
+    "users": ["string"]
   },
   "reports": [
     {
-      "id": "string",
-      "uuid": "string",
-      "referenceId": "string",
+      "id": "d0fea516-9b58-4cf5-ab86-bb7e983e4b0c",
+      "uuid": "maia-8439cc39b63b",
+      "referenceId": "96234",
       "type": "reference",
       "processed": true,
-      "users_permissions_user": "string",
-      "score": 0,
-      "scoreProbability": 0,
-      "scoreConfidence": 0,
-      "scoreVersion": "string",
-      "published_at": "string",
-      "created_by": "string",
-      "updated_by": "string"
+      "users_permissions_user": "jlopez",
+      "score": 98,
+      "scoreProbability": 96,
+      "scoreConfidence": 99,
+      "scoreVersion": "v-ab86"
     }
-  ]
+  ],
+  "created_by": "admin",
+  "updated_by": "admin"
 }
 ```
 
@@ -179,7 +233,7 @@ response
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -193,8 +247,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -206,7 +260,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -220,8 +274,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -233,7 +287,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -247,8 +301,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

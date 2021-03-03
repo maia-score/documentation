@@ -23,24 +23,17 @@ module.exports = {
           items: [
             {
               type: 'category',
-              label: '{Provider}',
-              collapsed: true,
-              items: [
-                'paths/auth/{provider}/callback/get'
-              ],
-            }, {
-              type: 'category',
               label: 'Email Confirmation',
               collapsed: true,
               items: [
-                'paths/auth/email-confirmation/get'
+                'paths/auth/email-confirmation/emailConfirmation'
               ],
             }, {
               type: 'category',
               label: 'Forgot Password',
               collapsed: true,
               items: [
-                'paths/auth/forgot-password/post'
+                'paths/auth/forgot-password/forgotPassword'
               ],
             }, {
               type: 'category',
@@ -52,24 +45,24 @@ module.exports = {
                   label: 'Register',
                   collapsed: true,
                   items: [
-                    'paths/auth/local/register/post'
+                    'paths/auth/local/register/registerAuth'
                   ],
                 },
-                'paths/auth/local/post'
+                'paths/auth/local/localAuth'
               ],
             }, {
               type: 'category',
               label: 'Reset Password',
               collapsed: true,
               items: [
-                'paths/auth/reset-password/post'
+                'paths/auth/reset-password/{resetToken}/resetPassword'
               ],
             }, {
               type: 'category',
               label: 'Send Email Confirmation',
               collapsed: true,
               items: [
-                'paths/auth/send-email-confirmation/post'
+                'paths/auth/send-email-confirmation/sendEmailConfirmation'
               ],
             }
           ],
@@ -78,13 +71,12 @@ module.exports = {
           label: 'Company',
           collapsed: true,
           items: [
-            'paths/company/get',
-            'paths/company/put',
-            'paths/company/delete',
+            'paths/company/getCompany',
+            'paths/company/updateCompany'
           ],
         }, {
           type: 'category',
-          label: 'Custumers',
+          label: 'Customers',
           collapsed: true,
           items: [
             {
@@ -92,20 +84,20 @@ module.exports = {
               label: '{id}',
               collapsed: true,
               items: [
-                'paths/customers/{id}/get',
-                'paths/customers/{id}/put',
-                'paths/customers/{id}/delete'
+                'paths/customers/{id}/getCustomer',
+                'paths/customers/{id}/updateCustomer',
+                'paths/customers/{id}/deleteCustomer'
               ],
             }, {
               type: 'category',
               label: 'Count',
               collapsed: true,
               items: [
-                'paths/customers/count/get'
+                'paths/customers/count/countCustomers'
               ],
             },
-            'paths/customers/get',
-            'paths/customers/post',
+            'paths/customers/getCustomers',
+            'paths/customers/createCustomer',
           ],
         }, {
           type: 'category',
@@ -117,20 +109,20 @@ module.exports = {
               label: '{id}',
               collapsed: true,
               items: [
-                'paths/datasources/{id}/get',
-                'paths/datasources/{id}/put',
-                'paths/datasources/{id}/delete'
+                'paths/datasources/{id}/getDatasource',
+                'paths/datasources/{id}/updateDatasource',
+                'paths/datasources/{id}/deleteDatasource'
               ],
             }, {
               type: 'category',
               label: 'Count',
               collapsed: true,
               items: [
-                'paths/datasources/count/get'
+                'paths/datasources/count/countDatasources'
               ],
             },
-            'paths/datasources/get',
-            'paths/datasources/post',
+            'paths/datasources/getDatasources',
+            'paths/datasources/createDatasource',
           ],
         }, {
           type: 'category',
@@ -142,20 +134,20 @@ module.exports = {
               label: '{id}',
               collapsed: true,
               items: [
-                'paths/payments/{id}/get',
-                'paths/payments/{id}/put',
-                'paths/payments/{id}/delete'
+                'paths/payments/{id}/getPayment',
+                'paths/payments/{id}/updatePayment',
+                'paths/payments/{id}/deletePayment'
               ],
             }, {
               type: 'category',
               label: 'Count',
               collapsed: true,
               items: [
-                'paths/payments/count/get'
+                'paths/payments/count/countPayments'
               ],
             },
-            'paths/payments/get',
-            'paths/payments/post',
+            'paths/payments/getPayments',
+            'paths/payments/createPayment',
           ],
         }, {
           type: 'category',
@@ -167,20 +159,18 @@ module.exports = {
               label: '{id}',
               collapsed: true,
               items: [
-                'paths/reports/{id}/get',
-                'paths/reports/{id}/put',
-                'paths/reports/{id}/delete'
+                'paths/reports/{id}/getReport'
               ],
             }, {
               type: 'category',
               label: 'Count',
               collapsed: true,
               items: [
-                'paths/reports/count/get'
+                'paths/reports/count/countReports'
               ],
             },
-            'paths/reports/get',
-            'paths/reports/post',
+            'paths/reports/getReports',
+            'paths/reports/createReport',
           ],
         }, {
           type: 'category',
@@ -192,20 +182,49 @@ module.exports = {
               label: '{id}',
               collapsed: true,
               items: [
-                'paths/trainings/{id}/get',
-                'paths/trainings/{id}/put',
-                'paths/trainings/{id}/delete'
+                'paths/trainings/{id}/getTraining',
+              ],
+            },{
+              type: 'category',
+              label: 'Cancel',
+              collapsed: true,
+              items: [
+                'paths/trainings/cancel/{id}/cancelTraining',
               ],
             }, {
               type: 'category',
               label: 'Count',
               collapsed: true,
               items: [
-                'paths/trainings/count/get'
+                'paths/trainings/count/countTrainings'
               ],
             },
-            'paths/trainings/get',
-            'paths/trainings/post',
+            'paths/trainings/getTrainings',
+            'paths/trainings/createTraining',
+          ],
+        }, {
+          type: 'category',
+          label: 'Users',
+          collapsed: true,
+          items: [
+            {
+              type: 'category',
+              label: '{id}',
+              collapsed: true,
+              items: [
+                'paths/users/{id}/getUser',
+                'paths/users/{id}/updateUser',
+                'paths/users/{id}/deleteUser'
+              ],
+            }, {
+              type: 'category',
+              label: 'Count',
+              collapsed: true,
+              items: [
+                'paths/users/me/getMe'
+              ],
+            },
+            'paths/users/getUsers'
           ],
         }
       ],

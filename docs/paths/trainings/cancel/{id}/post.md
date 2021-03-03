@@ -1,9 +1,9 @@
 ---
-id:
-slug: company-delete
-title:
-sidebar_label:
-description: Deletes current company information.
+id: cancelTraining
+slug: trainings-cancel-id-post
+title: Cancel queued training
+sidebar_label: POST
+description: Cancels a queued training.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,9 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">DELETE</Method><Path>/company</Path>
+<Url>
+  <Method color="#6b55b2">POST</Method><Path>{unescape(escape('/trainings/cancel/{id}'))}</Path>
+</Url>
+
+> Cancels a queued training.
+
+## Parameters
+
+| name |  in  |  type  | required | description |
+| ---- | :--: | :----: | :------: | ----------- |
+| `id` | path | string |   true   | Training    |
 
 ### Code Snippets
 
@@ -57,16 +79,16 @@ export const Path = ({children}) => (
 <TabItem value="shell">
 
 ```shell
-curl --request DELETE \
-  --url https://mywebsite.io/company \
+curl --request POST \
+  --url https://maiascore.com/trainings/cancel/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
-curl --request DELETE \
-  --url https://mywebsite.io/company \
+curl --request POST \
+  --url https://maiascore.com/trainings/cancel/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -78,31 +100,7 @@ curl --request DELETE \
 
 ### 200
 
-deletes a single company based on the ID supplied
-
-<!-- prettier-ignore-start -->
-
-<Tabs defaultValue="application/json" values={[
-  { label: "application/json", value: "application/json" },
-]}>
-
-<!-- prettier-ignore-end -->
-
-<TabItem value="application/json">
-
-```json title="Example response"
-0
-```
-
-</TabItem>
-
-</Tabs>
-
----
-
-### 403
-
-Forbidden
+Canceled successfuly
 
 <!-- prettier-ignore-start -->
 
@@ -116,8 +114,45 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "id": "string",
+  "uuid": "string",
+  "accuracy": 0,
+  "precission": 0,
+  "mae": 0,
+  "rmse": 0,
+  "binaryPath": "string",
+  "version": "string",
+  "meta": "string",
+  "published_at": "2019-08-24T14:15:22Z",
+  "created_by": "string",
+  "updated_by": "string"
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+---
+
+### 403
+
+**Forbidden**: this operation requeris authentication
+
+<!-- prettier-ignore-start -->
+
+<Tabs defaultValue="application/json" values={[
+  { label: "application/json", value: "application/json" },
+]}>
+
+<!-- prettier-ignore-end -->
+
+<TabItem value="application/json">
+
+```json title="Example response"
+{
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -129,7 +164,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -143,8 +178,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -156,7 +191,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -170,8 +205,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

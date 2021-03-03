@@ -1,8 +1,8 @@
 ---
-id:
+id: findUserPermission
 slug: users-permissions-search-id-get
 title:
-sidebar_label:
+sidebar_label: GET
 description: Search for users
 ---
 
@@ -40,15 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">GET</Method><Path>/users-permissions/search/{id}</Path>
+<Url>
+  <Method color="#6b55b2">GET</Method><Path>{unescape(escape('/users-permissions/search/{id}'))}</Path>
+</Url>
+
+> Search for users
 
 ## Parameters
 
 | name         |  in   |  type   | required | description                                                          |
 | ------------ | :---: | :-----: | :------: | -------------------------------------------------------------------- |
-| `id`         | path  | string  |   true   |                                                                      |
+| `id`         | path  | string  |   true   | User Id                                                              |
 | `_limit`     | query | integer |  false   | Maximum number of results possible                                   |
 | `_sort`      | query | string  |  false   | Sort according to a specific field.                                  |
 | `_start`     | query | integer |  false   | Skip a specific number of entries (especially useful for pagination) |
@@ -77,7 +93,7 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request GET \
-  --url 'https://mywebsite.io/users-permissions/search/%7Bid%7D?_limit=SOME_INTEGER_VALUE&_sort=SOME_STRING_VALUE&_start=SOME_INTEGER_VALUE&%3D=SOME_STRING_VALUE&_ne=SOME_STRING_VALUE&_lt=SOME_STRING_VALUE&_lte=SOME_STRING_VALUE&_gt=SOME_STRING_VALUE&_gte=SOME_STRING_VALUE&_contains=SOME_STRING_VALUE&_containss=SOME_STRING_VALUE&_in=SOME_ARRAY_VALUE&_nin=SOME_ARRAY_VALUE' \
+  --url 'https://maiascore.com/users-permissions/search/%7Bid%7D?_limit=SOME_INTEGER_VALUE&_sort=SOME_STRING_VALUE&_start=SOME_INTEGER_VALUE&%3D=SOME_STRING_VALUE&_ne=SOME_STRING_VALUE&_lt=SOME_STRING_VALUE&_lte=SOME_STRING_VALUE&_gt=SOME_STRING_VALUE&_gte=SOME_STRING_VALUE&_contains=SOME_STRING_VALUE&_containss=SOME_STRING_VALUE&_in=SOME_ARRAY_VALUE&_nin=SOME_ARRAY_VALUE' \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -85,7 +101,7 @@ curl --request GET \
 
 ```shell title="Shell + Curl"
 curl --request GET \
-  --url 'https://mywebsite.io/users-permissions/search/%7Bid%7D?_limit=SOME_INTEGER_VALUE&_sort=SOME_STRING_VALUE&_start=SOME_INTEGER_VALUE&%3D=SOME_STRING_VALUE&_ne=SOME_STRING_VALUE&_lt=SOME_STRING_VALUE&_lte=SOME_STRING_VALUE&_gt=SOME_STRING_VALUE&_gte=SOME_STRING_VALUE&_contains=SOME_STRING_VALUE&_containss=SOME_STRING_VALUE&_in=SOME_ARRAY_VALUE&_nin=SOME_ARRAY_VALUE' \
+  --url 'https://maiascore.com/users-permissions/search/%7Bid%7D?_limit=SOME_INTEGER_VALUE&_sort=SOME_STRING_VALUE&_start=SOME_INTEGER_VALUE&%3D=SOME_STRING_VALUE&_ne=SOME_STRING_VALUE&_lt=SOME_STRING_VALUE&_lte=SOME_STRING_VALUE&_gt=SOME_STRING_VALUE&_gte=SOME_STRING_VALUE&_contains=SOME_STRING_VALUE&_containss=SOME_STRING_VALUE&_in=SOME_ARRAY_VALUE&_nin=SOME_ARRAY_VALUE' \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -97,7 +113,7 @@ curl --request GET \
 
 ### 200
 
-response
+OK
 
 <!-- prettier-ignore-start -->
 
@@ -124,27 +140,24 @@ response
       "description": "string",
       "type": "string",
       "permissions": ["string"],
-      "users": ["string"],
-      "created_by": "string",
-      "updated_by": "string"
+      "users": ["string"]
     },
     "reports": [
       {
-        "id": "string",
-        "uuid": "string",
-        "referenceId": "string",
+        "id": "d0fea516-9b58-4cf5-ab86-bb7e983e4b0c",
+        "uuid": "maia-8439cc39b63b",
+        "referenceId": "96234",
         "type": "reference",
         "processed": true,
-        "users_permissions_user": "string",
-        "score": 0,
-        "scoreProbability": 0,
-        "scoreConfidence": 0,
-        "scoreVersion": "string",
-        "published_at": "string",
-        "created_by": "string",
-        "updated_by": "string"
+        "users_permissions_user": "jlopez",
+        "score": 98,
+        "scoreProbability": 96,
+        "scoreConfidence": 99,
+        "scoreVersion": "v-ab86"
       }
-    ]
+    ],
+    "created_by": "admin",
+    "updated_by": "admin"
   }
 ]
 ```
@@ -157,7 +170,7 @@ response
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -171,8 +184,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -184,7 +197,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -198,8 +211,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -211,7 +224,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -225,8 +238,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

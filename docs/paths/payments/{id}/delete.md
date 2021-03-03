@@ -1,9 +1,9 @@
 ---
-id:
+id: deletePayment
 slug: payments-id-delete
-title:
-sidebar_label:
-description: Delete a single payments record
+title: Delete a single payments record
+sidebar_label: DELETE
+description: Removes a payment record for local records.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,15 +40,31 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">DELETE</Method><Path>/payments/{id}</Path>
+<Url>
+  <Method color="#6b55b2">DELETE</Method><Path>{unescape(escape('/payments/{id}'))}</Path>
+</Url>
+
+> Removes a payment record for local records.
 
 ## Parameters
 
 | name |  in  |  type  | required | description |
 | ---- | :--: | :----: | :------: | ----------- |
-| `id` | path | string |   true   |             |
+| `id` | path | string |   true   | Payment Id  |
 
 ### Code Snippets
 
@@ -64,7 +80,7 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request DELETE \
-  --url https://mywebsite.io/payments/%7Bid%7D \
+  --url https://maiascore.com/payments/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -72,7 +88,7 @@ curl --request DELETE \
 
 ```shell title="Shell + Curl"
 curl --request DELETE \
-  --url https://mywebsite.io/payments/%7Bid%7D \
+  --url https://maiascore.com/payments/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
 ```
 
@@ -108,7 +124,7 @@ deletes a single payments based on the ID supplied
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -122,8 +138,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -135,7 +151,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -149,8 +165,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -162,7 +178,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -176,8 +192,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

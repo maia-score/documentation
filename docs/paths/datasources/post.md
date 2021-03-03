@@ -1,9 +1,9 @@
 ---
-id:
+id: createDatasource
 slug: datasources-post
-title:
-sidebar_label:
-description: Create a new datasources record
+title: Create a new datasources record
+sidebar_label: POST
+description: Creates, test and connects a new data source based on the secutiry scheme selected.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,9 +40,25 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">POST</Method><Path>/datasources</Path>
+<Url>
+  <Method color="#6b55b2">POST</Method><Path>{unescape(escape('/datasources'))}</Path>
+</Url>
+
+> Creates, test and connects a new data source based on the secutiry scheme selected.
 
 ## Request Body
 
@@ -50,13 +66,15 @@ export const Path = ({children}) => (
 
 <Tabs defaultValue="application/json" values={[
   { label: "application/json", value: "application/json" },
+  { label: "application/xml", value: "application/xml" },
+  { label: "application/x-www-form-urlencoded", value: "application/x-www-form-urlencoded" },
 ]}>
 
 <!-- prettier-ignore-end -->
 
 <TabItem value="application/json">
 
-```json title="Example request"
+```json
 {
   "driver": "mysql",
   "host": "string",
@@ -74,10 +92,60 @@ export const Path = ({children}) => (
   "sshPassword": "string",
   "sshPort": "string",
   "sshIdentity": "string",
-  "sshTunneling": true,
-  "published_at": "2019-08-24T14:15:22Z",
-  "created_by": "string",
-  "updated_by": "string"
+  "sshTunneling": true
+}
+```
+
+</TabItem>
+
+<TabItem value="application/xml">
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <driver>mysql</driver>
+  <host>string</host>
+  <username>string</username>
+  <password>string</password>
+  <database>string</database>
+  <port>string</port>
+  <ssl>true</ssl>
+  <keyfile>string</keyfile>
+  <certificate>string</certificate>
+  <sslCA>string</sslCA>
+  <ssh>true</ssh>
+  <sshHost>string</sshHost>
+  <sshUsername>string</sshUsername>
+  <sshPassword>string</sshPassword>
+  <sshPort>string</sshPort>
+  <sshIdentity>string</sshIdentity>
+  <sshTunneling>true</sshTunneling>
+</item>
+```
+
+</TabItem>
+
+<TabItem value="application/x-www-form-urlencoded">
+
+```json
+{
+  "driver": "mysql",
+  "host": "string",
+  "username": "string",
+  "password": "string",
+  "database": "string",
+  "port": "string",
+  "ssl": true,
+  "keyfile": "string",
+  "certificate": "string",
+  "sslCA": "string",
+  "ssh": true,
+  "sshHost": "string",
+  "sshUsername": "string",
+  "sshPassword": "string",
+  "sshPort": "string",
+  "sshIdentity": "string",
+  "sshTunneling": true
 }
 ```
 
@@ -99,20 +167,20 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request POST \
-  --url https://mywebsite.io/datasources \
+  --url https://maiascore.com/datasources \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"driver":"mysql","host":"string","username":"string","password":"string","database":"string","port":"string","ssl":true,"keyfile":"string","certificate":"string","sslCA":"string","ssh":true,"sshHost":"string","sshUsername":"string","sshPassword":"string","sshPort":"string","sshIdentity":"string","sshTunneling":true,"published_at":"2019-08-24T14:15:22Z","created_by":"string","updated_by":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"driver":"mysql","host":"string","username":"string","password":"string","database":"string","port":"string","ssl":true,"keyfile":"string","certificate":"string","sslCA":"string","ssh":true,"sshHost":"string","sshUsername":"string","sshPassword":"string","sshPort":"string","sshIdentity":"string","sshTunneling":true}'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
 curl --request POST \
-  --url https://mywebsite.io/datasources \
+  --url https://maiascore.com/datasources \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"driver":"mysql","host":"string","username":"string","password":"string","database":"string","port":"string","ssl":true,"keyfile":"string","certificate":"string","sslCA":"string","ssh":true,"sshHost":"string","sshUsername":"string","sshPassword":"string","sshPort":"string","sshIdentity":"string","sshTunneling":true,"published_at":"2019-08-24T14:15:22Z","created_by":"string","updated_by":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"driver":"mysql","host":"string","username":"string","password":"string","database":"string","port":"string","ssl":true,"keyfile":"string","certificate":"string","sslCA":"string","ssh":true,"sshHost":"string","sshUsername":"string","sshPassword":"string","sshPort":"string","sshIdentity":"string","sshTunneling":true}'
 ```
 
 </Tabs>
@@ -155,7 +223,9 @@ Retrieve datasources document(s)
   "sshPort": "string",
   "sshIdentity": "string",
   "sshTunneling": true,
-  "published_at": "2019-08-24T14:15:22Z"
+  "published_at": "2019-08-24T14:15:22Z",
+  "created_by": "string",
+  "updated_by": "string"
 }
 ```
 
@@ -167,7 +237,7 @@ Retrieve datasources document(s)
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -181,8 +251,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -194,7 +264,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -208,8 +278,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -221,7 +291,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -235,8 +305,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

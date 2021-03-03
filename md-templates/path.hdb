@@ -2,7 +2,7 @@
 id: {{method.operationId}}
 slug: {{slug}}
 title: {{method.summary}}
-sidebar_label: {{method.operationId}}
+sidebar_label: {{httpMethod}}
 description: {{method.description}}
 ---
 
@@ -41,13 +41,28 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 {{{{/rawBlock}}}}
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">{{httpMethod}}</Method><Path>{{path}}</Path>
-
+<Url>
+  <Method color="#6b55b2">{{httpMethod}}</Method><Path>{unescape(escape('{{path}}'))}</Path>
+</Url>
 
 {{#with method}}
+
+> {{description}}
 
 {{#if parameters}}
 ## Parameters
@@ -81,7 +96,7 @@ export const Path = ({children}) => (
 
 {{description}}
 
-{{{schemaSampleWithTitle @key schema "Example request"}}}
+{{{schemaSample @key schema }}}
 
 </TabItem>
 

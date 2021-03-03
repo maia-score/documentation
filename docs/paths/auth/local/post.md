@@ -1,9 +1,9 @@
 ---
-id:
+id: localAuth
 slug: auth-local-post
-title:
-sidebar_label:
-description: Login a user using the identifiers email and password
+title: User Login
+sidebar_label: POST
+description: Login a user using the identifiers email and password.
 ---
 
 <!-- prettier-ignore-start -->
@@ -40,9 +40,25 @@ export const Path = ({children}) => (
   </span>
 );
 
+export const Url = ({children}) => {
+  return (
+    <div
+      style={{
+        marginBottom: '3rem',
+        paddingTop: '1rem'
+      }}>
+      {children}
+    </div>
+  );
+};
+
 <!-- prettier-ignore-end -->
 
-<Method color="#6b55b2">POST</Method><Path>/auth/local</Path>
+<Url>
+  <Method color="#6b55b2">POST</Method><Path>{unescape(escape('/auth/local'))}</Path>
+</Url>
+
+> Login a user using the identifiers email and password.
 
 ## Request Body
 
@@ -50,15 +66,41 @@ export const Path = ({children}) => (
 
 <Tabs defaultValue="application/json" values={[
   { label: "application/json", value: "application/json" },
+  { label: "application/xml", value: "application/xml" },
+  { label: "application/x-www-form-urlencoded", value: "application/x-www-form-urlencoded" },
 ]}>
 
 <!-- prettier-ignore-end -->
 
 <TabItem value="application/json">
 
-```json title="Example request"
+```json
 {
-  "foo": "string"
+  "user": "jlopez",
+  "password": "********"
+}
+```
+
+</TabItem>
+
+<TabItem value="application/xml">
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <user>jlopez</user>
+  <password>********</password>
+</item>
+```
+
+</TabItem>
+
+<TabItem value="application/x-www-form-urlencoded">
+
+```json
+{
+  "user": "jlopez",
+  "password": "********"
 }
 ```
 
@@ -80,20 +122,20 @@ export const Path = ({children}) => (
 
 ```shell
 curl --request POST \
-  --url https://mywebsite.io/auth/local \
+  --url https://maiascore.com/auth/local \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"foo":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"user":"jlopez","password":"********"}'
 ```
 
 </TabItem>
 
 ```shell title="Shell + Curl"
 curl --request POST \
-  --url https://mywebsite.io/auth/local \
+  --url https://maiascore.com/auth/local \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
-  --header 'content-type: application/json' \
-  --data '{"foo":"string"}'
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data '{"user":"jlopez","password":"********"}'
 ```
 
 </Tabs>
@@ -104,7 +146,7 @@ curl --request POST \
 
 ### 200
 
-response
+Auth suxcessful
 
 <!-- prettier-ignore-start -->
 
@@ -118,7 +160,8 @@ response
 
 ```json title="Example response"
 {
-  "foo": "string"
+  "code": 200,
+  "message": "OK"
 }
 ```
 
@@ -130,7 +173,7 @@ response
 
 ### 403
 
-Forbidden
+**Forbidden**: this operation requeris authentication
 
 <!-- prettier-ignore-start -->
 
@@ -144,8 +187,8 @@ Forbidden
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -157,7 +200,7 @@ Forbidden
 
 ### 404
 
-Not found
+**Not found**: the resource was not found
 
 <!-- prettier-ignore-start -->
 
@@ -171,8 +214,8 @@ Not found
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 
@@ -184,7 +227,7 @@ Not found
 
 ### default
 
-unexpected error
+**Unexpected error**
 
 <!-- prettier-ignore-start -->
 
@@ -198,8 +241,8 @@ unexpected error
 
 ```json title="Example response"
 {
-  "code": 0,
-  "message": "string"
+  "code": 500,
+  "message": "Error - Server Error"
 }
 ```
 

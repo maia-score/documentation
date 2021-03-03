@@ -2,13 +2,13 @@
   "openapi": "3.0.2",
   "info": {
     "version": "1.0.0",
-    "title": "DOCUMENTATION",
+    "title": "Maia Score",
     "description": "",
-    "termsOfService": "https://mywebsite.io",
+    "termsOfService": "https://maiascore.com",
     "contact": {
-      "name": "TEAM",
-      "email": "contact-email@something.io",
-      "url": "https://mywebsite.io"
+      "name": "Engineering Team",
+      "email": "engineering@ysnx.ai",
+      "url": "https://synx.ai"
     },
     "license": {
       "name": "Apache 2.0",
@@ -17,28 +17,23 @@
     "x-generation-date": "02/26/2021 9:31:01 PM"
   },
   "x-hasEquivalentPaths": true,
-  "x-strapi-config": {
-    "path": "/documentation",
-    "showGeneratedFiles": true,
-    "generateDefaultResponse": true
-  },
   "servers": [
     {
-      "url": "https://mywebsite.io",
+      "url": "https://maiascore.com",
       "description": "Development server"
     },
     {
-      "url": "https://mywebsite.io",
+      "url": "https://maiascore.com",
       "description": "Staging server"
     },
     {
-      "url": "https://mywebsite.io",
+      "url": "https://maiascore.com",
       "description": "Production server"
     }
   ],
   "externalDocs": {
     "description": "Find out more",
-    "url": "https://strapi.io/documentation/developer-docs/latest/"
+    "url": "https://maias-score.github.io/documentation"
   },
   "security": [
     {
@@ -49,7 +44,8 @@
     "/company": {
       "get": {
         "deprecated": false,
-        "description": "Returns current company information.",
+        "description": "Returns current Maia customer company information.",
+        "operationId": "getCompany",
         "responses": {
           "200": {
             "description": "Retrieve company document(s)",
@@ -65,27 +61,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -95,7 +98,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Retreive company information",
         "tags": [
           "Company"
         ],
@@ -241,6 +244,7 @@
       "put": {
         "deprecated": false,
         "description": "Updates current company information.",
+        "operationId": "updateCompany",
         "responses": {
           "200": {
             "description": "Retrieve company document(s)",
@@ -253,27 +257,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -283,15 +294,25 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Update company information",
         "tags": [
           "Company"
         ],
         "requestBody": {
-          "description": "",
+          "description": "The fields to update company information, non presents fields are ignored.",
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCompany"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCompany"
+              }
+            },
+            "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/NewCompany"
               }
@@ -299,64 +320,13 @@
           }
         },
         "parameters": []
-      },
-      "delete": {
-        "deprecated": false,
-        "description": "Deletes current company information.",
-        "responses": {
-          "200": {
-            "description": "deletes a single company based on the ID supplied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int64"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Company"
-        ],
-        "parameters": []
       }
     },
     "/customers": {
       "get": {
         "deprecated": false,
-        "description": "Find all the customers's records",
+        "description": "This method requests and filters all customers records registered in database.",
+        "operationId": "getCustomers",
         "responses": {
           "200": {
             "description": "Retrieve customers document(s)",
@@ -372,27 +342,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -402,7 +379,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Find all the customer records",
         "tags": [
           "Customers"
         ],
@@ -547,7 +524,8 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new customers record",
+        "description": "This method is used to register a new customer into database. These information will be used for AI agent trainig.",
+        "operationId": "createCustomer",
         "responses": {
           "200": {
             "description": "Retrieve customers document(s)",
@@ -560,27 +538,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -590,15 +575,25 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Create a new customers record.",
         "tags": [
           "Customers"
         ],
         "requestBody": {
-          "description": "",
+          "description": "While not every fields are required, is strongly recommended to fill out as many as possbile.",
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomers"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomers"
+              }
+            },
+            "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/NewCustomers"
               }
@@ -610,7 +605,8 @@
     "/customers/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of customers documents",
+        "description": "Perform an optmized _count_ of records, usually for pagination purposes.",
+        "operationId": "countCustomers",
         "responses": {
           "200": {
             "description": "Retrieve customers document(s)",
@@ -627,27 +623,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -657,7 +660,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Retrieve the numver of customers documents",
         "tags": [
           "Customers"
         ],
@@ -667,7 +670,8 @@
     "/customers/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one customers record",
+        "description": "Find one customers record using Id or Reference.",
+        "operationId": "getCustomer",
         "responses": {
           "200": {
             "description": "Retrieve customers document(s)",
@@ -680,27 +684,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -710,7 +721,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Find one customers record",
         "tags": [
           "Customers"
         ],
@@ -718,7 +729,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Customer Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -729,7 +740,8 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single customers record",
+        "description": "This methods updates the information for a single customer.",
+        "operationId": "updateCustomer",
         "responses": {
           "200": {
             "description": "Retrieve customers document(s)",
@@ -742,27 +754,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -772,15 +791,25 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Update a single customers record.",
         "tags": [
           "Customers"
         ],
         "requestBody": {
-          "description": "",
+          "description": "Fields to update the customer.",
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomers"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomers"
+              }
+            },
+            "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/NewCustomers"
               }
@@ -791,7 +820,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Customer Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -803,6 +832,7 @@
       "delete": {
         "deprecated": false,
         "description": "Delete a single customers record",
+        "operationId": "deleteCustomer",
         "responses": {
           "200": {
             "description": "deletes a single customers based on the ID supplied",
@@ -816,27 +846,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -846,7 +883,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Delete a single customers record",
         "tags": [
           "Customers"
         ],
@@ -854,7 +891,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Customer Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -867,7 +904,8 @@
     "/datasources": {
       "get": {
         "deprecated": false,
-        "description": "Find all the datasources's records",
+        "description": "Used to fetch information about all the datasource records where customers and their payments historial is stored.",
+        "operationId": "getDatasources",
         "responses": {
           "200": {
             "description": "Retrieve datasources document(s)",
@@ -883,27 +921,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -913,7 +958,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Find all the datasource records",
         "tags": [
           "Datasources"
         ],
@@ -1058,7 +1103,8 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new datasources record",
+        "description": "Creates, test and connects a new data source based on the secutiry scheme selected.",
+        "operationId": "createDatasource",
         "responses": {
           "200": {
             "description": "Retrieve datasources document(s)",
@@ -1071,27 +1117,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1101,7 +1154,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Create a new datasources record",
         "tags": [
           "Datasources"
         ],
@@ -1113,6 +1166,16 @@
               "schema": {
                 "$ref": "#/components/schemas/NewDatasources"
               }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewDatasources"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/NewDatasources"
+              }
             }
           }
         }
@@ -1121,7 +1184,8 @@
     "/datasources/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of datasources documents",
+        "description": "Get the number of current data sources.",
+        "operationId": "countDatasources",
         "responses": {
           "200": {
             "description": "Retrieve datasources document(s)",
@@ -1138,27 +1202,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1168,7 +1239,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Retrieve the number of datasources documents",
         "tags": [
           "Datasources"
         ],
@@ -1178,7 +1249,8 @@
     "/datasources/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one datasources record",
+        "description": "Retrieve information about the selected data source based on the `Id`",
+        "operationId": "getDatasource",
         "responses": {
           "200": {
             "description": "Retrieve datasources document(s)",
@@ -1191,27 +1263,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requires authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1221,7 +1300,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Find one datasources record",
         "tags": [
           "Datasources"
         ],
@@ -1229,7 +1308,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Datasource Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -1240,7 +1319,8 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single datasources record",
+        "description": "Update and test a new connection to a data source.",
+        "operationId": "updateDatasource",
         "responses": {
           "200": {
             "description": "Retrieve datasources document(s)",
@@ -1253,27 +1333,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1283,15 +1370,25 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Fields to uptade a data source",
         "tags": [
           "Datasources"
         ],
         "requestBody": {
-          "description": "",
+          "description": "Update a single datasources record",
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewDatasources"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewDatasources"
+              }
+            },
+            "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/NewDatasources"
               }
@@ -1302,7 +1399,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Datasource Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -1313,7 +1410,8 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single datasources record",
+        "description": "Removes the connection with a data source and erases login information. Please note that a reference of the data source will remain to ensure consistence about data origin on customer and payment records, but data source cannot be longer used or accessed.",
+        "operationId": "deleteDatasource",
         "responses": {
           "200": {
             "description": "deletes a single datasources based on the ID supplied",
@@ -1327,27 +1425,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1357,7 +1462,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Delete a single datasources record",
         "tags": [
           "Datasources"
         ],
@@ -1365,7 +1470,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Datasource Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -1378,7 +1483,8 @@
     "/payments": {
       "get": {
         "deprecated": false,
-        "description": "Find all the payments's records",
+        "description": "Retrieves and filter a list of payment records.",
+        "operationId": "getPayments",
         "responses": {
           "200": {
             "description": "Retrieve payments document(s)",
@@ -1394,27 +1500,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1424,7 +1537,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Find all the payment records",
         "tags": [
           "Payments"
         ],
@@ -1569,7 +1682,8 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new payments record",
+        "description": "Register a new payment to a customer historial.",
+        "operationId": "createPayment",
         "responses": {
           "200": {
             "description": "Retrieve payments document(s)",
@@ -1582,27 +1696,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1612,7 +1733,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Create a new payments record",
         "tags": [
           "Payments"
         ],
@@ -1624,6 +1745,16 @@
               "schema": {
                 "$ref": "#/components/schemas/NewPayments"
               }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPayments"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPayments"
+              }
             }
           }
         }
@@ -1632,7 +1763,8 @@
     "/payments/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of payments documents",
+        "description": "Count payments across all users and data sources.",
+        "operationId": "countPayments",
         "responses": {
           "200": {
             "description": "Retrieve payments document(s)",
@@ -1649,27 +1781,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1679,7 +1818,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Retrieve the number of payments records",
         "tags": [
           "Payments"
         ],
@@ -1689,7 +1828,8 @@
     "/payments/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one payments record",
+        "description": "Gets a payment event from its `Id`",
+        "operationId": "getPayment",
         "responses": {
           "200": {
             "description": "Retrieve payments document(s)",
@@ -1702,27 +1842,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1732,7 +1879,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Find one payments record",
         "tags": [
           "Payments"
         ],
@@ -1740,7 +1887,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Payment Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -1751,7 +1898,8 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single payments record",
+        "description": "Updates a payment event.",
+        "operationId": "updatePayment",
         "responses": {
           "200": {
             "description": "Retrieve payments document(s)",
@@ -1764,27 +1912,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1794,15 +1949,25 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Update a single payments record",
         "tags": [
           "Payments"
         ],
         "requestBody": {
-          "description": "",
+          "description": "The fields to update the record.",
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPayments"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPayments"
+              }
+            },
+            "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/NewPayments"
               }
@@ -1813,7 +1978,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Payment Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -1824,7 +1989,8 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single payments record",
+        "description": "Removes a payment record for local records.",
+        "operationId": "deletePayment",
         "responses": {
           "200": {
             "description": "deletes a single payments based on the ID supplied",
@@ -1838,27 +2004,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1868,7 +2041,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Delete a single payments record",
         "tags": [
           "Payments"
         ],
@@ -1876,7 +2049,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Payment Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -1889,7 +2062,8 @@
     "/reports": {
       "get": {
         "deprecated": false,
-        "description": "Find all the reports's records",
+        "description": "Retrieves and filters a list of score reports.",
+        "operationId": "getReports",
         "responses": {
           "200": {
             "description": "Retrieve reports document(s)",
@@ -1905,27 +2079,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -1935,7 +2116,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Find all the score reports",
         "tags": [
           "Reports"
         ],
@@ -2080,7 +2261,8 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new reports record",
+        "description": "Create and process a new score repors.",
+        "operationId": "createReport",
         "responses": {
           "200": {
             "description": "Retrieve reports document(s)",
@@ -2093,27 +2275,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -2123,15 +2312,25 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Create a new score report",
         "tags": [
           "Reports"
         ],
         "requestBody": {
-          "description": "",
+          "description": "The fields to generete a score report. While most parameters are optional, is strongly recommended to fill out as many as possible.",
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewReports"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewReports"
+              }
+            },
+            "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/NewReports"
               }
@@ -2143,7 +2342,8 @@
     "/reports/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of reports documents",
+        "description": "Get report count across all users.",
+        "operationId": "countReports",
         "responses": {
           "200": {
             "description": "Retrieve reports document(s)",
@@ -2160,27 +2360,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -2190,7 +2397,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Retrieve the number of score reports",
         "tags": [
           "Reports"
         ],
@@ -2200,7 +2407,8 @@
     "/reports/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one reports record",
+        "description": "Get one score report based on its `Id`",
+        "operationId": "getReport",
         "responses": {
           "200": {
             "description": "Retrieve reports document(s)",
@@ -2213,27 +2421,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -2243,7 +2458,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Find one score report",
         "tags": [
           "Reports"
         ],
@@ -2251,7 +2466,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Report Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -2260,147 +2475,12 @@
           }
         ]
       },
-      "put": {
-        "deprecated": false,
-        "description": "Update a single reports record",
-        "responses": {
-          "200": {
-            "description": "Retrieve reports document(s)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Reports"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Reports"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewReports"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      },
-      "delete": {
-        "deprecated": false,
-        "description": "Delete a single reports record",
-        "responses": {
-          "200": {
-            "description": "deletes a single reports based on the ID supplied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int64"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Reports"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
     },
     "/trainings": {
       "get": {
         "deprecated": false,
-        "description": "Find all the trainings's records",
+        "description": "Retrieve information about AI agent training history and its performance score.",
+        "operationId": "getTrainings",
         "responses": {
           "200": {
             "description": "Retrieve trainings document(s)",
@@ -2416,27 +2496,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -2446,7 +2533,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Find all the training records",
         "tags": [
           "Trainings"
         ],
@@ -2591,7 +2678,8 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new trainings record",
+        "description": "Manually lanch or schedule a training task. Please note that training will be queued and run asynchronously.",
+        "operationId": "createTraining",
         "responses": {
           "200": {
             "description": "Retrieve trainings document(s)",
@@ -2604,27 +2692,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -2634,19 +2729,29 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Create a new training",
         "tags": [
           "Trainings"
         ],
         "requestBody": {
-          "description": "",
+          "description": "The trigger parameter of new training.",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/NewTrainings"
               }
-            }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTrainings"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTrainings"
+              }
+            },
           }
         }
       }
@@ -2654,7 +2759,8 @@
     "/trainings/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of trainings documents",
+        "description": "Gets the counts of all agent trainings.",
+        "operationId": "countTrainings",
         "responses": {
           "200": {
             "description": "Retrieve trainings document(s)",
@@ -2671,27 +2777,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -2701,7 +2814,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Retrieve the nubver of trainings",
         "tags": [
           "Trainings"
         ],
@@ -2711,7 +2824,8 @@
     "/trainings/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one trainings record",
+        "description": "Gets the information about an specific training and its performance metrics.",
+        "operationId": "getTraining",
         "responses": {
           "200": {
             "description": "Retrieve trainings document(s)",
@@ -2724,27 +2838,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -2754,7 +2875,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Find one training",
         "tags": [
           "Trainings"
         ],
@@ -2762,7 +2883,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Training Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -2771,184 +2892,52 @@
           }
         ]
       },
-      "put": {
-        "deprecated": false,
-        "description": "Update a single trainings record",
-        "responses": {
-          "200": {
-            "description": "Retrieve trainings document(s)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Trainings"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Trainings"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewTrainings"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      },
-      "delete": {
-        "deprecated": false,
-        "description": "Delete a single trainings record",
-        "responses": {
-          "200": {
-            "description": "deletes a single trainings based on the ID supplied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int64"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Trainings"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
     },
-    "/email/": {
+    "/trainings/cancel/{id}": {
       "post": {
         "deprecated": false,
-        "description": "Send an email",
+        "description": "Cancels a queued training.",
+        "operationId": "cancelTraining",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Canceled successfuly",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Trainings"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -2958,7 +2947,84 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Cancel queued training",
+        "tags": [
+          "Trainings"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Training",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+    },
+    "/email": {
+      "post": {
+        "x-docgenIgnore": true,
+        "deprecated": false,
+        "description": "Endpoint to send emails to internal users.",
+        "operationId": "sendEmail",
+        "responses": {
+          "200": {
+            "description": "Email sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                },
+                "example" : {
+                  "code": 200,
+                  "message": "Email sent successfully"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "**Forbidden**: this operation requeris authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "**Not found**: the resource was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "**Unexpected error**",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Send an email",
         "tags": [
           "Email - Email"
         ],
@@ -2969,7 +3035,8 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "foo": {
+                  "id": {
+                    "description": "Id, username or email for the receiver",
                     "type": "string"
                   }
                 }
@@ -2979,47 +3046,51 @@
         }
       }
     },
-    "/upload/": {
+    "/upload": {
       "post": {
         "deprecated": false,
-        "description": "Upload a file",
+        "description": "This is a multipurpose endpoin to upload a file to the logged user.",
+        "operationId": "uploadFile",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Upload successful",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3029,7 +3100,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Upload a file",
         "tags": [
           "Upload - File"
         ],
@@ -3040,7 +3111,10 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "foo": {
+                  "filename": {
+                    "type": "string"
+                  },
+                  "binaryUrl": {
                     "type": "string"
                   }
                 }
@@ -3053,44 +3127,52 @@
     "/upload/files/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the total number of uploaded files",
+        "description": "Retrieve the total number of uploaded files across all users.",
+        "operationId": "filesCount",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
+                },
+                "example" : {
+                  "code": 200,
+                  "message": "OK"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3100,7 +3182,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Retrieve number of uploaded files",
         "tags": [
           "Upload - File"
         ],
@@ -3110,15 +3192,19 @@
     "/upload/files": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve all file documents",
+        "description": "Get a list of files belonging to logged account.",
+        "operationId": "getFiles",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
-                    "foo": {
+                    "filename": {
+                      "type": "string"
+                    },
+                    "binaryUrl": {
                       "type": "string"
                     }
                   }
@@ -3127,27 +3213,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3157,7 +3250,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Retreive all file documents",
         "tags": [
           "Upload - File"
         ],
@@ -3167,15 +3260,19 @@
     "/upload/files/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve a single file depending on its id",
+        "description": "Retrieve a single file by its `Id`",
+        "operationId": "getFile",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
-                    "foo": {
+                    "filename": {
+                      "type": "string"
+                    },
+                    "binaryUrl": {
                       "type": "string"
                     }
                   }
@@ -3184,27 +3281,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3214,7 +3318,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Get one file",
         "tags": [
           "Upload - File"
         ],
@@ -3222,7 +3326,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "File Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -3234,43 +3338,47 @@
       "delete": {
         "deprecated": false,
         "description": "Delete an uploaded file",
+        "operationId": "deleteFile",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Deleted successfuly",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3288,7 +3396,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "File Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -3298,18 +3406,22 @@
         ]
       }
     },
-    "/upload/search/{id}": {
+    "/upload/search/{query}": {
       "get": {
         "deprecated": false,
-        "description": "Search for an uploaded file",
+        "description": "Performs a search for an uploaded file by its file name.",
+        "operationId": "findFile",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
-                    "foo": {
+                    "filename": {
+                      "type": "string"
+                    },
+                    "binaryUrl": {
                       "type": "string"
                     }
                   }
@@ -3318,27 +3430,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3348,15 +3467,15 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Search for an uploaded file",
         "tags": [
           "Upload - File"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "query",
             "in": "path",
-            "description": "",
+            "description": "Search query",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -3368,11 +3487,13 @@
     },
     "/users-permissions/roles/{id}": {
       "get": {
+        "x-docgenIgnore": true,
         "deprecated": false,
-        "description": "Retrieve a role depending on its id",
+        "description": "Retrieve a role depending on its `Id`",
+        "operationId": "getUserPermission",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -3382,27 +3503,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3420,7 +3548,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "Role Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -3432,11 +3560,13 @@
     },
     "/users-permissions/roles": {
       "get": {
+        "x-docgenIgnore": true,
         "deprecated": false,
         "description": "Retrieve all role documents",
+        "operationId": "getUserPermissionRoles",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -3449,27 +3579,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3623,11 +3760,13 @@
         ]
       },
       "post": {
+        "x-docgenIgnore": true,
         "deprecated": false,
         "description": "Create a new role",
+        "operationId": "createUserPermissionsRoles",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -3637,27 +3776,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3685,12 +3831,14 @@
       }
     },
     "/users-permissions/roles/{role}": {
+      "x-docgenIgnore": true,
       "put": {
         "deprecated": false,
         "description": "Update a role",
+        "operationId": "createUserPermissionRole",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -3700,27 +3848,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3738,7 +3893,7 @@
           {
             "name": "role",
             "in": "path",
-            "description": "",
+            "description": "Role Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -3759,45 +3914,50 @@
         }
       },
       "delete": {
+        "x-docgenIgnore": true,
         "deprecated": false,
         "description": "Delete a role",
+        "operationId": "deleteUserPermissionRole",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3815,7 +3975,7 @@
           {
             "name": "role",
             "in": "path",
-            "description": "",
+            "description": "Role Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -3827,11 +3987,13 @@
     },
     "/users-permissions/search/{id}": {
       "get": {
+        "x-docgenIgnore": true,
         "deprecated": false,
         "description": "Search for users",
+        "operationId": "findUserPermission",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -3844,27 +4006,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -3882,7 +4051,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "User Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -4031,44 +4200,48 @@
     "/connect/*": {
       "get": {
         "deprecated": false,
-        "description": "Connect a provider",
+        "description": "Connect a login or authentication provider.",
+        "operationId": "connectProvider",
         "responses": {
           "200": {
             "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4088,44 +4261,48 @@
     "/auth/local": {
       "post": {
         "deprecated": false,
-        "description": "Login a user using the identifiers email and password",
+        "description": "Login a user using the identifiers email and password.",
+        "operationId": "localAuth",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Auth suxcessful",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4135,19 +4312,55 @@
             }
           }
         },
-        "summary": "",
+        "summary": "User Login",
         "tags": [
           "UsersPermissions - User"
         ],
         "requestBody": {
-          "description": "",
+          "description": "User login credentials",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "properties": {
-                  "foo": {
-                    "type": "string"
+                  "user": {
+                    "type": "string",
+                    "example": "jlopez"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "********"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "properties": {
+                  "user": {
+                    "type": "string",
+                    "example": "jlopez"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "********"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "user": {
+                    "type": "string",
+                    "example": "jlopez"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "********"
                   }
                 }
               }
@@ -4159,10 +4372,11 @@
     "/auth/local/register": {
       "post": {
         "deprecated": false,
-        "description": "Register a new user with the default role",
+        "description": "Register a new user with the default role.",
+        "operationId": "registerAuth",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Register Successful",
             "content": {
               "application/json": {
                 "schema": {
@@ -4172,27 +4386,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4202,19 +4423,29 @@
             }
           }
         },
-        "summary": "",
+        "summary": "User Registrarion",
         "tags": [
           "UsersPermissions - User"
         ],
         "requestBody": {
-          "description": "",
+          "description": "User fields",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/NewUsersPermissionsUser"
               }
-            }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+              }
+            },
           }
         }
       }
@@ -4222,44 +4453,48 @@
     "/auth/{provider}/callback": {
       "get": {
         "deprecated": false,
-        "description": "Successfull redirection after approving a provider",
+        "description": "Successful redirection after approving a provider",
+        "operationId": "providerCallback",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Calback successful",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4269,7 +4504,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Auth provider callback",
         "tags": [
           "UsersPermissions - User"
         ],
@@ -4277,7 +4512,7 @@
           {
             "name": "provider",
             "in": "path",
-            "description": "",
+            "description": "User Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -4290,44 +4525,48 @@
     "/auth/forgot-password": {
       "post": {
         "deprecated": false,
-        "description": "Send the reset password email link",
+        "description": "Sends the reset password email link.",
+        "operationId": "forgotPassword",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4337,7 +4576,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Password reset",
         "tags": [
           "UsersPermissions - User"
         ],
@@ -4348,7 +4587,28 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "foo": {
+                  "id": {
+                    "description": "Id, username or email",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "description": "Id, username or email",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "description": "Id, username or email",
                     "type": "string"
                   }
                 }
@@ -4358,47 +4618,51 @@
         }
       }
     },
-    "/auth/reset-password": {
+    "/auth/reset-password/{resetToken}": {
       "post": {
         "deprecated": false,
         "description": "Reset user password with a code (resetToken)",
+        "operationId": "resetPassword",
         "responses": {
           "200": {
             "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4408,68 +4672,69 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Reset password",
         "tags": [
           "UsersPermissions - User"
         ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
+        "parameters": [
+          {
+            "name": "resetToken",
+            "in": "path",
+            "description": "Token for password reset",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
-        }
+        ]
       }
     },
     "/auth/email-confirmation": {
       "get": {
         "deprecated": false,
         "description": "Validate a user account",
+        "operationId": "emailConfirmation",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Confirmation successful",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4489,44 +4754,52 @@
     "/auth/send-email-confirmation": {
       "post": {
         "deprecated": false,
-        "description": "Send a confirmation email to user",
+        "description": "If not confirmed, sends a confirmation email to an user as part of verification process.",
+        "operationId": "sendEmailConfirmation",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Email sent successfuly",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
+                },
+                "example" : {
+                  "code": 200,
+                  "message": "Email sent successfuly"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4536,7 +4809,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Send confirmation email",
         "tags": [
           "UsersPermissions - User"
         ],
@@ -4547,7 +4820,28 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "foo": {
+                  "id": {
+                    "description": "Id, username or email for the receiver",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "description": "Id, username or email for the receiver",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "description": "Id, username or email for the receiver",
                     "type": "string"
                   }
                 }
@@ -4560,10 +4854,11 @@
     "/users": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve all user documents",
+        "description": "Get a list of registered users.",
+        "operationId": "getUsers",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -4576,27 +4871,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4606,7 +4908,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Retrieve all users",
         "tags": [
           "UsersPermissions - User"
         ],
@@ -4753,10 +5055,11 @@
     "/users/me": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the logged in user information",
+        "description": "Retrieve the logged in user information.",
+        "operationId": "getMe",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -4766,27 +5069,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4796,7 +5106,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Return logged in user",
         "tags": [
           "UsersPermissions - User"
         ],
@@ -4806,10 +5116,11 @@
     "/users/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve a single user depending on his id",
+        "description": "Retrieve a single user depending by `Id`",
+        "operationId": "getUser",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -4819,27 +5130,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4849,7 +5167,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Return an user",
         "tags": [
           "UsersPermissions - User"
         ],
@@ -4857,7 +5175,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "User Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -4869,9 +5187,10 @@
       "put": {
         "deprecated": false,
         "description": "Update an existing user",
+        "operationId": "updateUser",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Update successful",
             "content": {
               "application/json": {
                 "schema": {
@@ -4881,27 +5200,34 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4911,7 +5237,7 @@
             }
           }
         },
-        "summary": "",
+        "summary": "Update an user",
         "tags": [
           "UsersPermissions - User"
         ],
@@ -4919,7 +5245,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "User Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -4928,10 +5254,20 @@
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Fields for user update.",
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+              }
+            },
+            "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/NewUsersPermissionsUser"
               }
@@ -4942,43 +5278,51 @@
       "delete": {
         "deprecated": false,
         "description": "Delete an existing user",
+        "operationId": "deleteUser",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "User delete successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Success"
+                },
+                "example" : {
+                  "code": 200,
+                  "message": "User deleted successfully"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "**Forbidden**: this operation requeris authentication",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": 403,
+                  "message":"Error - Forbidden"
                 }
               }
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "**Not found**: the resource was not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }, "example": {
+                  "code": 404,
+                  "message":"Error - Not found"
                 }
               }
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "**Unexpected error**",
             "content": {
               "application/json": {
                 "schema": {
@@ -4996,7 +5340,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "User Id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -5015,37 +5359,40 @@
         ],
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "Name": {
-            "type": "string"
-          },
-          "Slug": {
-            "type": "string"
-          },
-          "published_at": {
             "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "NewCompany": {
-        "properties": {
+            "example": "b6825a95"
+          },
           "Name": {
-            "type": "string"
+            "type": "string",
+            "example": "Fianciera Espectacular"
           },
           "Slug": {
-            "type": "string"
+            "type": "string",
+            "example": "financiera-espectacular"
           },
           "published_at": {
             "type": "string",
             "format": "date-time"
           },
           "created_by": {
-            "type": "string"
+            "type": "string",
+            "example": "maia"
           },
           "updated_by": {
-            "type": "string"
+            "type": "string",
+            "example":"jlopez"
+          }
+        }
+      },
+      "NewCompany": {
+        "properties": {
+          "Name": {
+            "type": "string",
+            "example": "Fianciera Espectacular"
+          },
+          "Slug": {
+            "type": "string",
+            "example": "financiera-espectacular"
           }
         }
       },
@@ -5101,6 +5448,12 @@
           "published_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       },
@@ -5146,16 +5499,6 @@
               "separated",
               "widowed"
             ]
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
           }
         }
       },
@@ -5231,6 +5574,12 @@
           "published_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       },
@@ -5296,16 +5645,6 @@
           },
           "sshTunneling": {
             "type": "boolean"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
           }
         }
       },
@@ -5334,6 +5673,12 @@
           "published_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       },
@@ -5352,16 +5697,6 @@
           "date": {
             "type": "string",
             "format": "date"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
           }
         }
       },
@@ -5456,6 +5791,12 @@
           "published_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       },
@@ -5493,16 +5834,6 @@
             "type": "number"
           },
           "scoreVersion": {
-            "type": "string"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
             "type": "string"
           }
         }
@@ -5542,6 +5873,12 @@
           "published_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       },
@@ -5569,16 +5906,6 @@
             "type": "string"
           },
           "meta": {
-            "type": "string"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
             "type": "string"
           }
         }
@@ -5632,9 +5959,6 @@
                   "type": "string"
                 },
                 "role": {
-                  "type": "string"
-                },
-                "created_by": {
                   "type": "string"
                 },
                 "updated_by": {
@@ -5696,6 +6020,12 @@
                 }
               }
             }
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       },
@@ -5725,12 +6055,6 @@
             "items": {
               "type": "string"
             }
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
           }
         }
       },
@@ -5792,12 +6116,6 @@
                 "items": {
                   "type": "string"
                 }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
               }
             }
           },
@@ -5810,52 +6128,60 @@
               ],
               "properties": {
                 "id": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "d0fea516-9b58-4cf5-ab86-bb7e983e4b0c"
                 },
                 "uuid": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "maia-8439cc39b63b"
                 },
                 "referenceId": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "96234"
                 },
                 "type": {
                   "type": "string",
                   "enum": [
                     "reference",
                     "vector"
-                  ]
+                  ],
+                  "example": "reference"
                 },
                 "processed": {
                   "type": "boolean"
                 },
                 "users_permissions_user": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "jlopez"
                 },
                 "score": {
-                  "type": "number"
+                  "type": "number",
+                  "example": 98
                 },
                 "scoreProbability": {
-                  "type": "number"
+                  "type": "number",
+                  "example": 96
                 },
                 "scoreConfidence": {
-                  "type": "number"
+                  "type": "number",
+                  "example": 99
                 },
                 "scoreVersion": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "v-ab86"
                 }
               }
             }
+          },
+          "created_by": {
+            "type": "string",
+            "example": "admin"
+          },
+          "updated_by": {
+            "type": "string",
+            "example": "admin"
           }
-        }
+        },
       },
       "NewUsersPermissionsUser": {
         "required": [
@@ -5865,25 +6191,31 @@
         "properties": {
           "username": {
             "type": "string",
-            "minLength": 3
+            "minLength": 3,
+            "example": "jlopez"
           },
           "email": {
             "type": "string",
-            "minLength": 6
+            "minLength": 6,
+            "example": "test@mydomain.com"
           },
           "provider": {
-            "type": "string"
+            "type": "string",
+            "example": "local"
           },
           "password": {
             "type": "string",
             "format": "password",
-            "minLength": 6
+            "minLength": 6,
+            "example": "********"
           },
           "resetPasswordToken": {
-            "type": "string"
+            "type": "string",
+            "example": "26f425d6-9269-442b-89ed-e35ba63bf9c0"
           },
           "confirmationToken": {
-            "type": "string"
+            "type": "string",
+            "example": "eddc394a-8664-406e-852f-7a35d84a7fb7"
           },
           "confirmed": {
             "type": "boolean",
@@ -5900,29 +6232,59 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
+            },
+            "example": [
+              "maia-c6cbaa76ba8f",
+              "maia-3b5a054c593d",
+              "maia-f95a8582aea5"
+            ]
           }
         }
       },
-      "Error": {
+      "Success": {
+        "type": "object",
+        "description": "Returns on successful operation that returns no data.",
         "required": [
           "code",
           "message"
         ],
         "properties": {
           "code": {
+            "description": "HTTP code",
             "type": "integer",
             "format": "int32"
           },
           "message": {
+            "description": "'OK' or additional information",
             "type": "string"
           }
+        },
+        "example": {
+          "code": 200,
+          "message": "OK"
+        }
+      },
+      "Error": {
+        "type": "object",
+        "description": "Returns on failed operation.",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "description": "HTTP error code",
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "description": "'Error' or additional information",
+            "type": "string"
+          }
+        },
+        "example": {
+          "code": 500,
+          "message": "Error - Server Error"
         }
       }
     },
@@ -5945,6 +6307,9 @@
       "name": "Datasources"
     },
     {
+      "name": "Email - Email"
+    },
+    {
       "name": "Payments"
     },
     {
@@ -5952,9 +6317,6 @@
     },
     {
       "name": "Trainings"
-    },
-    {
-      "name": "Email - Email"
     },
     {
       "name": "Upload - File"
