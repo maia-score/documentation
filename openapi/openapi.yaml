@@ -1,0 +1,121 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Maia Score
+  description: ''
+  termsOfService: 'https://maiascore.com'
+  contact:
+    name: Engineering Team
+    email: engineering@ysnx.ai
+    url: 'https://synx.ai'
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+  x-generation-date: '02/26/2021 9:31:01 PM'
+x-hasEquivalentPaths: true
+servers:
+  - url: 'https://maiascore.com'
+    description: Development server
+  - url: 'https://maiascore.com'
+    description: Staging server
+  - url: 'https://maiascore.com'
+    description: Production server
+externalDocs:
+  description: Find out more
+  url: 'https://maias-score.github.io/documentation'
+security:
+  - bearerAuth: []
+paths:
+  /company:
+    $ref: paths/company.yaml
+  /customers:
+    $ref: paths/customers.yaml
+  /customers/count:
+    $ref: paths/customers@count.yaml
+  '/customers/{id}':
+    $ref: 'paths/customers@{id}.yaml'
+  /datasources:
+    $ref: paths/datasources.yaml
+  /datasources/count:
+    $ref: paths/datasources@count.yaml
+  '/datasources/{id}':
+    $ref: 'paths/datasources@{id}.yaml'
+  /payments:
+    $ref: paths/payments.yaml
+  /payments/count:
+    $ref: paths/payments@count.yaml
+  '/payments/{id}':
+    $ref: 'paths/payments@{id}.yaml'
+  /reports:
+    $ref: paths/reports.yaml
+  /reports/count:
+    $ref: paths/reports@count.yaml
+  '/reports/{id}':
+    $ref: 'paths/reports@{id}.yaml'
+  /trainings:
+    $ref: paths/trainings.yaml
+  /trainings/count:
+    $ref: paths/trainings@count.yaml
+  '/trainings/{id}':
+    $ref: 'paths/trainings@{id}.yaml'
+  '/trainings/cancel/{id}':
+    $ref: 'paths/trainings@cancel@{id}.yaml'
+  /email:
+    $ref: paths/email.yaml
+  /upload:
+    $ref: paths/upload.yaml
+  /upload/files/count:
+    $ref: paths/upload@files@count.yaml
+  /upload/files:
+    $ref: paths/upload@files.yaml
+  '/upload/files/{id}':
+    $ref: 'paths/upload@files@{id}.yaml'
+  '/upload/search/{query}':
+    $ref: 'paths/upload@search@{query}.yaml'
+  '/users-permissions/roles/{id}':
+    $ref: 'paths/users-permissions@roles@{id}.yaml'
+  /users-permissions/roles:
+    $ref: paths/users-permissions@roles.yaml
+  '/users-permissions/roles/{role}':
+    $ref: 'paths/users-permissions@roles@{role}.yaml'
+  '/users-permissions/search/{id}':
+    $ref: 'paths/users-permissions@search@{id}.yaml'
+  /connect/*:
+    $ref: paths/connect@*.yaml
+  /auth/local:
+    $ref: paths/auth@local.yaml
+  /auth/local/register:
+    $ref: paths/auth@local@register.yaml
+  '/auth/{provider}/callback':
+    $ref: 'paths/auth@{provider}@callback.yaml'
+  /auth/forgot-password:
+    $ref: paths/auth@forgot-password.yaml
+  '/auth/reset-password/{resetToken}':
+    $ref: 'paths/auth@reset-password@{resetToken}.yaml'
+  /auth/email-confirmation:
+    $ref: paths/auth@email-confirmation.yaml
+  /auth/send-email-confirmation:
+    $ref: paths/auth@send-email-confirmation.yaml
+  /users:
+    $ref: paths/users.yaml
+  /users/me:
+    $ref: paths/users@me.yaml
+  '/users/{id}':
+    $ref: 'paths/users@{id}.yaml'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+tags:
+  - name: Company
+  - name: Customer
+  - name: Datasource
+  - name: Email - Email
+  - name: Payment
+  - name: Report
+  - name: Training
+  - name: Upload - File
+  - name: UsersPermissions - Role
+  - name: UsersPermissions - User

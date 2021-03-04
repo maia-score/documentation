@@ -1,6 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+npx @redocly/openapi-cli bundle openapi/openapi.yaml -o spec/openapi.json
+yarn prettier --write spec/openapi.json
 yarn speccy lint spec/openapi.json
 yarn oas3-mdx --spec spec/openapi.json --target docs/paths --templates md-templates --snippets "shell,node,python,php"
 git add -A .

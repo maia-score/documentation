@@ -1,0 +1,51 @@
+properties:
+  driver:
+    type: string
+    enum:
+      - mysql
+      - mariadb
+      - sqlserver
+      - postgre
+      - excell
+      - csv
+      - rest
+      - mongo
+    example: mongo
+  host:
+    type: string
+    example: 192.0.0.1
+  username:
+    type: string
+    example: dd_user
+  password:
+    type: string
+    example: db_password
+  database:
+    type: string
+    example: mongo
+  port:
+    type: number
+    example: '3643'
+  ssl:
+    type: boolean
+    example: false
+  sslKeyfile:
+    type: string
+  sslCertificate:
+    type: string
+  sslCA:
+    type: string
+  ssh:
+    type: boolean
+  sshHost:
+    type: string
+  sshUsername:
+    type: string
+  sshPassword:
+    type: string
+  sshPort:
+    type: string
+  sshIdentity:
+    type: string
+  sshTunneling:
+    type: boolean

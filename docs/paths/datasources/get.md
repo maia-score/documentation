@@ -3,7 +3,7 @@ id: getDatasources
 slug: datasources-get
 title: Find all the datasource records
 sidebar_label: GET
-description: Used to fetch information about all the datasource records where customers and their payments historial is stored.
+description: Used to fetch information about all the datasource records where Customer and their Payment historial is stored.
 ---
 
 <!-- prettier-ignore-start -->
@@ -58,7 +58,7 @@ export const Url = ({children}) => {
   <Method color="#6b55b2">GET</Method><Path>{unescape(escape('/datasources'))}</Path>
 </Url>
 
-> Used to fetch information about all the datasource records where customers and their payments historial is stored.
+> Used to fetch information about all the datasource records where Customer and their Payment historial is stored.
 
 ## Parameters
 
@@ -277,7 +277,7 @@ if ($err) {
 
 ### 200
 
-Retrieve datasources document(s)
+Retreives a list in an &#x60;Array&#x60; format for all record of &#x60;Datasource&#x60; into the &#x60;data&#x60; param of an &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -290,31 +290,35 @@ Retrieve datasources document(s)
 <TabItem value="application/json">
 
 ```json title="Example response"
-[
-  {
-    "id": "string",
-    "driver": "mysql",
-    "host": "string",
-    "username": "string",
-    "password": "string",
-    "database": "string",
-    "port": "string",
-    "ssl": true,
-    "keyfile": "string",
-    "certificate": "string",
-    "sslCA": "string",
-    "ssh": true,
-    "sshHost": "string",
-    "sshUsername": "string",
-    "sshPassword": "string",
-    "sshPort": "string",
-    "sshIdentity": "string",
-    "sshTunneling": true,
-    "published_at": "2019-08-24T14:15:22Z",
-    "created_by": "string",
-    "updated_by": "string"
-  }
-]
+{
+  "code": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": "eddc394a",
+      "driver": "mongo",
+      "host": "192.0.0.1",
+      "username": "dd_user",
+      "password": "db_password",
+      "database": "mongo",
+      "port": "3643",
+      "ssl": false,
+      "sslKeyfile": "string",
+      "sslCertificate": "string",
+      "sslCA": "string",
+      "ssh": true,
+      "sshHost": "string",
+      "sshUsername": "string",
+      "sshPassword": "string",
+      "sshPort": "string",
+      "sshIdentity": "string",
+      "sshTunneling": true,
+      "published_at": "2019-08-24T14:15:22Z",
+      "created_by": "admin",
+      "updated_by": "admin"
+    }
+  ]
+}
 ```
 
 </TabItem>

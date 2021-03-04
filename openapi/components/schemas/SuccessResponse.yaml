@@ -1,0 +1,16 @@
+type: object
+description: Returns on successful operation that returns no data.
+required:
+  - code
+  - message
+properties:
+  code:
+    description: HTTP code
+    type: integer
+    format: int32
+  message:
+    description: '''OK'' or additional information'
+    type: string
+example:
+  code: 200
+  message: OK

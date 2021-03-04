@@ -1,0 +1,50 @@
+get:
+  deprecated: false
+  description: Performs a search for an uploaded file by its file name.
+  operationId: findFile
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            properties:
+              filename:
+                type: string
+              binaryUrl:
+                type: string
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Search for an uploaded file
+  tags:
+    - Upload - File
+  parameters:
+    - name: query
+      in: path
+      description: Search query
+      deprecated: false
+      required: true
+      schema:
+        type: string

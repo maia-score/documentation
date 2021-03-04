@@ -1,0 +1,21 @@
+required:
+  - id
+properties:
+  id:
+    type: string
+    example: b6825a95
+  Name:
+    type: string
+    example: Fianciera Espectacular
+  Slug:
+    type: string
+    example: financiera-espectacular
+  published_at:
+    type: string
+    format: date-time
+  created_by:
+    type: string
+    example: maia
+  updated_by:
+    type: string
+    example: jlopez

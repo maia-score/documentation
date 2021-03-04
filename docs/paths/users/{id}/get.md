@@ -3,7 +3,7 @@ id: getUser
 slug: users-id-get
 title: Return an user
 sidebar_label: GET
-description: Retrieve a single user depending by &#x60;Id&#x60;
+description: Retrieve a single user by &#x60;Id&#x60;
 ---
 
 <!-- prettier-ignore-start -->
@@ -58,7 +58,7 @@ export const Url = ({children}) => {
   <Method color="#6b55b2">GET</Method><Path>{unescape(escape('/users/{id}'))}</Path>
 </Url>
 
-> Retrieve a single user depending by &#x60;Id&#x60;
+> Retrieve a single user by &#x60;Id&#x60;
 
 ## Parameters
 
@@ -277,36 +277,53 @@ OK
 
 ```json title="Example response"
 {
-  "id": "string",
-  "username": "string",
-  "email": "string",
-  "provider": "string",
-  "confirmed": false,
-  "blocked": false,
-  "role": {
+  "code": 200,
+  "message": "OK",
+  "data": {
     "id": "string",
-    "name": "string",
-    "description": "string",
-    "type": "string",
-    "permissions": ["string"],
-    "users": ["string"]
-  },
-  "reports": [
-    {
-      "id": "d0fea516-9b58-4cf5-ab86-bb7e983e4b0c",
-      "uuid": "maia-8439cc39b63b",
-      "referenceId": "96234",
+    "username": "string",
+    "email": "string",
+    "provider": "string",
+    "confirmed": false,
+    "blocked": false,
+    "role": {
+      "id": "string",
+      "name": "string",
+      "description": "string",
+      "type": "string",
+      "permissions": [
+        {
+          "id": "string",
+          "type": "string",
+          "controller": "string",
+          "action": "string",
+          "enabled": true,
+          "policy": "string",
+          "role": "string",
+          "updated_by": "string"
+        }
+      ],
+      "users": [null],
+      "created_by": "string",
+      "updated_by": "string"
+    },
+    "reports": {
+      "id": "string",
+      "uuid": "string",
+      "referenceId": "string",
       "type": "reference",
       "processed": true,
-      "users_permissions_user": "jlopez",
-      "score": 98,
-      "scoreProbability": 96,
-      "scoreConfidence": 99,
-      "scoreVersion": "v-ab86"
-    }
-  ],
-  "created_by": "admin",
-  "updated_by": "admin"
+      "score": 0,
+      "scoreProbability": 0,
+      "scoreConfidence": 0,
+      "scoreVersion": "string",
+      "published_at": "2019-08-24T14:15:22Z",
+      "created_by": "string",
+      "updated_by": "string"
+    },
+    "created_by": "admin",
+    "updated_by": "admin"
+  }
 }
 ```
 

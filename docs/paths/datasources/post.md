@@ -1,7 +1,7 @@
 ---
 id: createDatasource
 slug: datasources-post
-title: Create a new datasources record
+title: Create a new Datasource record
 sidebar_label: POST
 description: Creates, test and connects a new data source based on the secutiry scheme selected.
 ---
@@ -76,15 +76,15 @@ export const Url = ({children}) => {
 
 ```json
 {
-  "driver": "mysql",
-  "host": "string",
-  "username": "string",
-  "password": "string",
-  "database": "string",
-  "port": "string",
-  "ssl": true,
-  "keyfile": "string",
-  "certificate": "string",
+  "driver": "mongo",
+  "host": "192.0.0.1",
+  "username": "dd_user",
+  "password": "db_password",
+  "database": "mongo",
+  "port": "3643",
+  "ssl": false,
+  "sslKeyfile": "string",
+  "sslCertificate": "string",
   "sslCA": "string",
   "ssh": true,
   "sshHost": "string",
@@ -103,15 +103,15 @@ export const Url = ({children}) => {
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <item>
-  <driver>mysql</driver>
-  <host>string</host>
-  <username>string</username>
-  <password>string</password>
-  <database>string</database>
-  <port>string</port>
-  <ssl>true</ssl>
-  <keyfile>string</keyfile>
-  <certificate>string</certificate>
+  <driver>mongo</driver>
+  <host>192.0.0.1</host>
+  <username>dd_user</username>
+  <password>db_password</password>
+  <database>mongo</database>
+  <port>3643</port>
+  <ssl>false</ssl>
+  <sslKeyfile>string</sslKeyfile>
+  <sslCertificate>string</sslCertificate>
   <sslCA>string</sslCA>
   <ssh>true</ssh>
   <sshHost>string</sshHost>
@@ -129,15 +129,15 @@ export const Url = ({children}) => {
 
 ```json
 {
-  "driver": "mysql",
-  "host": "string",
-  "username": "string",
-  "password": "string",
-  "database": "string",
-  "port": "string",
-  "ssl": true,
-  "keyfile": "string",
-  "certificate": "string",
+  "driver": "mongo",
+  "host": "192.0.0.1",
+  "username": "dd_user",
+  "password": "db_password",
+  "database": "mongo",
+  "port": "3643",
+  "ssl": false,
+  "sslKeyfile": "string",
+  "sslCertificate": "string",
   "sslCA": "string",
   "ssh": true,
   "sshHost": "string",
@@ -173,7 +173,7 @@ curl --request POST \
   --url https://maiascore.com/datasources \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
   --header 'content-type: application/x-www-form-urlencoded' \
-  --data '{"driver":"mysql","host":"string","username":"string","password":"string","database":"string","port":"string","ssl":true,"keyfile":"string","certificate":"string","sslCA":"string","ssh":true,"sshHost":"string","sshUsername":"string","sshPassword":"string","sshPort":"string","sshIdentity":"string","sshTunneling":true}'
+  --data '{"driver":"mongo","host":"192.0.0.1","username":"dd_user","password":"db_password","database":"mongo","port":"3643","ssl":false,"sslKeyfile":"string","sslCertificate":"string","sslCA":"string","ssh":true,"sshHost":"string","sshUsername":"string","sshPassword":"string","sshPort":"string","sshIdentity":"string","sshTunneling":true}'
 ```
 
 </TabItem>
@@ -209,15 +209,15 @@ const req = http.request(options, function (res) {
 
 req.write(
   JSON.stringify({
-    driver: "mysql",
-    host: "string",
-    username: "string",
-    password: "string",
-    database: "string",
-    port: "string",
-    ssl: true,
-    keyfile: "string",
-    certificate: "string",
+    driver: "mongo",
+    host: "192.0.0.1",
+    username: "dd_user",
+    password: "db_password",
+    database: "mongo",
+    port: "3643",
+    ssl: false,
+    sslKeyfile: "string",
+    sslCertificate: "string",
     sslCA: "string",
     ssh: true,
     sshHost: "string",
@@ -240,7 +240,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("maiascore.com")
 
-payload = "{\"driver\":\"mysql\",\"host\":\"string\",\"username\":\"string\",\"password\":\"string\",\"database\":\"string\",\"port\":\"string\",\"ssl\":true,\"keyfile\":\"string\",\"certificate\":\"string\",\"sslCA\":\"string\",\"ssh\":true,\"sshHost\":\"string\",\"sshUsername\":\"string\",\"sshPassword\":\"string\",\"sshPort\":\"string\",\"sshIdentity\":\"string\",\"sshTunneling\":true}"
+payload = "{\"driver\":\"mongo\",\"host\":\"192.0.0.1\",\"username\":\"dd_user\",\"password\":\"db_password\",\"database\":\"mongo\",\"port\":\"3643\",\"ssl\":false,\"sslKeyfile\":\"string\",\"sslCertificate\":\"string\",\"sslCA\":\"string\",\"ssh\":true,\"sshHost\":\"string\",\"sshUsername\":\"string\",\"sshPassword\":\"string\",\"sshPort\":\"string\",\"sshIdentity\":\"string\",\"sshTunneling\":true}"
 
 headers = {
     'content-type': "application/x-www-form-urlencoded",
@@ -272,7 +272,7 @@ curl_setopt_array($curl, [
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "{\"driver\":\"mysql\",\"host\":\"string\",\"username\":\"string\",\"password\":\"string\",\"database\":\"string\",\"port\":\"string\",\"ssl\":true,\"keyfile\":\"string\",\"certificate\":\"string\",\"sslCA\":\"string\",\"ssh\":true,\"sshHost\":\"string\",\"sshUsername\":\"string\",\"sshPassword\":\"string\",\"sshPort\":\"string\",\"sshIdentity\":\"string\",\"sshTunneling\":true}",
+  CURLOPT_POSTFIELDS => "{\"driver\":\"mongo\",\"host\":\"192.0.0.1\",\"username\":\"dd_user\",\"password\":\"db_password\",\"database\":\"mongo\",\"port\":\"3643\",\"ssl\":false,\"sslKeyfile\":\"string\",\"sslCertificate\":\"string\",\"sslCA\":\"string\",\"ssh\":true,\"sshHost\":\"string\",\"sshUsername\":\"string\",\"sshPassword\":\"string\",\"sshPort\":\"string\",\"sshIdentity\":\"string\",\"sshTunneling\":true}",
   CURLOPT_HTTPHEADER => [
     "Authorization: Bearer REPLACE_BEARER_TOKEN",
     "content-type: application/x-www-form-urlencoded"
@@ -298,7 +298,7 @@ curl --request POST \
   --url https://maiascore.com/datasources \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
   --header 'content-type: application/x-www-form-urlencoded' \
-  --data '{"driver":"mysql","host":"string","username":"string","password":"string","database":"string","port":"string","ssl":true,"keyfile":"string","certificate":"string","sslCA":"string","ssh":true,"sshHost":"string","sshUsername":"string","sshPassword":"string","sshPort":"string","sshIdentity":"string","sshTunneling":true}'
+  --data '{"driver":"mongo","host":"192.0.0.1","username":"dd_user","password":"db_password","database":"mongo","port":"3643","ssl":false,"sslKeyfile":"string","sslCertificate":"string","sslCA":"string","ssh":true,"sshHost":"string","sshUsername":"string","sshPassword":"string","sshPort":"string","sshIdentity":"string","sshTunneling":true}'
 ```
 
 ```javascript title="Node + Native"
@@ -330,15 +330,15 @@ const req = http.request(options, function (res) {
 
 req.write(
   JSON.stringify({
-    driver: "mysql",
-    host: "string",
-    username: "string",
-    password: "string",
-    database: "string",
-    port: "string",
-    ssl: true,
-    keyfile: "string",
-    certificate: "string",
+    driver: "mongo",
+    host: "192.0.0.1",
+    username: "dd_user",
+    password: "db_password",
+    database: "mongo",
+    port: "3643",
+    ssl: false,
+    sslKeyfile: "string",
+    sslCertificate: "string",
     sslCA: "string",
     ssh: true,
     sshHost: "string",
@@ -357,7 +357,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("maiascore.com")
 
-payload = "{\"driver\":\"mysql\",\"host\":\"string\",\"username\":\"string\",\"password\":\"string\",\"database\":\"string\",\"port\":\"string\",\"ssl\":true,\"keyfile\":\"string\",\"certificate\":\"string\",\"sslCA\":\"string\",\"ssh\":true,\"sshHost\":\"string\",\"sshUsername\":\"string\",\"sshPassword\":\"string\",\"sshPort\":\"string\",\"sshIdentity\":\"string\",\"sshTunneling\":true}"
+payload = "{\"driver\":\"mongo\",\"host\":\"192.0.0.1\",\"username\":\"dd_user\",\"password\":\"db_password\",\"database\":\"mongo\",\"port\":\"3643\",\"ssl\":false,\"sslKeyfile\":\"string\",\"sslCertificate\":\"string\",\"sslCA\":\"string\",\"ssh\":true,\"sshHost\":\"string\",\"sshUsername\":\"string\",\"sshPassword\":\"string\",\"sshPort\":\"string\",\"sshIdentity\":\"string\",\"sshTunneling\":true}"
 
 headers = {
     'content-type': "application/x-www-form-urlencoded",
@@ -385,7 +385,7 @@ curl_setopt_array($curl, [
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "{\"driver\":\"mysql\",\"host\":\"string\",\"username\":\"string\",\"password\":\"string\",\"database\":\"string\",\"port\":\"string\",\"ssl\":true,\"keyfile\":\"string\",\"certificate\":\"string\",\"sslCA\":\"string\",\"ssh\":true,\"sshHost\":\"string\",\"sshUsername\":\"string\",\"sshPassword\":\"string\",\"sshPort\":\"string\",\"sshIdentity\":\"string\",\"sshTunneling\":true}",
+  CURLOPT_POSTFIELDS => "{\"driver\":\"mongo\",\"host\":\"192.0.0.1\",\"username\":\"dd_user\",\"password\":\"db_password\",\"database\":\"mongo\",\"port\":\"3643\",\"ssl\":false,\"sslKeyfile\":\"string\",\"sslCertificate\":\"string\",\"sslCA\":\"string\",\"ssh\":true,\"sshHost\":\"string\",\"sshUsername\":\"string\",\"sshPassword\":\"string\",\"sshPort\":\"string\",\"sshIdentity\":\"string\",\"sshTunneling\":true}",
   CURLOPT_HTTPHEADER => [
     "Authorization: Bearer REPLACE_BEARER_TOKEN",
     "content-type: application/x-www-form-urlencoded"
@@ -412,7 +412,7 @@ if ($err) {
 
 ### 200
 
-Retrieve datasources document(s)
+Retreives the created, updated or requested record query for &#x60;Datasource&#x60; into a &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -426,27 +426,31 @@ Retrieve datasources document(s)
 
 ```json title="Example response"
 {
-  "id": "string",
-  "driver": "mysql",
-  "host": "string",
-  "username": "string",
-  "password": "string",
-  "database": "string",
-  "port": "string",
-  "ssl": true,
-  "keyfile": "string",
-  "certificate": "string",
-  "sslCA": "string",
-  "ssh": true,
-  "sshHost": "string",
-  "sshUsername": "string",
-  "sshPassword": "string",
-  "sshPort": "string",
-  "sshIdentity": "string",
-  "sshTunneling": true,
-  "published_at": "2019-08-24T14:15:22Z",
-  "created_by": "string",
-  "updated_by": "string"
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "id": "eddc394a",
+    "driver": "mongo",
+    "host": "192.0.0.1",
+    "username": "dd_user",
+    "password": "db_password",
+    "database": "mongo",
+    "port": "3643",
+    "ssl": false,
+    "sslKeyfile": "string",
+    "sslCertificate": "string",
+    "sslCA": "string",
+    "ssh": true,
+    "sshHost": "string",
+    "sshUsername": "string",
+    "sshPassword": "string",
+    "sshPort": "string",
+    "sshIdentity": "string",
+    "sshTunneling": true,
+    "published_at": "2019-08-24T14:15:22Z",
+    "created_by": "admin",
+    "updated_by": "admin"
+  }
 }
 ```
 

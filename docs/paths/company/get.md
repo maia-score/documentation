@@ -277,7 +277,7 @@ if ($err) {
 
 ### 200
 
-Retrieve company document(s)
+Retreives a list in an &#x60;Array&#x60; format for all record of &#x60;Company&#x60; into the &#x60;data&#x60; param of an &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -290,16 +290,20 @@ Retrieve company document(s)
 <TabItem value="application/json">
 
 ```json title="Example response"
-[
-  {
-    "id": "b6825a95",
-    "Name": "Fianciera Espectacular",
-    "Slug": "financiera-espectacular",
-    "published_at": "2019-08-24T14:15:22Z",
-    "created_by": "maia",
-    "updated_by": "jlopez"
-  }
-]
+{
+  "code": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": "b6825a95",
+      "Name": "Fianciera Espectacular",
+      "Slug": "financiera-espectacular",
+      "published_at": "2019-08-24T14:15:22Z",
+      "created_by": "maia",
+      "updated_by": "jlopez"
+    }
+  ]
+}
 ```
 
 </TabItem>

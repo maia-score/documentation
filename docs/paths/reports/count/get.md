@@ -1,7 +1,7 @@
 ---
 id: countReports
 slug: reports-count-get
-title: Retrieve the number of score reports
+title: Retrieve the number of score Report
 sidebar_label: GET
 description: Get report count across all users.
 ---
@@ -257,7 +257,7 @@ if ($err) {
 
 ### 200
 
-Retrieve reports document(s)
+Retreives total number of &#x60;$1&#x60; records into &#x60;data.count&#x60; of an &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -271,7 +271,11 @@ Retrieve reports document(s)
 
 ```json title="Example response"
 {
-  "count": 0
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "count": 2492
+  }
 }
 ```
 

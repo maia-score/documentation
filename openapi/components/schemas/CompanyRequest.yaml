@@ -1,0 +1,7 @@
+properties:
+  Name:
+    type: string
+    example: Fianciera Espectacular
+  Slug:
+    type: string
+    example: financiera-espectacular

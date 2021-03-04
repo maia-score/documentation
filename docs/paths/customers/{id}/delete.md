@@ -1,9 +1,9 @@
 ---
 id: deleteCustomer
 slug: customers-id-delete
-title: Delete a single customers record
+title: Delete a single Customer record
 sidebar_label: DELETE
-description: Delete a single customers record
+description: Delete a single Customer record
 ---
 
 <!-- prettier-ignore-start -->
@@ -58,7 +58,7 @@ export const Url = ({children}) => {
   <Method color="#6b55b2">DELETE</Method><Path>{unescape(escape('/customers/{id}'))}</Path>
 </Url>
 
-> Delete a single customers record
+> Delete a single Customer record
 
 ## Parameters
 
@@ -263,7 +263,7 @@ if ($err) {
 
 ### 200
 
-deletes a single customers based on the ID supplied
+Deletes a record from data bases by its &#x60;id&#x60; and returns a &#x60;Success&#x60; response.
 
 <!-- prettier-ignore-start -->
 
@@ -276,7 +276,10 @@ deletes a single customers based on the ID supplied
 <TabItem value="application/json">
 
 ```json title="Example response"
-0
+{
+  "code": 200,
+  "message": "OK"
+}
 ```
 
 </TabItem>

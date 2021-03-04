@@ -1,0 +1,42 @@
+required:
+  - username
+  - email
+properties:
+  username:
+    type: string
+    minLength: 3
+    example: jlopez
+  email:
+    type: string
+    minLength: 6
+    example: test@mydomain.com
+  provider:
+    type: string
+    example: local
+  password:
+    type: string
+    format: password
+    minLength: 6
+    example: '********'
+  resetPasswordToken:
+    type: string
+    example: 26f425d6-9269-442b-89ed-e35ba63bf9c0
+  confirmationToken:
+    type: string
+    example: eddc394a-8664-406e-852f-7a35d84a7fb7
+  confirmed:
+    type: boolean
+    default: false
+  blocked:
+    type: boolean
+    default: false
+  role:
+    type: string
+  Report:
+    type: array
+    items:
+      type: string
+    example:
+      - maia-c6cbaa76ba8f
+      - maia-3b5a054c593d
+      - maia-f95a8582aea5

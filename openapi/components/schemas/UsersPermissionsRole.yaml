@@ -1,0 +1,47 @@
+required:
+  - id
+  - name
+properties:
+  id:
+    type: string
+  name:
+    type: string
+    minLength: 3
+  description:
+    type: string
+  type:
+    type: string
+  permissions:
+    type: array
+    items:
+      required:
+        - id
+        - type
+        - controller
+        - action
+        - enabled
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        controller:
+          type: string
+        action:
+          type: string
+        enabled:
+          type: boolean
+        policy:
+          type: string
+        role:
+          type: string
+        updated_by:
+          type: string
+  users:
+    type: array
+    items:
+      $ref: ./UsersPermissionsUser.yaml
+  created_by:
+    type: string
+  updated_by:
+    type: string

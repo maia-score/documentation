@@ -1,7 +1,7 @@
 ---
 id: deleteDatasource
 slug: datasources-id-delete
-title: Delete a single datasources record
+title: Delete a single Datasource record
 sidebar_label: DELETE
 description: Removes the connection with a data source and erases login information. Please note that a reference of the data source will remain to ensure consistence about data origin on customer and payment records, but data source cannot be longer used or accessed.
 ---
@@ -263,7 +263,7 @@ if ($err) {
 
 ### 200
 
-deletes a single datasources based on the ID supplied
+Deletes a record from data bases by its &#x60;id&#x60; and returns a &#x60;Success&#x60; response.
 
 <!-- prettier-ignore-start -->
 
@@ -276,7 +276,10 @@ deletes a single datasources based on the ID supplied
 <TabItem value="application/json">
 
 ```json title="Example response"
-0
+{
+  "code": 200,
+  "message": "OK"
+}
 ```
 
 </TabItem>

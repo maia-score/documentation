@@ -263,7 +263,7 @@ if ($err) {
 
 ### 200
 
-User delete successfully
+Deletes a record from data bases by its &#x60;id&#x60; and returns a &#x60;Success&#x60; response.
 
 <!-- prettier-ignore-start -->
 

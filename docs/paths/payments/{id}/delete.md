@@ -1,7 +1,7 @@
 ---
 id: deletePayment
 slug: payments-id-delete
-title: Delete a single payments record
+title: Delete a single Payment record
 sidebar_label: DELETE
 description: Removes a payment record for local records.
 ---
@@ -263,7 +263,7 @@ if ($err) {
 
 ### 200
 
-deletes a single payments based on the ID supplied
+Deletes a record from data bases by its &#x60;id&#x60; and returns a &#x60;Success&#x60; response.
 
 <!-- prettier-ignore-start -->
 
@@ -276,7 +276,10 @@ deletes a single payments based on the ID supplied
 <TabItem value="application/json">
 
 ```json title="Example response"
-0
+{
+  "code": 200,
+  "message": "OK"
+}
 ```
 
 </TabItem>

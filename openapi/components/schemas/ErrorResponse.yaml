@@ -1,0 +1,16 @@
+type: object
+description: Returns on failed operation.
+required:
+  - code
+  - message
+properties:
+  code:
+    description: HTTP error code
+    type: integer
+    format: int32
+  message:
+    description: '''Error'' or additional information'
+    type: string
+example:
+  code: 500
+  message: Error - Server Error

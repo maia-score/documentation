@@ -1,9 +1,9 @@
 ---
 id: countPayments
 slug: payments-count-get
-title: Retrieve the number of payments records
+title: Retrieve the number of Payment records
 sidebar_label: GET
-description: Count payments across all users and data sources.
+description: Count Payment across all users and data sources.
 ---
 
 <!-- prettier-ignore-start -->
@@ -58,7 +58,7 @@ export const Url = ({children}) => {
   <Method color="#6b55b2">GET</Method><Path>{unescape(escape('/payments/count'))}</Path>
 </Url>
 
-> Count payments across all users and data sources.
+> Count Payment across all users and data sources.
 
 ### Code Snippets
 
@@ -257,7 +257,7 @@ if ($err) {
 
 ### 200
 
-Retrieve payments document(s)
+Retreives total number of &#x60;$1&#x60; records into &#x60;data.count&#x60; of an &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -271,7 +271,11 @@ Retrieve payments document(s)
 
 ```json title="Example response"
 {
-  "count": 0
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "count": 2492
+  }
 }
 ```
 

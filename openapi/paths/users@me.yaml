@@ -1,0 +1,54 @@
+get:
+  deprecated: false
+  description: Retrieve the logged in user information.
+  operationId: getMe
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            description: >-
+              Retreives the current autheticated user into the `data` param of
+              an `APIResponse` schema.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                $ref: ../components/schemas/UsersPermissionsUser.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Return logged in user
+  tags:
+    - UsersPermissions - User
+  parameters: []

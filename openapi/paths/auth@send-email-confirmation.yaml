@@ -1,0 +1,65 @@
+post:
+  deprecated: false
+  description: >-
+    If not confirmed, sends a confirmation email to an user as part of
+    verification process.
+  operationId: sendEmailConfirmation
+  responses:
+    '200':
+      description: Email sent successfuly
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SuccessResponse.yaml
+          example:
+            code: 200
+            message: Email sent successfuly
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Send confirmation email
+  tags:
+    - UsersPermissions - User
+  requestBody:
+    description: ''
+    required: true
+    content:
+      application/json:
+        schema:
+          properties:
+            id:
+              description: 'Id, username or email for the receiver'
+              type: string
+      application/xml:
+        schema:
+          properties:
+            id:
+              description: 'Id, username or email for the receiver'
+              type: string
+      application/x-www-form-urlencoded:
+        schema:
+          properties:
+            id:
+              description: 'Id, username or email for the receiver'
+              type: string

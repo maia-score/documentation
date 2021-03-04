@@ -1,0 +1,17 @@
+properties:
+  uuid:
+    type: string
+  accuracy:
+    type: number
+  precission:
+    type: number
+  mae:
+    type: number
+  rmse:
+    type: number
+  binaryPath:
+    type: string
+  version:
+    type: string
+  meta:
+    type: string

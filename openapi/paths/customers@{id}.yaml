@@ -1,0 +1,187 @@
+get:
+  deprecated: false
+  description: Find one Customer record using Id or Reference.
+  operationId: getCustomer
+  responses:
+    '200':
+      description: >-
+        Retreives the created, updated or requested record query for `Customer`
+        into a `APIResponse` schema.
+      content:
+        application/json:
+          schema:
+            type: object
+            description: >-
+              Returns an APIResponse with Response schema as `data` on
+              successful operation.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                $ref: ../components/schemas/Customer.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Find one Customer record
+  tags:
+    - Customer
+  parameters:
+    - name: id
+      in: path
+      description: Customer Id
+      deprecated: false
+      required: true
+      schema:
+        type: string
+put:
+  deprecated: false
+  description: This methods updates the information for a single customer.
+  operationId: updateCustomer
+  responses:
+    '200':
+      description: >-
+        Retreives the created, updated or requested record query for `Customer`
+        into a `APIResponse` schema.
+      content:
+        application/json:
+          schema:
+            type: object
+            description: >-
+              Returns an APIResponse with Response schema as `data` on
+              successful operation.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                $ref: ../components/schemas/Customer.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Update a single Customer record.
+  tags:
+    - Customer
+  requestBody:
+    description: Fields to update the customer.
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CustomerRequest.yaml
+      application/xml:
+        schema:
+          $ref: ../components/schemas/CustomerRequest.yaml
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: ../components/schemas/CustomerRequest.yaml
+  parameters:
+    - name: id
+      in: path
+      description: Customer Id
+      deprecated: false
+      required: true
+      schema:
+        type: string
+delete:
+  deprecated: false
+  description: Delete a single Customer record
+  operationId: deleteCustomer
+  responses:
+    '200':
+      description: >-
+        Deletes a record from data bases by its `id` and returns a `Success`
+        response.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SuccessResponse.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Delete a single Customer record
+  tags:
+    - Customer
+  parameters:
+    - name: id
+      in: path
+      description: Customer Id
+      deprecated: false
+      required: true
+      schema:
+        type: string

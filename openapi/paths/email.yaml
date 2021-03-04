@@ -1,0 +1,52 @@
+post:
+  x-docgenIgnore: true
+  deprecated: false
+  description: Endpoint to send emails to internal users.
+  operationId: sendEmail
+  responses:
+    '200':
+      description: Email sent successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SuccessResponse.yaml
+          example:
+            code: 200
+            message: Email sent successfully
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Send an email
+  tags:
+    - Email - Email
+  requestBody:
+    description: ''
+    required: true
+    content:
+      application/json:
+        schema:
+          properties:
+            id:
+              description: 'Id, username or email for the receiver'
+              type: string

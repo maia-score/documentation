@@ -48,13 +48,30 @@
         "operationId": "getCompany",
         "responses": {
           "200": {
-            "description": "Retrieve company document(s)",
+            "description": "Retreives a list in an `Array` format for all record of `Company` into the `data` param of an `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Company"
+                  "type": "object",
+                  "description": "Returns an `Array` of Company on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Company"
+                      }
+                    }
                   }
                 }
               }
@@ -65,11 +82,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -79,10 +96,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -92,16 +110,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Retreive company information",
-        "tags": [
-          "Company"
-        ],
+        "tags": ["Company"],
         "parameters": [
           {
             "name": "_limit",
@@ -247,95 +263,27 @@
         "operationId": "updateCompany",
         "responses": {
           "200": {
-            "description": "Retrieve company document(s)",
+            "description": "Retreives the created, updated or requested record query for `Company` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Company"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "**Forbidden**: this operation requeris authentication",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "example": {
-                  "code": 403,
-                  "message":"Error - Forbidden"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "**Not found**: the resource was not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
-                  "code": 404,
-                  "message":"Error - Not found"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "**Unexpected error**",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Update company information",
-        "tags": [
-          "Company"
-        ],
-        "requestBody": {
-          "description": "The fields to update company information, non presents fields are ignored.",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewCompany"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/NewCompany"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/NewCompany"
-              }
-            }
-          }
-        },
-        "parameters": []
-      }
-    },
-    "/customers": {
-      "get": {
-        "deprecated": false,
-        "description": "This method requests and filters all customers records registered in database.",
-        "operationId": "getCustomers",
-        "responses": {
-          "200": {
-            "description": "Retrieve customers document(s)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Customers"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Company"
+                    }
                   }
                 }
               }
@@ -346,11 +294,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -360,10 +308,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -373,16 +322,115 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update company information",
+        "tags": ["Company"],
+        "requestBody": {
+          "description": "The fields to update company information, non presents fields are ignored.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyRequest"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyRequest"
+              }
+            }
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/customers": {
+      "get": {
+        "deprecated": false,
+        "description": "This method requests and filters all Customer records registered in database.",
+        "operationId": "getCustomers",
+        "responses": {
+          "200": {
+            "description": "Retreives a list in an `Array` format for all record of `Customer` into the `data` param of an `APIResponse` schema.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Returns an `Array` of Customer on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Customer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "**Forbidden**: this operation requeris authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "code": 403,
+                  "message": "Error - Forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "**Not found**: the resource was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "code": 404,
+                  "message": "Error - Not found"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "**Unexpected error**",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Find all the customer records",
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customer"],
         "parameters": [
           {
             "name": "_limit",
@@ -528,11 +576,28 @@
         "operationId": "createCustomer",
         "responses": {
           "200": {
-            "description": "Retrieve customers document(s)",
+            "description": "Retreives the created, updated or requested record query for `Customer` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Customers"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Customer"
+                    }
+                  }
                 }
               }
             }
@@ -542,11 +607,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -556,10 +621,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -569,33 +635,31 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Create a new customers record.",
-        "tags": [
-          "Customers"
-        ],
+        "summary": "Create a new Customer record.",
+        "tags": ["Customer"],
         "requestBody": {
           "description": "While not every fields are required, is strongly recommended to fill out as many as possbile.",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCustomers"
+                "$ref": "#/components/schemas/CustomerRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/NewCustomers"
+                "$ref": "#/components/schemas/CustomerRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/NewCustomers"
+                "$ref": "#/components/schemas/CustomerRequest"
               }
             }
           }
@@ -609,13 +673,31 @@
         "operationId": "countCustomers",
         "responses": {
           "200": {
-            "description": "Retrieve customers document(s)",
+            "description": "Retreives a list in an `Array` format for all record of `$1` into the `data` param of an `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "object",
+                  "description": "Returns an `Array` of $1 on successful operation.",
                   "properties": {
-                    "count": {
-                      "type": "integer"
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        }
+                      }
                     }
                   }
                 }
@@ -627,11 +709,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -641,10 +723,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -654,31 +737,46 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Retrieve the numver of customers documents",
-        "tags": [
-          "Customers"
-        ],
+        "summary": "Retrieve the numver of Customer documents",
+        "tags": ["Customer"],
         "parameters": []
       }
     },
     "/customers/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one customers record using Id or Reference.",
+        "description": "Find one Customer record using Id or Reference.",
         "operationId": "getCustomer",
         "responses": {
           "200": {
-            "description": "Retrieve customers document(s)",
+            "description": "Retreives the created, updated or requested record query for `Customer` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Customers"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Customer"
+                    }
+                  }
                 }
               }
             }
@@ -688,11 +786,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -702,10 +800,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -715,16 +814,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Find one customers record",
-        "tags": [
-          "Customers"
-        ],
+        "summary": "Find one Customer record",
+        "tags": ["Customer"],
         "parameters": [
           {
             "name": "id",
@@ -744,11 +841,28 @@
         "operationId": "updateCustomer",
         "responses": {
           "200": {
-            "description": "Retrieve customers document(s)",
+            "description": "Retreives the created, updated or requested record query for `Customer` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Customers"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Customer"
+                    }
+                  }
                 }
               }
             }
@@ -758,11 +872,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -772,10 +886,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -785,33 +900,31 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Update a single customers record.",
-        "tags": [
-          "Customers"
-        ],
+        "summary": "Update a single Customer record.",
+        "tags": ["Customer"],
         "requestBody": {
           "description": "Fields to update the customer.",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCustomers"
+                "$ref": "#/components/schemas/CustomerRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/NewCustomers"
+                "$ref": "#/components/schemas/CustomerRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/NewCustomers"
+                "$ref": "#/components/schemas/CustomerRequest"
               }
             }
           }
@@ -831,16 +944,15 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single customers record",
+        "description": "Delete a single Customer record",
         "operationId": "deleteCustomer",
         "responses": {
           "200": {
-            "description": "deletes a single customers based on the ID supplied",
+            "description": "Deletes a record from data bases by its `id` and returns a `Success` response.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int64"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -850,11 +962,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -864,10 +976,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -877,16 +990,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Delete a single customers record",
-        "tags": [
-          "Customers"
-        ],
+        "summary": "Delete a single Customer record",
+        "tags": ["Customer"],
         "parameters": [
           {
             "name": "id",
@@ -904,17 +1015,34 @@
     "/datasources": {
       "get": {
         "deprecated": false,
-        "description": "Used to fetch information about all the datasource records where customers and their payments historial is stored.",
+        "description": "Used to fetch information about all the datasource records where Customer and their Payment historial is stored.",
         "operationId": "getDatasources",
         "responses": {
           "200": {
-            "description": "Retrieve datasources document(s)",
+            "description": "Retreives a list in an `Array` format for all record of `Datasource` into the `data` param of an `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Datasources"
+                  "type": "object",
+                  "description": "Returns an `Array` of Datasource on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Datasource"
+                      }
+                    }
                   }
                 }
               }
@@ -925,11 +1053,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -939,10 +1067,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -952,16 +1081,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Find all the datasource records",
-        "tags": [
-          "Datasources"
-        ],
+        "tags": ["Datasource"],
         "parameters": [
           {
             "name": "_limit",
@@ -1107,11 +1234,28 @@
         "operationId": "createDatasource",
         "responses": {
           "200": {
-            "description": "Retrieve datasources document(s)",
+            "description": "Retreives the created, updated or requested record query for `Datasource` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Datasources"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Datasource"
+                    }
+                  }
                 }
               }
             }
@@ -1121,11 +1265,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -1135,10 +1279,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -1148,33 +1293,31 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Create a new datasources record",
-        "tags": [
-          "Datasources"
-        ],
+        "summary": "Create a new Datasource record",
+        "tags": ["Datasource"],
         "requestBody": {
           "description": "",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewDatasources"
+                "$ref": "#/components/schemas/DatasourceRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/NewDatasources"
+                "$ref": "#/components/schemas/DatasourceRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/NewDatasources"
+                "$ref": "#/components/schemas/DatasourceRequest"
               }
             }
           }
@@ -1188,13 +1331,31 @@
         "operationId": "countDatasources",
         "responses": {
           "200": {
-            "description": "Retrieve datasources document(s)",
+            "description": "Retreives a list in an `Array` format for all record of `$1` into the `data` param of an `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "object",
+                  "description": "Returns an `Array` of $1 on successful operation.",
                   "properties": {
-                    "count": {
-                      "type": "integer"
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        }
+                      }
                     }
                   }
                 }
@@ -1206,11 +1367,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -1220,10 +1381,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -1233,16 +1395,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Retrieve the number of datasources documents",
-        "tags": [
-          "Datasources"
-        ],
+        "summary": "Retrieve the number of Datasource documents",
+        "tags": ["Datasource"],
         "parameters": []
       }
     },
@@ -1253,11 +1413,28 @@
         "operationId": "getDatasource",
         "responses": {
           "200": {
-            "description": "Retrieve datasources document(s)",
+            "description": "Retreives the created, updated or requested record query for `Datasource` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Datasources"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Datasource"
+                    }
+                  }
                 }
               }
             }
@@ -1267,11 +1444,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -1281,10 +1458,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -1294,16 +1472,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Find one datasources record",
-        "tags": [
-          "Datasources"
-        ],
+        "summary": "Find one Datasource record",
+        "tags": ["Datasource"],
         "parameters": [
           {
             "name": "id",
@@ -1323,11 +1499,28 @@
         "operationId": "updateDatasource",
         "responses": {
           "200": {
-            "description": "Retrieve datasources document(s)",
+            "description": "Retreives the created, updated or requested record query for `Datasource` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Datasources"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Datasource"
+                    }
+                  }
                 }
               }
             }
@@ -1337,11 +1530,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -1351,10 +1544,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -1364,33 +1558,31 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Fields to uptade a data source",
-        "tags": [
-          "Datasources"
-        ],
+        "tags": ["Datasource"],
         "requestBody": {
-          "description": "Update a single datasources record",
+          "description": "Update a single Datasource record",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewDatasources"
+                "$ref": "#/components/schemas/DatasourceRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/NewDatasources"
+                "$ref": "#/components/schemas/DatasourceRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/NewDatasources"
+                "$ref": "#/components/schemas/DatasourceRequest"
               }
             }
           }
@@ -1414,12 +1606,11 @@
         "operationId": "deleteDatasource",
         "responses": {
           "200": {
-            "description": "deletes a single datasources based on the ID supplied",
+            "description": "Deletes a record from data bases by its `id` and returns a `Success` response.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int64"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -1429,11 +1620,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -1443,10 +1634,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -1456,16 +1648,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Delete a single datasources record",
-        "tags": [
-          "Datasources"
-        ],
+        "summary": "Delete a single Datasource record",
+        "tags": ["Datasource"],
         "parameters": [
           {
             "name": "id",
@@ -1487,13 +1677,30 @@
         "operationId": "getPayments",
         "responses": {
           "200": {
-            "description": "Retrieve payments document(s)",
+            "description": "Retreives a list in an `Array` format for all record of `Payment` into the `data` param of an `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Payments"
+                  "type": "object",
+                  "description": "Returns an `Array` of Payment on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Payment"
+                      }
+                    }
                   }
                 }
               }
@@ -1504,11 +1711,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -1518,10 +1725,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -1531,16 +1739,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Find all the payment records",
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payment"],
         "parameters": [
           {
             "name": "_limit",
@@ -1686,94 +1892,26 @@
         "operationId": "createPayment",
         "responses": {
           "200": {
-            "description": "Retrieve payments document(s)",
+            "description": "Retreives the created, updated or requested record query for `Payment` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Payments"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "**Forbidden**: this operation requeris authentication",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "example": {
-                  "code": 403,
-                  "message":"Error - Forbidden"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "**Not found**: the resource was not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
-                  "code": 404,
-                  "message":"Error - Not found"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "**Unexpected error**",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create a new payments record",
-        "tags": [
-          "Payments"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPayments"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPayments"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPayments"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/payments/count": {
-      "get": {
-        "deprecated": false,
-        "description": "Count payments across all users and data sources.",
-        "operationId": "countPayments",
-        "responses": {
-          "200": {
-            "description": "Retrieve payments document(s)",
-            "content": {
-              "application/json": {
-                "schema": {
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
                   "properties": {
-                    "count": {
-                      "type": "integer"
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Payment"
                     }
                   }
                 }
@@ -1785,11 +1923,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -1799,10 +1937,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -1812,16 +1951,118 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Retrieve the number of payments records",
-        "tags": [
-          "Payments"
-        ],
+        "summary": "Create a new Payment record",
+        "tags": ["Payment"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRequest"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/count": {
+      "get": {
+        "deprecated": false,
+        "description": "Count Payment across all users and data sources.",
+        "operationId": "countPayments",
+        "responses": {
+          "200": {
+            "description": "Retreives total number of `$1` records into `data.count` of an `APIResponse` schema.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Returns number of total records of `$1`.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer",
+                          "description": "Number of records",
+                          "example": 2492
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "**Forbidden**: this operation requeris authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "code": 403,
+                  "message": "Error - Forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "**Not found**: the resource was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "code": 404,
+                  "message": "Error - Not found"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "**Unexpected error**",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieve the number of Payment records",
+        "tags": ["Payment"],
         "parameters": []
       }
     },
@@ -1832,11 +2073,28 @@
         "operationId": "getPayment",
         "responses": {
           "200": {
-            "description": "Retrieve payments document(s)",
+            "description": "Retreives the created, updated or requested record query for `Payment` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Payments"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Payment"
+                    }
+                  }
                 }
               }
             }
@@ -1846,11 +2104,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -1860,10 +2118,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -1873,16 +2132,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Find one payments record",
-        "tags": [
-          "Payments"
-        ],
+        "summary": "Find one Payment record",
+        "tags": ["Payment"],
         "parameters": [
           {
             "name": "id",
@@ -1902,11 +2159,28 @@
         "operationId": "updatePayment",
         "responses": {
           "200": {
-            "description": "Retrieve payments document(s)",
+            "description": "Retreives the created, updated or requested record query for `Payment` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Payments"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Payment"
+                    }
+                  }
                 }
               }
             }
@@ -1916,11 +2190,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -1930,10 +2204,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -1943,33 +2218,31 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Update a single payments record",
-        "tags": [
-          "Payments"
-        ],
+        "summary": "Update a single Payment record",
+        "tags": ["Payment"],
         "requestBody": {
           "description": "The fields to update the record.",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPayments"
+                "$ref": "#/components/schemas/PaymentRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/NewPayments"
+                "$ref": "#/components/schemas/PaymentRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/NewPayments"
+                "$ref": "#/components/schemas/PaymentRequest"
               }
             }
           }
@@ -1993,12 +2266,11 @@
         "operationId": "deletePayment",
         "responses": {
           "200": {
-            "description": "deletes a single payments based on the ID supplied",
+            "description": "Deletes a record from data bases by its `id` and returns a `Success` response.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int64"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -2008,11 +2280,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -2022,10 +2294,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -2035,16 +2308,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Delete a single payments record",
-        "tags": [
-          "Payments"
-        ],
+        "summary": "Delete a single Payment record",
+        "tags": ["Payment"],
         "parameters": [
           {
             "name": "id",
@@ -2062,17 +2333,34 @@
     "/reports": {
       "get": {
         "deprecated": false,
-        "description": "Retrieves and filters a list of score reports.",
+        "description": "Retrieves and filters a list of score Report.",
         "operationId": "getReports",
         "responses": {
           "200": {
-            "description": "Retrieve reports document(s)",
+            "description": "Retreives a list in an `Array` format for all record of `Report` into the `data` param of an `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Reports"
+                  "type": "object",
+                  "description": "Returns an `Array` of Report on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Report"
+                      }
+                    }
                   }
                 }
               }
@@ -2083,11 +2371,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -2097,10 +2385,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -2110,16 +2399,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Find all the score reports",
-        "tags": [
-          "Reports"
-        ],
+        "summary": "Find all the score Report",
+        "tags": ["Report"],
         "parameters": [
           {
             "name": "_limit",
@@ -2265,11 +2552,28 @@
         "operationId": "createReport",
         "responses": {
           "200": {
-            "description": "Retrieve reports document(s)",
+            "description": "Retreives the created, updated or requested record query for `Report` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Reports"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Report"
+                    }
+                  }
                 }
               }
             }
@@ -2279,11 +2583,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -2293,10 +2597,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -2306,33 +2611,31 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Create a new score report",
-        "tags": [
-          "Reports"
-        ],
+        "tags": ["Report"],
         "requestBody": {
           "description": "The fields to generete a score report. While most parameters are optional, is strongly recommended to fill out as many as possible.",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewReports"
+                "$ref": "#/components/schemas/ReportRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/NewReports"
+                "$ref": "#/components/schemas/ReportRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/NewReports"
+                "$ref": "#/components/schemas/ReportRequest"
               }
             }
           }
@@ -2346,13 +2649,33 @@
         "operationId": "countReports",
         "responses": {
           "200": {
-            "description": "Retrieve reports document(s)",
+            "description": "Retreives total number of `$1` records into `data.count` of an `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "object",
+                  "description": "Returns number of total records of `$1`.",
                   "properties": {
-                    "count": {
-                      "type": "integer"
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer",
+                          "description": "Number of records",
+                          "example": 2492
+                        }
+                      }
                     }
                   }
                 }
@@ -2364,11 +2687,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -2378,10 +2701,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -2391,16 +2715,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
-        "summary": "Retrieve the number of score reports",
-        "tags": [
-          "Reports"
-        ],
+        "summary": "Retrieve the number of score Report",
+        "tags": ["Report"],
         "parameters": []
       }
     },
@@ -2411,11 +2733,28 @@
         "operationId": "getReport",
         "responses": {
           "200": {
-            "description": "Retrieve reports document(s)",
+            "description": "Retreives the created, updated or requested record query for `Report` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Reports"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Report"
+                    }
+                  }
                 }
               }
             }
@@ -2425,11 +2764,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -2439,10 +2778,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -2452,16 +2792,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Find one score report",
-        "tags": [
-          "Reports"
-        ],
+        "tags": ["Report"],
         "parameters": [
           {
             "name": "id",
@@ -2474,7 +2812,7 @@
             }
           }
         ]
-      },
+      }
     },
     "/trainings": {
       "get": {
@@ -2483,13 +2821,30 @@
         "operationId": "getTrainings",
         "responses": {
           "200": {
-            "description": "Retrieve trainings document(s)",
+            "description": "Retreives a list in an `Array` format for all record of `Training` into the `data` param of an `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Trainings"
+                  "type": "object",
+                  "description": "Returns an `Array` of Training on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Training"
+                      }
+                    }
                   }
                 }
               }
@@ -2500,11 +2855,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -2514,10 +2869,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -2527,16 +2883,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Find all the training records",
-        "tags": [
-          "Trainings"
-        ],
+        "tags": ["Training"],
         "parameters": [
           {
             "name": "_limit",
@@ -2682,94 +3036,26 @@
         "operationId": "createTraining",
         "responses": {
           "200": {
-            "description": "Retrieve trainings document(s)",
+            "description": "Retreives the created, updated or requested record query for `Training` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Trainings"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "**Forbidden**: this operation requeris authentication",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "example": {
-                  "code": 403,
-                  "message":"Error - Forbidden"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "**Not found**: the resource was not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
-                  "code": 404,
-                  "message":"Error - Not found"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "**Unexpected error**",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create a new training",
-        "tags": [
-          "Trainings"
-        ],
-        "requestBody": {
-          "description": "The trigger parameter of new training.",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewTrainings"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/NewTrainings"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/NewTrainings"
-              }
-            },
-          }
-        }
-      }
-    },
-    "/trainings/count": {
-      "get": {
-        "deprecated": false,
-        "description": "Gets the counts of all agent trainings.",
-        "operationId": "countTrainings",
-        "responses": {
-          "200": {
-            "description": "Retrieve trainings document(s)",
-            "content": {
-              "application/json": {
-                "schema": {
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
                   "properties": {
-                    "count": {
-                      "type": "integer"
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Training"
                     }
                   }
                 }
@@ -2781,11 +3067,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -2795,10 +3081,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -2808,16 +3095,118 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a new training",
+        "tags": ["Training"],
+        "requestBody": {
+          "description": "The trigger parameter of new training.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrainingRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/TrainingRequest"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/TrainingRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trainings/count": {
+      "get": {
+        "deprecated": false,
+        "description": "Gets the counts of all agent trainings.",
+        "operationId": "countTrainings",
+        "responses": {
+          "200": {
+            "description": "Retreives total number of `$1` records into `data.count` of an `APIResponse` schema.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Returns number of total records of `$1`.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer",
+                          "description": "Number of records",
+                          "example": 2492
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "**Forbidden**: this operation requeris authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "code": 403,
+                  "message": "Error - Forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "**Not found**: the resource was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "code": 404,
+                  "message": "Error - Not found"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "**Unexpected error**",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Retrieve the nubver of trainings",
-        "tags": [
-          "Trainings"
-        ],
+        "tags": ["Training"],
         "parameters": []
       }
     },
@@ -2828,11 +3217,28 @@
         "operationId": "getTraining",
         "responses": {
           "200": {
-            "description": "Retrieve trainings document(s)",
+            "description": "Retreives the created, updated or requested record query for `Training` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Trainings"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Training"
+                    }
+                  }
                 }
               }
             }
@@ -2842,11 +3248,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -2856,10 +3262,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -2869,16 +3276,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Find one training",
-        "tags": [
-          "Trainings"
-        ],
+        "tags": ["Training"],
         "parameters": [
           {
             "name": "id",
@@ -2891,7 +3296,7 @@
             }
           }
         ]
-      },
+      }
     },
     "/trainings/cancel/{id}": {
       "post": {
@@ -2900,11 +3305,28 @@
         "operationId": "cancelTraining",
         "responses": {
           "200": {
-            "description": "Canceled successfuly",
+            "description": "Retreives the created, updated or requested record query for `Training` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Trainings"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Training"
+                    }
+                  }
                 }
               }
             }
@@ -2914,11 +3336,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -2928,10 +3350,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -2941,16 +3364,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Cancel queued training",
-        "tags": [
-          "Trainings"
-        ],
+        "tags": ["Training"],
         "parameters": [
           {
             "name": "id",
@@ -2963,7 +3384,7 @@
             }
           }
         ]
-      },
+      }
     },
     "/email": {
       "post": {
@@ -2977,9 +3398,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 },
-                "example" : {
+                "example": {
                   "code": 200,
                   "message": "Email sent successfully"
                 }
@@ -2991,11 +3412,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3005,10 +3426,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3018,16 +3440,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Send an email",
-        "tags": [
-          "Email - Email"
-        ],
+        "tags": ["Email - Email"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3053,11 +3473,28 @@
         "operationId": "uploadFile",
         "responses": {
           "200": {
-            "description": "Upload successful",
+            "description": "Retreives the created, updated or requested record query for `Success` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    }
+                  }
                 }
               }
             }
@@ -3067,11 +3504,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3081,10 +3518,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3094,16 +3532,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Upload a file",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3135,9 +3571,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 },
-                "example" : {
+                "example": {
                   "code": 200,
                   "message": "OK"
                 }
@@ -3149,11 +3585,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3163,10 +3599,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3176,16 +3613,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Retrieve number of uploaded files",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": []
       }
     },
@@ -3217,11 +3652,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3231,10 +3666,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3244,16 +3680,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Retreive all file documents",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": []
       }
     },
@@ -3285,11 +3719,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3299,10 +3733,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3312,16 +3747,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Get one file",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "id",
@@ -3341,11 +3774,28 @@
         "operationId": "deleteFile",
         "responses": {
           "200": {
-            "description": "Deleted successfuly",
+            "description": "Retreives the created, updated or requested record query for `Success` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    }
+                  }
                 }
               }
             }
@@ -3355,11 +3805,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3369,10 +3819,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3382,16 +3833,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "id",
@@ -3434,11 +3883,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3448,10 +3897,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3461,16 +3911,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Search for an uploaded file",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "query",
@@ -3507,11 +3955,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3521,10 +3969,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3534,16 +3983,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "id",
@@ -3583,11 +4030,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3597,10 +4044,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3610,16 +4058,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "_limit",
@@ -3780,11 +4226,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3794,10 +4240,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3807,23 +4254,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "requestBody": {
           "description": "",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsRole"
+                "$ref": "#/components/schemas/UsersPermissionsRoleRequest"
               }
             }
           }
@@ -3831,8 +4276,8 @@
       }
     },
     "/users-permissions/roles/{role}": {
-      "x-docgenIgnore": true,
       "put": {
+        "x-docgenIgnore": true,
         "deprecated": false,
         "description": "Update a role",
         "operationId": "createUserPermissionRole",
@@ -3852,11 +4297,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3866,10 +4311,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3879,16 +4325,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "role",
@@ -3907,7 +4351,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsRole"
+                "$ref": "#/components/schemas/UsersPermissionsRoleRequest"
               }
             }
           }
@@ -3920,11 +4364,28 @@
         "operationId": "deleteUserPermissionRole",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Retreives the created, updated or requested record query for `Success` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    }
+                  }
                 }
               }
             }
@@ -3934,11 +4395,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -3948,10 +4409,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -3961,16 +4423,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "role",
@@ -4010,11 +4470,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -4024,10 +4484,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -4037,16 +4498,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -4204,11 +4663,28 @@
         "operationId": "connectProvider",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retreives the created, updated or requested record query for `Success` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    }
+                  }
                 }
               }
             }
@@ -4218,11 +4694,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -4232,10 +4708,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -4245,16 +4722,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
@@ -4265,11 +4740,28 @@
         "operationId": "localAuth",
         "responses": {
           "200": {
-            "description": "Auth suxcessful",
+            "description": "Retreives the created, updated or requested record query for `Success` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    }
+                  }
                 }
               }
             }
@@ -4279,11 +4771,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -4293,10 +4785,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -4306,16 +4799,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "User Login",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "User login credentials",
           "required": true,
@@ -4376,11 +4867,28 @@
         "operationId": "registerAuth",
         "responses": {
           "200": {
-            "description": "Register Successful",
+            "description": "Retruns the created User.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersPermissionsUser"
+                  "type": "object",
+                  "description": "Retruns the created User.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/UsersPermissionsUser"
+                    }
+                  }
                 }
               }
             }
@@ -4390,11 +4898,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -4404,10 +4912,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -4417,35 +4926,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "User Registrarion",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "User fields",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+                "$ref": "#/components/schemas/UsersPermissionsUserRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+                "$ref": "#/components/schemas/UsersPermissionsUserRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+                "$ref": "#/components/schemas/UsersPermissionsUserRequest"
               }
-            },
+            }
           }
         }
       }
@@ -4457,11 +4964,28 @@
         "operationId": "providerCallback",
         "responses": {
           "200": {
-            "description": "Calback successful",
+            "description": "Retreives the created, updated or requested record query for `Success` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    }
+                  }
                 }
               }
             }
@@ -4471,11 +4995,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -4485,10 +5009,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -4498,16 +5023,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Auth provider callback",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "provider",
@@ -4529,11 +5052,28 @@
         "operationId": "forgotPassword",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Retreives the created, updated or requested record query for `Success` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    }
+                  }
                 }
               }
             }
@@ -4543,11 +5083,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -4557,10 +5097,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -4570,16 +5111,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Password reset",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4625,11 +5164,28 @@
         "operationId": "resetPassword",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retreives the created, updated or requested record query for `Success` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    }
+                  }
                 }
               }
             }
@@ -4639,11 +5195,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -4653,10 +5209,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -4666,16 +5223,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Reset password",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "resetToken",
@@ -4697,11 +5252,28 @@
         "operationId": "emailConfirmation",
         "responses": {
           "200": {
-            "description": "Confirmation successful",
+            "description": "Retreives the created, updated or requested record query for `Success` into a `APIResponse` schema.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "type": "object",
+                  "description": "Returns an APIResponse with Response schema as `data` on successful operation.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    }
+                  }
                 }
               }
             }
@@ -4711,11 +5283,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -4725,10 +5297,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -4738,16 +5311,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
@@ -4762,9 +5333,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 },
-                "example" : {
+                "example": {
                   "code": 200,
                   "message": "Email sent successfuly"
                 }
@@ -4776,11 +5347,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -4790,10 +5361,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -4803,16 +5375,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Send confirmation email",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4862,9 +5432,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UsersPermissionsUser"
+                  "type": "object",
+                  "description": "Retreives a list in an `Array` format for all record of UsersPermissionsUser into the `data` param of an `APIResponse` schema.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UsersPermissionsUser"
+                      }
+                    }
                   }
                 }
               }
@@ -4875,11 +5462,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -4889,10 +5476,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -4902,16 +5490,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Retrieve all users",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "_limit",
@@ -5063,7 +5649,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersPermissionsUser"
+                  "type": "object",
+                  "description": "Retreives the current autheticated user into the `data` param of an `APIResponse` schema.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/UsersPermissionsUser"
+                    }
+                  }
                 }
               }
             }
@@ -5073,11 +5676,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -5087,10 +5690,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -5100,23 +5704,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Return logged in user",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
     "/users/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve a single user depending by `Id`",
+        "description": "Retrieve a single user by `Id`",
         "operationId": "getUser",
         "responses": {
           "200": {
@@ -5124,7 +5726,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersPermissionsUser"
+                  "type": "object",
+                  "description": "Retreives an User by its `Id` into the `data` param of an `APIResponse` schema.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/UsersPermissionsUser"
+                    }
+                  }
                 }
               }
             }
@@ -5134,11 +5753,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -5148,10 +5767,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -5161,16 +5781,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Return an user",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -5186,7 +5804,7 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update an existing user",
+        "description": "Update the information of an existing user",
         "operationId": "updateUser",
         "responses": {
           "200": {
@@ -5194,7 +5812,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersPermissionsUser"
+                  "type": "object",
+                  "description": "Returns the modified record of UsersPermissionsUser into the `data` param of an `APIResponse` schema.",
+                  "properties": {
+                    "code": {
+                      "description": "HTTP code",
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 200
+                    },
+                    "message": {
+                      "description": "'OK' or additional information",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/UsersPermissionsUser"
+                    }
+                  }
                 }
               }
             }
@@ -5204,11 +5839,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -5218,10 +5853,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -5231,16 +5867,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "Update an user",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -5259,17 +5893,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+                "$ref": "#/components/schemas/UsersPermissionsUserRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+                "$ref": "#/components/schemas/UsersPermissionsUserRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+                "$ref": "#/components/schemas/UsersPermissionsUserRequest"
               }
             }
           }
@@ -5281,15 +5915,11 @@
         "operationId": "deleteUser",
         "responses": {
           "200": {
-            "description": "User delete successfully",
+            "description": "Deletes a record from data bases by its `id` and returns a `Success` response.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
-                },
-                "example" : {
-                  "code": 200,
-                  "message": "User deleted successfully"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -5299,11 +5929,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
                   "code": 403,
-                  "message":"Error - Forbidden"
+                  "message": "Error - Forbidden"
                 }
               }
             }
@@ -5313,10 +5943,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }, "example": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
                   "code": 404,
-                  "message":"Error - Not found"
+                  "message": "Error - Not found"
                 }
               }
             }
@@ -5326,16 +5957,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -5352,11 +5981,36 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
     "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "description": "Returns on failed operation.",
+        "required": ["code", "message"],
+        "properties": {
+          "code": {
+            "description": "HTTP error code",
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "description": "'Error' or additional information",
+            "type": "string"
+          }
+        },
+        "example": {
+          "code": 500,
+          "message": "Error - Server Error"
+        }
+      },
       "Company": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string",
@@ -5380,11 +6034,11 @@
           },
           "updated_by": {
             "type": "string",
-            "example":"jlopez"
+            "example": "jlopez"
           }
         }
       },
-      "NewCompany": {
+      "CompanyRequest": {
         "properties": {
           "Name": {
             "type": "string",
@@ -5396,119 +6050,141 @@
           }
         }
       },
-      "Customers": {
-        "required": [
-          "id"
-        ],
+      "Customer": {
+        "required": ["id"],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "example": "b6825a95"
           },
           "uuid": {
-            "type": "string"
+            "type": "string",
+            "example": "26f425d6-9269-442b-89ed-e35ba63bf9c0"
           },
           "referenceId": {
-            "type": "string"
+            "type": "string",
+            "example": "92442"
           },
           "dateOfBirth": {
             "type": "string",
             "format": "date"
           },
           "addressStreet": {
-            "type": "string"
+            "type": "string",
+            "example": "Av Siempre Viva"
           },
           "addressNeighborhood": {
-            "type": "string"
+            "type": "string",
+            "example": "Los Alamos"
           },
           "addressCity": {
-            "type": "string"
+            "type": "string",
+            "example": "Guadalajara"
           },
           "addressState": {
-            "type": "string"
+            "type": "string",
+            "example": "Jalisco"
           },
           "addressCountry": {
-            "type": "string"
+            "type": "string",
+            "example": "Mexico"
           },
           "gender": {
             "type": "string",
-            "enum": [
-              "male",
-              "female"
-            ]
+            "enum": ["male", "female"],
+            "example": "male"
           },
           "maritalStatus": {
             "type": "string",
-            "enum": [
-              "single",
-              "married",
-              "separated",
-              "widowed"
-            ]
+            "enum": ["single", "married", "separated", "widowed"],
+            "example": "single"
           },
           "published_at": {
             "type": "string",
             "format": "date-time"
           },
           "created_by": {
-            "type": "string"
+            "type": "string",
+            "example": "jlopez"
           },
           "updated_by": {
-            "type": "string"
+            "type": "string",
+            "example": "jlopez"
           }
         }
       },
-      "NewCustomers": {
+      "CustomerRequest": {
         "properties": {
           "uuid": {
-            "type": "string"
+            "type": "string",
+            "example": "26f425d6-9269-442b-89ed-e35ba63bf9c0"
           },
           "referenceId": {
-            "type": "string"
+            "type": "string",
+            "example": "92442"
           },
           "dateOfBirth": {
             "type": "string",
             "format": "date"
           },
           "addressStreet": {
-            "type": "string"
+            "type": "string",
+            "example": "Av Siempre Viva"
           },
           "addressNeighborhood": {
-            "type": "string"
+            "type": "string",
+            "example": "Los Alamos"
           },
           "addressCity": {
-            "type": "string"
+            "type": "string",
+            "example": "Guadalajara"
           },
           "addressState": {
-            "type": "string"
+            "type": "string",
+            "example": "Jalisco"
           },
           "addressCountry": {
-            "type": "string"
+            "type": "string",
+            "example": "Mexico"
           },
           "gender": {
             "type": "string",
-            "enum": [
-              "male",
-              "female"
-            ]
+            "enum": ["male", "female"],
+            "example": "male"
           },
           "maritalStatus": {
             "type": "string",
-            "enum": [
-              "single",
-              "married",
-              "separated",
-              "widowed"
-            ]
+            "enum": ["single", "married", "separated", "widowed"],
+            "example": "single"
           }
         }
       },
-      "Datasources": {
-        "required": [
-          "id"
-        ],
+      "SuccessResponse": {
+        "type": "object",
+        "description": "Returns on successful operation that returns no data.",
+        "required": ["code", "message"],
+        "properties": {
+          "code": {
+            "description": "HTTP code",
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "description": "'OK' or additional information",
+            "type": "string"
+          }
+        },
+        "example": {
+          "code": 200,
+          "message": "OK"
+        }
+      },
+      "Datasource": {
+        "required": ["id"],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "example": "eddc394a"
           },
           "driver": {
             "type": "string",
@@ -5521,354 +6197,168 @@
               "csv",
               "rest",
               "mongo"
-            ]
-          },
-          "host": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "database": {
-            "type": "string"
-          },
-          "port": {
-            "type": "string"
-          },
-          "ssl": {
-            "type": "boolean"
-          },
-          "keyfile": {
-            "type": "string"
-          },
-          "certificate": {
-            "type": "string"
-          },
-          "sslCA": {
-            "type": "string"
-          },
-          "ssh": {
-            "type": "boolean"
-          },
-          "sshHost": {
-            "type": "string"
-          },
-          "sshUsername": {
-            "type": "string"
-          },
-          "sshPassword": {
-            "type": "string"
-          },
-          "sshPort": {
-            "type": "string"
-          },
-          "sshIdentity": {
-            "type": "string"
-          },
-          "sshTunneling": {
-            "type": "boolean"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
-          }
-        }
-      },
-      "NewDatasources": {
-        "properties": {
-          "driver": {
-            "type": "string",
-            "enum": [
-              "mysql",
-              "mariadb",
-              "sqlserver",
-              "postgre",
-              "excell",
-              "csv",
-              "rest",
-              "mongo"
-            ]
-          },
-          "host": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "database": {
-            "type": "string"
-          },
-          "port": {
-            "type": "string"
-          },
-          "ssl": {
-            "type": "boolean"
-          },
-          "keyfile": {
-            "type": "string"
-          },
-          "certificate": {
-            "type": "string"
-          },
-          "sslCA": {
-            "type": "string"
-          },
-          "ssh": {
-            "type": "boolean"
-          },
-          "sshHost": {
-            "type": "string"
-          },
-          "sshUsername": {
-            "type": "string"
-          },
-          "sshPassword": {
-            "type": "string"
-          },
-          "sshPort": {
-            "type": "string"
-          },
-          "sshIdentity": {
-            "type": "string"
-          },
-          "sshTunneling": {
-            "type": "boolean"
-          }
-        }
-      },
-      "Payments": {
-        "required": [
-          "id"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "amountDue": {
-            "type": "number"
-          },
-          "amountPaid": {
-            "type": "number"
-          },
-          "dueDate": {
-            "type": "string",
-            "format": "date"
-          },
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
-          }
-        }
-      },
-      "NewPayments": {
-        "properties": {
-          "amountDue": {
-            "type": "number"
-          },
-          "amountPaid": {
-            "type": "number"
-          },
-          "dueDate": {
-            "type": "string",
-            "format": "date"
-          },
-          "date": {
-            "type": "string",
-            "format": "date"
-          }
-        }
-      },
-      "Reports": {
-        "required": [
-          "id",
-          "uuid"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "uuid": {
-            "type": "string"
-          },
-          "referenceId": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "reference",
-              "vector"
-            ]
-          },
-          "processed": {
-            "type": "boolean"
-          },
-          "users_permissions_user": {
-            "required": [
-              "id",
-              "username",
-              "email"
             ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "reports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+            "example": "mongo"
           },
-          "score": {
-            "type": "number"
+          "host": {
+            "type": "string",
+            "example": "192.0.0.1"
           },
-          "scoreProbability": {
-            "type": "number"
+          "username": {
+            "type": "string",
+            "example": "dd_user"
           },
-          "scoreConfidence": {
-            "type": "number"
+          "password": {
+            "type": "string",
+            "example": "db_password"
           },
-          "scoreVersion": {
+          "database": {
+            "type": "string",
+            "example": "mongo"
+          },
+          "port": {
+            "type": "number",
+            "example": "3643"
+          },
+          "ssl": {
+            "type": "boolean",
+            "example": false
+          },
+          "sslKeyfile": {
             "type": "string"
+          },
+          "sslCertificate": {
+            "type": "string"
+          },
+          "sslCA": {
+            "type": "string"
+          },
+          "ssh": {
+            "type": "boolean"
+          },
+          "sshHost": {
+            "type": "string"
+          },
+          "sshUsername": {
+            "type": "string"
+          },
+          "sshPassword": {
+            "type": "string"
+          },
+          "sshPort": {
+            "type": "string"
+          },
+          "sshIdentity": {
+            "type": "string"
+          },
+          "sshTunneling": {
+            "type": "boolean"
           },
           "published_at": {
             "type": "string",
             "format": "date-time"
           },
           "created_by": {
-            "type": "string"
+            "type": "string",
+            "example": "admin"
           },
           "updated_by": {
-            "type": "string"
+            "type": "string",
+            "example": "admin"
           }
         }
       },
-      "NewReports": {
-        "required": [
-          "uuid"
-        ],
+      "DatasourceRequest": {
         "properties": {
-          "uuid": {
-            "type": "string"
-          },
-          "referenceId": {
-            "type": "string"
-          },
-          "type": {
+          "driver": {
             "type": "string",
             "enum": [
-              "reference",
-              "vector"
-            ]
+              "mysql",
+              "mariadb",
+              "sqlserver",
+              "postgre",
+              "excell",
+              "csv",
+              "rest",
+              "mongo"
+            ],
+            "example": "mongo"
           },
-          "processed": {
+          "host": {
+            "type": "string",
+            "example": "192.0.0.1"
+          },
+          "username": {
+            "type": "string",
+            "example": "dd_user"
+          },
+          "password": {
+            "type": "string",
+            "example": "db_password"
+          },
+          "database": {
+            "type": "string",
+            "example": "mongo"
+          },
+          "port": {
+            "type": "number",
+            "example": "3643"
+          },
+          "ssl": {
+            "type": "boolean",
+            "example": false
+          },
+          "sslKeyfile": {
+            "type": "string"
+          },
+          "sslCertificate": {
+            "type": "string"
+          },
+          "sslCA": {
+            "type": "string"
+          },
+          "ssh": {
             "type": "boolean"
           },
-          "users_permissions_user": {
+          "sshHost": {
             "type": "string"
           },
-          "score": {
-            "type": "number"
-          },
-          "scoreProbability": {
-            "type": "number"
-          },
-          "scoreConfidence": {
-            "type": "number"
-          },
-          "scoreVersion": {
+          "sshUsername": {
             "type": "string"
+          },
+          "sshPassword": {
+            "type": "string"
+          },
+          "sshPort": {
+            "type": "string"
+          },
+          "sshIdentity": {
+            "type": "string"
+          },
+          "sshTunneling": {
+            "type": "boolean"
           }
         }
       },
-      "Trainings": {
-        "required": [
-          "id"
-        ],
+      "Payment": {
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
           },
-          "uuid": {
-            "type": "string"
-          },
-          "accuracy": {
+          "amountDue": {
             "type": "number"
           },
-          "precission": {
+          "amountPaid": {
             "type": "number"
           },
-          "mae": {
-            "type": "number"
+          "dueDate": {
+            "type": "string",
+            "format": "date"
           },
-          "rmse": {
-            "type": "number"
-          },
-          "binaryPath": {
-            "type": "string"
-          },
-          "version": {
-            "type": "string"
-          },
-          "meta": {
-            "type": "string"
+          "date": {
+            "type": "string",
+            "format": "date"
           },
           "published_at": {
             "type": "string",
@@ -5882,39 +6372,67 @@
           }
         }
       },
-      "NewTrainings": {
+      "PaymentRequest": {
         "properties": {
-          "uuid": {
-            "type": "string"
-          },
-          "accuracy": {
+          "amountDue": {
             "type": "number"
           },
-          "precission": {
+          "amountPaid": {
             "type": "number"
           },
-          "mae": {
-            "type": "number"
+          "dueDate": {
+            "type": "string",
+            "format": "date"
           },
-          "rmse": {
-            "type": "number"
-          },
-          "binaryPath": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "UsersPermissionsUser": {
+        "required": ["id", "username", "email"],
+        "properties": {
+          "id": {
             "type": "string"
           },
-          "version": {
+          "username": {
+            "type": "string",
+            "minLength": 3
+          },
+          "email": {
+            "type": "string",
+            "minLength": 6
+          },
+          "provider": {
             "type": "string"
           },
-          "meta": {
-            "type": "string"
+          "confirmed": {
+            "type": "boolean",
+            "default": false
+          },
+          "blocked": {
+            "type": "boolean",
+            "default": false
+          },
+          "role": {
+            "$ref": "#/components/schemas/UsersPermissionsRole"
+          },
+          "reports": {
+            "$ref": "#/components/schemas/Report"
+          },
+          "created_by": {
+            "type": "string",
+            "example": "admin"
+          },
+          "updated_by": {
+            "type": "string",
+            "example": "admin"
           }
         }
       },
       "UsersPermissionsRole": {
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "properties": {
           "id": {
             "type": "string"
@@ -5932,13 +6450,7 @@
           "permissions": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "type",
-                "controller",
-                "action",
-                "enabled"
-              ],
+              "required": ["id", "type", "controller", "action", "enabled"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -5970,55 +6482,7 @@
           "users": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "username",
-                "email"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "username": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "resetPasswordToken": {
-                  "type": "string"
-                },
-                "confirmationToken": {
-                  "type": "string"
-                },
-                "confirmed": {
-                  "type": "boolean"
-                },
-                "blocked": {
-                  "type": "boolean"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "reports": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/components/schemas/UsersPermissionsUser"
             }
           },
           "created_by": {
@@ -6029,10 +6493,157 @@
           }
         }
       },
-      "NewUsersPermissionsRole": {
-        "required": [
-          "name"
-        ],
+      "Report": {
+        "required": ["id", "uuid"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "referenceId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["reference", "vector"]
+          },
+          "processed": {
+            "type": "boolean"
+          },
+          "users_permissions_user": {
+            "$ref": "#/components/schemas/UsersPermissionsUser"
+          },
+          "score": {
+            "type": "number"
+          },
+          "scoreProbability": {
+            "type": "number"
+          },
+          "scoreConfidence": {
+            "type": "number"
+          },
+          "scoreVersion": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "ReportRequest": {
+        "required": ["uuid"],
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "referenceId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["reference", "vector"]
+          },
+          "processed": {
+            "type": "boolean"
+          },
+          "users_permissions_user": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          },
+          "scoreProbability": {
+            "type": "number"
+          },
+          "scoreConfidence": {
+            "type": "number"
+          },
+          "scoreVersion": {
+            "type": "string"
+          }
+        }
+      },
+      "Training": {
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "accuracy": {
+            "type": "number"
+          },
+          "precission": {
+            "type": "number"
+          },
+          "mae": {
+            "type": "number"
+          },
+          "rmse": {
+            "type": "number"
+          },
+          "binaryPath": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "TrainingRequest": {
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "accuracy": {
+            "type": "number"
+          },
+          "precission": {
+            "type": "number"
+          },
+          "mae": {
+            "type": "number"
+          },
+          "rmse": {
+            "type": "number"
+          },
+          "binaryPath": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "string"
+          }
+        }
+      },
+      "UsersPermissionsRoleRequest": {
+        "required": ["name"],
         "properties": {
           "name": {
             "type": "string",
@@ -6058,136 +6669,8 @@
           }
         }
       },
-      "UsersPermissionsUser": {
-        "required": [
-          "id",
-          "username",
-          "email"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string",
-            "minLength": 3
-          },
-          "email": {
-            "type": "string",
-            "minLength": 6
-          },
-          "provider": {
-            "type": "string"
-          },
-          "confirmed": {
-            "type": "boolean",
-            "default": false
-          },
-          "blocked": {
-            "type": "boolean",
-            "default": false
-          },
-          "role": {
-            "required": [
-              "id",
-              "name"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              },
-              "permissions": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "reports": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "uuid"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "example": "d0fea516-9b58-4cf5-ab86-bb7e983e4b0c"
-                },
-                "uuid": {
-                  "type": "string",
-                  "example": "maia-8439cc39b63b"
-                },
-                "referenceId": {
-                  "type": "string",
-                  "example": "96234"
-                },
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "reference",
-                    "vector"
-                  ],
-                  "example": "reference"
-                },
-                "processed": {
-                  "type": "boolean"
-                },
-                "users_permissions_user": {
-                  "type": "string",
-                  "example": "jlopez"
-                },
-                "score": {
-                  "type": "number",
-                  "example": 98
-                },
-                "scoreProbability": {
-                  "type": "number",
-                  "example": 96
-                },
-                "scoreConfidence": {
-                  "type": "number",
-                  "example": 99
-                },
-                "scoreVersion": {
-                  "type": "string",
-                  "example": "v-ab86"
-                }
-              }
-            }
-          },
-          "created_by": {
-            "type": "string",
-            "example": "admin"
-          },
-          "updated_by": {
-            "type": "string",
-            "example": "admin"
-          }
-        },
-      },
-      "NewUsersPermissionsUser": {
-        "required": [
-          "username",
-          "email"
-        ],
+      "UsersPermissionsUserRequest": {
+        "required": ["username", "email"],
         "properties": {
           "username": {
             "type": "string",
@@ -6228,7 +6711,7 @@
           "role": {
             "type": "string"
           },
-          "reports": {
+          "Report": {
             "type": "array",
             "items": {
               "type": "string"
@@ -6240,59 +6723,6 @@
             ]
           }
         }
-      },
-      "Success": {
-        "type": "object",
-        "description": "Returns on successful operation that returns no data.",
-        "required": [
-          "code",
-          "message"
-        ],
-        "properties": {
-          "code": {
-            "description": "HTTP code",
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "description": "'OK' or additional information",
-            "type": "string"
-          }
-        },
-        "example": {
-          "code": 200,
-          "message": "OK"
-        }
-      },
-      "Error": {
-        "type": "object",
-        "description": "Returns on failed operation.",
-        "required": [
-          "code",
-          "message"
-        ],
-        "properties": {
-          "code": {
-            "description": "HTTP error code",
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "description": "'Error' or additional information",
-            "type": "string"
-          }
-        },
-        "example": {
-          "code": 500,
-          "message": "Error - Server Error"
-        }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
       }
     }
   },
@@ -6301,22 +6731,22 @@
       "name": "Company"
     },
     {
-      "name": "Customers"
+      "name": "Customer"
     },
     {
-      "name": "Datasources"
+      "name": "Datasource"
     },
     {
       "name": "Email - Email"
     },
     {
-      "name": "Payments"
+      "name": "Payment"
     },
     {
-      "name": "Reports"
+      "name": "Report"
     },
     {
-      "name": "Trainings"
+      "name": "Training"
     },
     {
       "name": "Upload - File"

@@ -1,0 +1,28 @@
+required:
+  - id
+properties:
+  id:
+    type: string
+  uuid:
+    type: string
+  accuracy:
+    type: number
+  precission:
+    type: number
+  mae:
+    type: number
+  rmse:
+    type: number
+  binaryPath:
+    type: string
+  version:
+    type: string
+  meta:
+    type: string
+  published_at:
+    type: string
+    format: date-time
+  created_by:
+    type: string
+  updated_by:
+    type: string

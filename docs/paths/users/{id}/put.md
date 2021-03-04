@@ -3,7 +3,7 @@ id: updateUser
 slug: users-id-put
 title: Update an user
 sidebar_label: PUT
-description: Update an existing user
+description: Update the information of an existing user
 ---
 
 <!-- prettier-ignore-start -->
@@ -58,7 +58,7 @@ export const Url = ({children}) => {
   <Method color="#6b55b2">PUT</Method><Path>{unescape(escape('/users/{id}'))}</Path>
 </Url>
 
-> Update an existing user
+> Update the information of an existing user
 
 ## Parameters
 
@@ -91,7 +91,7 @@ export const Url = ({children}) => {
   "confirmed": false,
   "blocked": false,
   "role": "string",
-  "reports": ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"]
+  "Report": ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"]
 }
 ```
 
@@ -111,9 +111,9 @@ export const Url = ({children}) => {
   <confirmed>false</confirmed>
   <blocked>false</blocked>
   <role>string</role>
-  <reports>maia-c6cbaa76ba8f</reports>
-  <reports>maia-3b5a054c593d</reports>
-  <reports>maia-f95a8582aea5</reports>
+  <Report>maia-c6cbaa76ba8f</Report>
+  <Report>maia-3b5a054c593d</Report>
+  <Report>maia-f95a8582aea5</Report>
 </item>
 ```
 
@@ -132,7 +132,7 @@ export const Url = ({children}) => {
   "confirmed": false,
   "blocked": false,
   "role": "string",
-  "reports": ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"]
+  "Report": ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"]
 }
 ```
 
@@ -160,7 +160,7 @@ curl --request PUT \
   --url https://maiascore.com/users/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
   --header 'content-type: application/x-www-form-urlencoded' \
-  --data '{"username":"jlopez","email":"test@mydomain.com","provider":"local","password":"********","resetPasswordToken":"26f425d6-9269-442b-89ed-e35ba63bf9c0","confirmationToken":"eddc394a-8664-406e-852f-7a35d84a7fb7","confirmed":false,"blocked":false,"role":"string","reports":["maia-c6cbaa76ba8f","maia-3b5a054c593d","maia-f95a8582aea5"]}'
+  --data '{"username":"jlopez","email":"test@mydomain.com","provider":"local","password":"********","resetPasswordToken":"26f425d6-9269-442b-89ed-e35ba63bf9c0","confirmationToken":"eddc394a-8664-406e-852f-7a35d84a7fb7","confirmed":false,"blocked":false,"role":"string","Report":["maia-c6cbaa76ba8f","maia-3b5a054c593d","maia-f95a8582aea5"]}'
 ```
 
 </TabItem>
@@ -205,7 +205,7 @@ req.write(
     confirmed: false,
     blocked: false,
     role: "string",
-    reports: ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"],
+    Report: ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"],
   })
 );
 req.end();
@@ -220,7 +220,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("maiascore.com")
 
-payload = "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"reports\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}"
+payload = "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"Report\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}"
 
 headers = {
     'content-type': "application/x-www-form-urlencoded",
@@ -252,7 +252,7 @@ curl_setopt_array($curl, [
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "PUT",
-  CURLOPT_POSTFIELDS => "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"reports\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}",
+  CURLOPT_POSTFIELDS => "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"Report\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}",
   CURLOPT_HTTPHEADER => [
     "Authorization: Bearer REPLACE_BEARER_TOKEN",
     "content-type: application/x-www-form-urlencoded"
@@ -278,7 +278,7 @@ curl --request PUT \
   --url https://maiascore.com/users/%7Bid%7D \
   --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
   --header 'content-type: application/x-www-form-urlencoded' \
-  --data '{"username":"jlopez","email":"test@mydomain.com","provider":"local","password":"********","resetPasswordToken":"26f425d6-9269-442b-89ed-e35ba63bf9c0","confirmationToken":"eddc394a-8664-406e-852f-7a35d84a7fb7","confirmed":false,"blocked":false,"role":"string","reports":["maia-c6cbaa76ba8f","maia-3b5a054c593d","maia-f95a8582aea5"]}'
+  --data '{"username":"jlopez","email":"test@mydomain.com","provider":"local","password":"********","resetPasswordToken":"26f425d6-9269-442b-89ed-e35ba63bf9c0","confirmationToken":"eddc394a-8664-406e-852f-7a35d84a7fb7","confirmed":false,"blocked":false,"role":"string","Report":["maia-c6cbaa76ba8f","maia-3b5a054c593d","maia-f95a8582aea5"]}'
 ```
 
 ```javascript title="Node + Native"
@@ -319,7 +319,7 @@ req.write(
     confirmed: false,
     blocked: false,
     role: "string",
-    reports: ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"],
+    Report: ["maia-c6cbaa76ba8f", "maia-3b5a054c593d", "maia-f95a8582aea5"],
   })
 );
 req.end();
@@ -330,7 +330,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("maiascore.com")
 
-payload = "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"reports\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}"
+payload = "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"Report\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}"
 
 headers = {
     'content-type': "application/x-www-form-urlencoded",
@@ -358,7 +358,7 @@ curl_setopt_array($curl, [
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "PUT",
-  CURLOPT_POSTFIELDS => "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"reports\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}",
+  CURLOPT_POSTFIELDS => "{\"username\":\"jlopez\",\"email\":\"test@mydomain.com\",\"provider\":\"local\",\"password\":\"********\",\"resetPasswordToken\":\"26f425d6-9269-442b-89ed-e35ba63bf9c0\",\"confirmationToken\":\"eddc394a-8664-406e-852f-7a35d84a7fb7\",\"confirmed\":false,\"blocked\":false,\"role\":\"string\",\"Report\":[\"maia-c6cbaa76ba8f\",\"maia-3b5a054c593d\",\"maia-f95a8582aea5\"]}",
   CURLOPT_HTTPHEADER => [
     "Authorization: Bearer REPLACE_BEARER_TOKEN",
     "content-type: application/x-www-form-urlencoded"
@@ -399,36 +399,53 @@ Update successful
 
 ```json title="Example response"
 {
-  "id": "string",
-  "username": "string",
-  "email": "string",
-  "provider": "string",
-  "confirmed": false,
-  "blocked": false,
-  "role": {
+  "code": 200,
+  "message": "OK",
+  "data": {
     "id": "string",
-    "name": "string",
-    "description": "string",
-    "type": "string",
-    "permissions": ["string"],
-    "users": ["string"]
-  },
-  "reports": [
-    {
-      "id": "d0fea516-9b58-4cf5-ab86-bb7e983e4b0c",
-      "uuid": "maia-8439cc39b63b",
-      "referenceId": "96234",
+    "username": "string",
+    "email": "string",
+    "provider": "string",
+    "confirmed": false,
+    "blocked": false,
+    "role": {
+      "id": "string",
+      "name": "string",
+      "description": "string",
+      "type": "string",
+      "permissions": [
+        {
+          "id": "string",
+          "type": "string",
+          "controller": "string",
+          "action": "string",
+          "enabled": true,
+          "policy": "string",
+          "role": "string",
+          "updated_by": "string"
+        }
+      ],
+      "users": [null],
+      "created_by": "string",
+      "updated_by": "string"
+    },
+    "reports": {
+      "id": "string",
+      "uuid": "string",
+      "referenceId": "string",
       "type": "reference",
       "processed": true,
-      "users_permissions_user": "jlopez",
-      "score": 98,
-      "scoreProbability": 96,
-      "scoreConfidence": 99,
-      "scoreVersion": "v-ab86"
-    }
-  ],
-  "created_by": "admin",
-  "updated_by": "admin"
+      "score": 0,
+      "scoreProbability": 0,
+      "scoreConfidence": 0,
+      "scoreVersion": "string",
+      "published_at": "2019-08-24T14:15:22Z",
+      "created_by": "string",
+      "updated_by": "string"
+    },
+    "created_by": "admin",
+    "updated_by": "admin"
+  }
 }
 ```
 

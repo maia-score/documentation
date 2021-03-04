@@ -1,0 +1,118 @@
+put:
+  x-docgenIgnore: true
+  deprecated: false
+  description: Update a role
+  operationId: createUserPermissionRole
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/UsersPermissionsRole.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: ''
+  tags:
+    - UsersPermissions - Role
+  parameters:
+    - name: role
+      in: path
+      description: Role Id
+      deprecated: false
+      required: true
+      schema:
+        type: string
+  requestBody:
+    description: ''
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UsersPermissionsRoleRequest.yaml
+delete:
+  x-docgenIgnore: true
+  deprecated: false
+  description: Delete a role
+  operationId: deleteUserPermissionRole
+  responses:
+    '200':
+      description: >-
+        Retreives the created, updated or requested record query for `Success`
+        into a `APIResponse` schema.
+      content:
+        application/json:
+          schema:
+            type: object
+            description: >-
+              Returns an APIResponse with Response schema as `data` on
+              successful operation.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                $ref: ../components/schemas/SuccessResponse.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: ''
+  tags:
+    - UsersPermissions - Role
+  parameters:
+    - name: role
+      in: path
+      description: Role Id
+      deprecated: false
+      required: true
+      schema:
+        type: string

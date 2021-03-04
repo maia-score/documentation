@@ -1,0 +1,183 @@
+get:
+  deprecated: false
+  description: Retrieve a single user by `Id`
+  operationId: getUser
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            description: >-
+              Retreives an User by its `Id` into the `data` param of an
+              `APIResponse` schema.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                $ref: ../components/schemas/UsersPermissionsUser.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Return an user
+  tags:
+    - UsersPermissions - User
+  parameters:
+    - name: id
+      in: path
+      description: User Id
+      deprecated: false
+      required: true
+      schema:
+        type: string
+put:
+  deprecated: false
+  description: Update the information of an existing user
+  operationId: updateUser
+  responses:
+    '200':
+      description: Update successful
+      content:
+        application/json:
+          schema:
+            type: object
+            description: >-
+              Returns the modified record of UsersPermissionsUser into the
+              `data` param of an `APIResponse` schema.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                $ref: ../components/schemas/UsersPermissionsUser.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Update an user
+  tags:
+    - UsersPermissions - User
+  parameters:
+    - name: id
+      in: path
+      description: User Id
+      deprecated: false
+      required: true
+      schema:
+        type: string
+  requestBody:
+    description: Fields for user update.
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UsersPermissionsUserRequest.yaml
+      application/xml:
+        schema:
+          $ref: ../components/schemas/UsersPermissionsUserRequest.yaml
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: ../components/schemas/UsersPermissionsUserRequest.yaml
+delete:
+  deprecated: false
+  description: Delete an existing user
+  operationId: deleteUser
+  responses:
+    '200':
+      description: >-
+        Deletes a record from data bases by its `id` and returns a `Success`
+        response.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SuccessResponse.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: ''
+  tags:
+    - UsersPermissions - User
+  parameters:
+    - name: id
+      in: path
+      description: User Id
+      deprecated: false
+      required: true
+      schema:
+        type: string

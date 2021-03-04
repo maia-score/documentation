@@ -263,7 +263,7 @@ if ($err) {
 
 ### 200
 
-Deleted successfuly
+Retreives the created, updated or requested record query for &#x60;Success&#x60; into a &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -278,7 +278,11 @@ Deleted successfuly
 ```json title="Example response"
 {
   "code": 200,
-  "message": "OK"
+  "message": "OK",
+  "data": {
+    "code": 200,
+    "message": "OK"
+  }
 }
 ```
 

@@ -1,0 +1,89 @@
+post:
+  deprecated: false
+  description: Login a user using the identifiers email and password.
+  operationId: localAuth
+  responses:
+    '200':
+      description: >-
+        Retreives the created, updated or requested record query for `Success`
+        into a `APIResponse` schema.
+      content:
+        application/json:
+          schema:
+            type: object
+            description: >-
+              Returns an APIResponse with Response schema as `data` on
+              successful operation.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                $ref: ../components/schemas/SuccessResponse.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: User Login
+  tags:
+    - UsersPermissions - User
+  requestBody:
+    description: User login credentials
+    required: true
+    content:
+      application/json:
+        schema:
+          properties:
+            user:
+              type: string
+              example: jlopez
+            password:
+              type: string
+              format: password
+              example: '********'
+      application/xml:
+        schema:
+          properties:
+            user:
+              type: string
+              example: jlopez
+            password:
+              type: string
+              format: password
+              example: '********'
+      application/x-www-form-urlencoded:
+        schema:
+          properties:
+            user:
+              type: string
+              example: jlopez
+            password:
+              type: string
+              format: password
+              example: '********'

@@ -1,0 +1,22 @@
+required:
+  - id
+properties:
+  id:
+    type: string
+  amountDue:
+    type: number
+  amountPaid:
+    type: number
+  dueDate:
+    type: string
+    format: date
+  date:
+    type: string
+    format: date
+  published_at:
+    type: string
+    format: date-time
+  created_by:
+    type: string
+  updated_by:
+    type: string

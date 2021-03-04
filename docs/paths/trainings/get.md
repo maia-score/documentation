@@ -277,7 +277,7 @@ if ($err) {
 
 ### 200
 
-Retrieve trainings document(s)
+Retreives a list in an &#x60;Array&#x60; format for all record of &#x60;Training&#x60; into the &#x60;data&#x60; param of an &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -290,22 +290,26 @@ Retrieve trainings document(s)
 <TabItem value="application/json">
 
 ```json title="Example response"
-[
-  {
-    "id": "string",
-    "uuid": "string",
-    "accuracy": 0,
-    "precission": 0,
-    "mae": 0,
-    "rmse": 0,
-    "binaryPath": "string",
-    "version": "string",
-    "meta": "string",
-    "published_at": "2019-08-24T14:15:22Z",
-    "created_by": "string",
-    "updated_by": "string"
-  }
-]
+{
+  "code": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": "string",
+      "uuid": "string",
+      "accuracy": 0,
+      "precission": 0,
+      "mae": 0,
+      "rmse": 0,
+      "binaryPath": "string",
+      "version": "string",
+      "meta": "string",
+      "published_at": "2019-08-24T14:15:22Z",
+      "created_by": "string",
+      "updated_by": "string"
+    }
+  ]
+}
 ```
 
 </TabItem>

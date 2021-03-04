@@ -1,7 +1,7 @@
 ---
 id: countDatasources
 slug: datasources-count-get
-title: Retrieve the number of datasources documents
+title: Retrieve the number of Datasource documents
 sidebar_label: GET
 description: Get the number of current data sources.
 ---
@@ -257,7 +257,7 @@ if ($err) {
 
 ### 200
 
-Retrieve datasources document(s)
+Retreives a list in an &#x60;Array&#x60; format for all record of &#x60;$1&#x60; into the &#x60;data&#x60; param of an &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -271,7 +271,11 @@ Retrieve datasources document(s)
 
 ```json title="Example response"
 {
-  "count": 0
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "count": 0
+  }
 }
 ```
 

@@ -1,7 +1,7 @@
 ---
 id: getDatasource
 slug: datasources-id-get
-title: Find one datasources record
+title: Find one Datasource record
 sidebar_label: GET
 description: Retrieve information about the selected data source based on the &#x60;Id&#x60;
 ---
@@ -263,7 +263,7 @@ if ($err) {
 
 ### 200
 
-Retrieve datasources document(s)
+Retreives the created, updated or requested record query for &#x60;Datasource&#x60; into a &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -277,27 +277,31 @@ Retrieve datasources document(s)
 
 ```json title="Example response"
 {
-  "id": "string",
-  "driver": "mysql",
-  "host": "string",
-  "username": "string",
-  "password": "string",
-  "database": "string",
-  "port": "string",
-  "ssl": true,
-  "keyfile": "string",
-  "certificate": "string",
-  "sslCA": "string",
-  "ssh": true,
-  "sshHost": "string",
-  "sshUsername": "string",
-  "sshPassword": "string",
-  "sshPort": "string",
-  "sshIdentity": "string",
-  "sshTunneling": true,
-  "published_at": "2019-08-24T14:15:22Z",
-  "created_by": "string",
-  "updated_by": "string"
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "id": "eddc394a",
+    "driver": "mongo",
+    "host": "192.0.0.1",
+    "username": "dd_user",
+    "password": "db_password",
+    "database": "mongo",
+    "port": "3643",
+    "ssl": false,
+    "sslKeyfile": "string",
+    "sslCertificate": "string",
+    "sslCA": "string",
+    "ssh": true,
+    "sshHost": "string",
+    "sshUsername": "string",
+    "sshPassword": "string",
+    "sshPort": "string",
+    "sshIdentity": "string",
+    "sshTunneling": true,
+    "published_at": "2019-08-24T14:15:22Z",
+    "created_by": "admin",
+    "updated_by": "admin"
+  }
 }
 ```
 

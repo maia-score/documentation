@@ -1,0 +1,53 @@
+required:
+  - id
+properties:
+  id:
+    type: string
+    example: b6825a95
+  uuid:
+    type: string
+    example: 26f425d6-9269-442b-89ed-e35ba63bf9c0
+  referenceId:
+    type: string
+    example: '92442'
+  dateOfBirth:
+    type: string
+    format: date
+  addressStreet:
+    type: string
+    example: Av Siempre Viva
+  addressNeighborhood:
+    type: string
+    example: Los Alamos
+  addressCity:
+    type: string
+    example: Guadalajara
+  addressState:
+    type: string
+    example: Jalisco
+  addressCountry:
+    type: string
+    example: Mexico
+  gender:
+    type: string
+    enum:
+      - male
+      - female
+    example: male
+  maritalStatus:
+    type: string
+    enum:
+      - single
+      - married
+      - separated
+      - widowed
+    example: single
+  published_at:
+    type: string
+    format: date-time
+  created_by:
+    type: string
+    example: jlopez
+  updated_by:
+    type: string
+    example: jlopez

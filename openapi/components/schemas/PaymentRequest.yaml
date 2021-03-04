@@ -1,0 +1,11 @@
+properties:
+  amountDue:
+    type: number
+  amountPaid:
+    type: number
+  dueDate:
+    type: string
+    format: date
+  date:
+    type: string
+    format: date

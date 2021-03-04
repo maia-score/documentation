@@ -1,0 +1,31 @@
+required:
+  - id
+  - username
+  - email
+properties:
+  id:
+    type: string
+  username:
+    type: string
+    minLength: 3
+  email:
+    type: string
+    minLength: 6
+  provider:
+    type: string
+  confirmed:
+    type: boolean
+    default: false
+  blocked:
+    type: boolean
+    default: false
+  role:
+    $ref: ./UsersPermissionsRole.yaml
+  reports:
+    $ref: ./Report.yaml
+  created_by:
+    type: string
+    example: admin
+  updated_by:
+    type: string
+    example: admin

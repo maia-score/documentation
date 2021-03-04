@@ -1,0 +1,223 @@
+get:
+  deprecated: false
+  description: >-
+    Used to fetch information about all the datasource records where Customer
+    and their Payment historial is stored.
+  operationId: getDatasources
+  responses:
+    '200':
+      description: >-
+        Retreives a list in an `Array` format for all record of `Datasource`
+        into the `data` param of an `APIResponse` schema.
+      content:
+        application/json:
+          schema:
+            type: object
+            description: Returns an `Array` of Datasource on successful operation.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                type: array
+                items:
+                  $ref: ../components/schemas/Datasource.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Find all the datasource records
+  tags:
+    - Datasource
+  parameters:
+    - name: _limit
+      in: query
+      required: false
+      description: Maximum number of results possible
+      schema:
+        type: integer
+      deprecated: false
+    - name: _sort
+      in: query
+      required: false
+      description: Sort according to a specific field.
+      schema:
+        type: string
+      deprecated: false
+    - name: _start
+      in: query
+      required: false
+      description: Skip a specific number of entries (especially useful for pagination)
+      schema:
+        type: integer
+      deprecated: false
+    - name: '='
+      in: query
+      required: false
+      description: Get entries that matches exactly your input
+      schema:
+        type: string
+      deprecated: false
+    - name: _ne
+      in: query
+      required: false
+      description: Get records that are not equals to something
+      schema:
+        type: string
+      deprecated: false
+    - name: _lt
+      in: query
+      required: false
+      description: Get record that are lower than a value
+      schema:
+        type: string
+      deprecated: false
+    - name: _lte
+      in: query
+      required: false
+      description: Get records that are lower than or equal to a value
+      schema:
+        type: string
+      deprecated: false
+    - name: _gt
+      in: query
+      required: false
+      description: Get records that are greater than a value
+      schema:
+        type: string
+      deprecated: false
+    - name: _gte
+      in: query
+      required: false
+      description: Get records that are greater than  or equal a value
+      schema:
+        type: string
+      deprecated: false
+    - name: _contains
+      in: query
+      required: false
+      description: Get records that contains a value
+      schema:
+        type: string
+      deprecated: false
+    - name: _containss
+      in: query
+      required: false
+      description: Get records that contains (case sensitive) a value
+      schema:
+        type: string
+      deprecated: false
+    - name: _in
+      in: query
+      required: false
+      description: Get records that matches any value in the array of values
+      schema:
+        type: array
+        items:
+          type: string
+      deprecated: false
+    - name: _nin
+      in: query
+      required: false
+      description: Get records that doesn't match any value in the array of values
+      schema:
+        type: array
+        items:
+          type: string
+      deprecated: false
+post:
+  deprecated: false
+  description: >-
+    Creates, test and connects a new data source based on the secutiry scheme
+    selected.
+  operationId: createDatasource
+  responses:
+    '200':
+      description: >-
+        Retreives the created, updated or requested record query for
+        `Datasource` into a `APIResponse` schema.
+      content:
+        application/json:
+          schema:
+            type: object
+            description: >-
+              Returns an APIResponse with Response schema as `data` on
+              successful operation.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                $ref: ../components/schemas/Datasource.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Create a new Datasource record
+  tags:
+    - Datasource
+  requestBody:
+    description: ''
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DatasourceRequest.yaml
+      application/xml:
+        schema:
+          $ref: ../components/schemas/DatasourceRequest.yaml
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: ../components/schemas/DatasourceRequest.yaml

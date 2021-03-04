@@ -1,9 +1,9 @@
 ---
 id: getReports
 slug: reports-get
-title: Find all the score reports
+title: Find all the score Report
 sidebar_label: GET
-description: Retrieves and filters a list of score reports.
+description: Retrieves and filters a list of score Report.
 ---
 
 <!-- prettier-ignore-start -->
@@ -58,7 +58,7 @@ export const Url = ({children}) => {
   <Method color="#6b55b2">GET</Method><Path>{unescape(escape('/reports'))}</Path>
 </Url>
 
-> Retrieves and filters a list of score reports.
+> Retrieves and filters a list of score Report.
 
 ## Parameters
 
@@ -277,7 +277,7 @@ if ($err) {
 
 ### 200
 
-Retrieve reports document(s)
+Retreives a list in an &#x60;Array&#x60; format for all record of &#x60;Report&#x60; into the &#x60;data&#x60; param of an &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -290,37 +290,57 @@ Retrieve reports document(s)
 <TabItem value="application/json">
 
 ```json title="Example response"
-[
-  {
-    "id": "string",
-    "uuid": "string",
-    "referenceId": "string",
-    "type": "reference",
-    "processed": true,
-    "users_permissions_user": {
+{
+  "code": 200,
+  "message": "OK",
+  "data": [
+    {
       "id": "string",
-      "username": "string",
-      "email": "string",
-      "provider": "string",
-      "password": "string",
-      "resetPasswordToken": "string",
-      "confirmationToken": "string",
-      "confirmed": true,
-      "blocked": true,
-      "role": "string",
-      "reports": ["string"],
+      "uuid": "string",
+      "referenceId": "string",
+      "type": "reference",
+      "processed": true,
+      "users_permissions_user": {
+        "id": "string",
+        "username": "string",
+        "email": "string",
+        "provider": "string",
+        "confirmed": false,
+        "blocked": false,
+        "role": {
+          "id": "string",
+          "name": "string",
+          "description": "string",
+          "type": "string",
+          "permissions": [
+            {
+              "id": "string",
+              "type": "string",
+              "controller": "string",
+              "action": "string",
+              "enabled": true,
+              "policy": "string",
+              "role": "string",
+              "updated_by": "string"
+            }
+          ],
+          "users": [null],
+          "created_by": "string",
+          "updated_by": "string"
+        },
+        "created_by": "admin",
+        "updated_by": "admin"
+      },
+      "score": 0,
+      "scoreProbability": 0,
+      "scoreConfidence": 0,
+      "scoreVersion": "string",
+      "published_at": "2019-08-24T14:15:22Z",
       "created_by": "string",
       "updated_by": "string"
-    },
-    "score": 0,
-    "scoreProbability": 0,
-    "scoreConfidence": 0,
-    "scoreVersion": "string",
-    "published_at": "2019-08-24T14:15:22Z",
-    "created_by": "string",
-    "updated_by": "string"
-  }
-]
+    }
+  ]
+}
 ```
 
 </TabItem>

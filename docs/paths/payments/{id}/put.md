@@ -1,7 +1,7 @@
 ---
 id: updatePayment
 slug: payments-id-put
-title: Update a single payments record
+title: Update a single Payment record
 sidebar_label: PUT
 description: Updates a payment event.
 ---
@@ -353,7 +353,7 @@ if ($err) {
 
 ### 200
 
-Retrieve payments document(s)
+Retreives the created, updated or requested record query for &#x60;Payment&#x60; into a &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -367,14 +367,18 @@ Retrieve payments document(s)
 
 ```json title="Example response"
 {
-  "id": "string",
-  "amountDue": 0,
-  "amountPaid": 0,
-  "dueDate": "2019-08-24",
-  "date": "2019-08-24",
-  "published_at": "2019-08-24T14:15:22Z",
-  "created_by": "string",
-  "updated_by": "string"
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "id": "string",
+    "amountDue": 0,
+    "amountPaid": 0,
+    "dueDate": "2019-08-24",
+    "date": "2019-08-24",
+    "published_at": "2019-08-24T14:15:22Z",
+    "created_by": "string",
+    "updated_by": "string"
+  }
 }
 ```
 

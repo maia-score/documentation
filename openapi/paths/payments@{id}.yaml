@@ -1,0 +1,187 @@
+get:
+  deprecated: false
+  description: Gets a payment event from its `Id`
+  operationId: getPayment
+  responses:
+    '200':
+      description: >-
+        Retreives the created, updated or requested record query for `Payment`
+        into a `APIResponse` schema.
+      content:
+        application/json:
+          schema:
+            type: object
+            description: >-
+              Returns an APIResponse with Response schema as `data` on
+              successful operation.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                $ref: ../components/schemas/Payment.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Find one Payment record
+  tags:
+    - Payment
+  parameters:
+    - name: id
+      in: path
+      description: Payment Id
+      deprecated: false
+      required: true
+      schema:
+        type: string
+put:
+  deprecated: false
+  description: Updates a payment event.
+  operationId: updatePayment
+  responses:
+    '200':
+      description: >-
+        Retreives the created, updated or requested record query for `Payment`
+        into a `APIResponse` schema.
+      content:
+        application/json:
+          schema:
+            type: object
+            description: >-
+              Returns an APIResponse with Response schema as `data` on
+              successful operation.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                $ref: ../components/schemas/Payment.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Update a single Payment record
+  tags:
+    - Payment
+  requestBody:
+    description: The fields to update the record.
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PaymentRequest.yaml
+      application/xml:
+        schema:
+          $ref: ../components/schemas/PaymentRequest.yaml
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: ../components/schemas/PaymentRequest.yaml
+  parameters:
+    - name: id
+      in: path
+      description: Payment Id
+      deprecated: false
+      required: true
+      schema:
+        type: string
+delete:
+  deprecated: false
+  description: Removes a payment record for local records.
+  operationId: deletePayment
+  responses:
+    '200':
+      description: >-
+        Deletes a record from data bases by its `id` and returns a `Success`
+        response.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SuccessResponse.yaml
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Delete a single Payment record
+  tags:
+    - Payment
+  parameters:
+    - name: id
+      in: path
+      description: Payment Id
+      deprecated: false
+      required: true
+      schema:
+        type: string

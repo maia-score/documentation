@@ -1,0 +1,59 @@
+get:
+  deprecated: false
+  description: Gets the counts of all agent trainings.
+  operationId: countTrainings
+  responses:
+    '200':
+      description: >-
+        Retreives total number of `$1` records into `data.count` of an
+        `APIResponse` schema.
+      content:
+        application/json:
+          schema:
+            type: object
+            description: Returns number of total records of `$1`.
+            properties:
+              code:
+                description: HTTP code
+                type: integer
+                format: int32
+                example: 200
+              message:
+                description: '''OK'' or additional information'
+                type: string
+                example: OK
+              data:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Number of records
+                    example: 2492
+    '403':
+      description: '**Forbidden**: this operation requeris authentication'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 403
+            message: Error - Forbidden
+    '404':
+      description: '**Not found**: the resource was not found'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+          example:
+            code: 404
+            message: Error - Not found
+    default:
+      description: '**Unexpected error**'
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+  summary: Retrieve the nubver of trainings
+  tags:
+    - Training
+  parameters: []

@@ -372,7 +372,7 @@ if ($err) {
 
 ### 200
 
-Retrieve reports document(s)
+Retreives the created, updated or requested record query for &#x60;Report&#x60; into a &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -386,33 +386,53 @@ Retrieve reports document(s)
 
 ```json title="Example response"
 {
-  "id": "string",
-  "uuid": "string",
-  "referenceId": "string",
-  "type": "reference",
-  "processed": true,
-  "users_permissions_user": {
+  "code": 200,
+  "message": "OK",
+  "data": {
     "id": "string",
-    "username": "string",
-    "email": "string",
-    "provider": "string",
-    "password": "string",
-    "resetPasswordToken": "string",
-    "confirmationToken": "string",
-    "confirmed": true,
-    "blocked": true,
-    "role": "string",
-    "reports": ["string"],
+    "uuid": "string",
+    "referenceId": "string",
+    "type": "reference",
+    "processed": true,
+    "users_permissions_user": {
+      "id": "string",
+      "username": "string",
+      "email": "string",
+      "provider": "string",
+      "confirmed": false,
+      "blocked": false,
+      "role": {
+        "id": "string",
+        "name": "string",
+        "description": "string",
+        "type": "string",
+        "permissions": [
+          {
+            "id": "string",
+            "type": "string",
+            "controller": "string",
+            "action": "string",
+            "enabled": true,
+            "policy": "string",
+            "role": "string",
+            "updated_by": "string"
+          }
+        ],
+        "users": [null],
+        "created_by": "string",
+        "updated_by": "string"
+      },
+      "created_by": "admin",
+      "updated_by": "admin"
+    },
+    "score": 0,
+    "scoreProbability": 0,
+    "scoreConfidence": 0,
+    "scoreVersion": "string",
+    "published_at": "2019-08-24T14:15:22Z",
     "created_by": "string",
     "updated_by": "string"
-  },
-  "score": 0,
-  "scoreProbability": 0,
-  "scoreConfidence": 0,
-  "scoreVersion": "string",
-  "published_at": "2019-08-24T14:15:22Z",
-  "created_by": "string",
-  "updated_by": "string"
+  }
 }
 ```
 

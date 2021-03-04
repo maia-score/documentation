@@ -367,7 +367,7 @@ if ($err) {
 
 ### 200
 
-Retrieve trainings document(s)
+Retreives the created, updated or requested record query for &#x60;Training&#x60; into a &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -381,18 +381,22 @@ Retrieve trainings document(s)
 
 ```json title="Example response"
 {
-  "id": "string",
-  "uuid": "string",
-  "accuracy": 0,
-  "precission": 0,
-  "mae": 0,
-  "rmse": 0,
-  "binaryPath": "string",
-  "version": "string",
-  "meta": "string",
-  "published_at": "2019-08-24T14:15:22Z",
-  "created_by": "string",
-  "updated_by": "string"
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "id": "string",
+    "uuid": "string",
+    "accuracy": 0,
+    "precission": 0,
+    "mae": 0,
+    "rmse": 0,
+    "binaryPath": "string",
+    "version": "string",
+    "meta": "string",
+    "published_at": "2019-08-24T14:15:22Z",
+    "created_by": "string",
+    "updated_by": "string"
+  }
 }
 ```
 

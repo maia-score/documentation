@@ -3,7 +3,7 @@ id: getCustomers
 slug: customers-get
 title: Find all the customer records
 sidebar_label: GET
-description: This method requests and filters all customers records registered in database.
+description: This method requests and filters all Customer records registered in database.
 ---
 
 <!-- prettier-ignore-start -->
@@ -58,7 +58,7 @@ export const Url = ({children}) => {
   <Method color="#6b55b2">GET</Method><Path>{unescape(escape('/customers'))}</Path>
 </Url>
 
-> This method requests and filters all customers records registered in database.
+> This method requests and filters all Customer records registered in database.
 
 ## Parameters
 
@@ -277,7 +277,7 @@ if ($err) {
 
 ### 200
 
-Retrieve customers document(s)
+Retreives a list in an &#x60;Array&#x60; format for all record of &#x60;Customer&#x60; into the &#x60;data&#x60; param of an &#x60;APIResponse&#x60; schema.
 
 <!-- prettier-ignore-start -->
 
@@ -290,24 +290,28 @@ Retrieve customers document(s)
 <TabItem value="application/json">
 
 ```json title="Example response"
-[
-  {
-    "id": "string",
-    "uuid": "string",
-    "referenceId": "string",
-    "dateOfBirth": "2019-08-24",
-    "addressStreet": "string",
-    "addressNeighborhood": "string",
-    "addressCity": "string",
-    "addressState": "string",
-    "addressCountry": "string",
-    "gender": "male",
-    "maritalStatus": "single",
-    "published_at": "2019-08-24T14:15:22Z",
-    "created_by": "string",
-    "updated_by": "string"
-  }
-]
+{
+  "code": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": "b6825a95",
+      "uuid": "26f425d6-9269-442b-89ed-e35ba63bf9c0",
+      "referenceId": "92442",
+      "dateOfBirth": "2019-08-24",
+      "addressStreet": "Av Siempre Viva",
+      "addressNeighborhood": "Los Alamos",
+      "addressCity": "Guadalajara",
+      "addressState": "Jalisco",
+      "addressCountry": "Mexico",
+      "gender": "male",
+      "maritalStatus": "single",
+      "published_at": "2019-08-24T14:15:22Z",
+      "created_by": "jlopez",
+      "updated_by": "jlopez"
+    }
+  ]
+}
 ```
 
 </TabItem>
